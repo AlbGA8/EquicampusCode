@@ -1,0 +1,22 @@
+package es.egt.daw.dawes.java.rest.equicampus.alumno.application.services;
+
+import org.springframework.stereotype.Service;
+
+import es.egt.daw.dawes.java.rest.equicampus.alumno.application.command.CreateAlumnoCommand;
+import es.egt.daw.dawes.java.rest.equicampus.alumno.application.usecase.CreateAlumnoUseCase;
+import es.egt.daw.dawes.java.rest.equicampus.alumno.domain.model.entity.Alumno;
+import lombok.RequiredArgsConstructor;
+
+@RequiredArgsConstructor
+@Service
+public class CreateAlumnoService {
+
+    private final CreateAlumnoUseCase createAlumnoUseCase;
+
+    public Alumno createAlumno(CreateAlumnoCommand comando){
+
+        Alumno alumno = createAlumnoUseCase.create(comando);
+        return alumno;
+    }
+
+}
