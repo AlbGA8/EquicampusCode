@@ -1,4 +1,4 @@
-package es.egt.daw.dawes.java.rest.equicampus.alumnos.infraestructure.db.jpa.repository.alumno;
+package es.egt.daw.dawes.java.rest.equicampus.alumno.infraestructure.db.jpa.repository.alumno;
 
 public class AlumnoEntityJpaRepository {
 

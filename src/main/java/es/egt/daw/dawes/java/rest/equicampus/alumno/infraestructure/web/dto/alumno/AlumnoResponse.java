@@ -1,4 +1,4 @@
-package es.egt.daw.dawes.java.rest.equicampus.alumno.infraestructure.web.dto;
+package es.egt.daw.dawes.java.rest.equicampus.alumno.infraestructure.web.dto.alumno;
 
 import java.time.LocalDateTime;
 

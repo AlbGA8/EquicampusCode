@@ -1,13 +1,13 @@
-package es.egt.daw.dawes.java.rest.equicampus.alumnos.infraestructure.db.jpa.repository.profesor;
+package es.egt.daw.dawes.java.rest.equicampus.alumno.infraestructure.db.jpa.repository.profesor;
 
 import java.util.List;
 import java.util.Optional;
 
-import es.egt.daw.dawes.java.rest.equicampus.alumnos.domain.model.entity.Profesor;
-import es.egt.daw.dawes.java.rest.equicampus.alumnos.domain.model.identifiers.ProfesorId;
-import es.egt.daw.dawes.java.rest.equicampus.alumnos.domain.repository.ProfesorRepository;
-import es.egt.daw.dawes.java.rest.equicampus.alumnos.infraestructure.db.jpa.entity.profesor.ProfesorEntity;
-import es.egt.daw.dawes.java.rest.equicampus.alumnos.infraestructure.web.rest.mapper.ProfesorMapper;
+import es.egt.daw.dawes.java.rest.equicampus.alumno.domain.model.entity.Profesor;
+import es.egt.daw.dawes.java.rest.equicampus.alumno.domain.model.identifiers.ProfesorId;
+import es.egt.daw.dawes.java.rest.equicampus.alumno.domain.repository.ProfesorRepository;
+import es.egt.daw.dawes.java.rest.equicampus.alumno.infraestructure.db.jpa.entity.profesor.ProfesorEntity;
+import es.egt.daw.dawes.java.rest.equicampus.alumno.infraestructure.web.rest.mapper.ProfesorMapper;
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor

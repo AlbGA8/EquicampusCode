@@ -1,4 +1,4 @@
-package es.egt.daw.dawes.java.rest.equicampus.alumnos.infraestructure.db.repository.mock;
+package es.egt.daw.dawes.java.rest.equicampus.alumno.infraestructure.db.repository.mock;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -7,9 +7,11 @@ import java.util.Map;
 import java.util.Optional;
 import org.springframework.stereotype.Repository;
 
-import es.egt.daw.dawes.java.rest.equicampus.alumnos.domain.model.entity.Alumno;
-import es.egt.daw.dawes.java.rest.equicampus.alumnos.domain.model.identifiers.AlumnoId;
-import es.egt.daw.dawes.java.rest.equicampus.alumnos.domain.repository.AlumnoRepository;
+import es.egt.daw.dawes.java.rest.equicampus.alumno.domain.model.entity.Alumno;
+import es.egt.daw.dawes.java.rest.equicampus.alumno.domain.model.identifiers.AlumnoId;
+import es.egt.daw.dawes.java.rest.equicampus.alumno.domain.repository.AlumnoRepository;
+
+
 
 @Repository
 

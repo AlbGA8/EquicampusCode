@@ -1,5 +1,7 @@
-package es.egt.daw.dawes.java.rest.equicampus.alumno.application.command;
+package es.egt.daw.dawes.java.rest.equicampus.alumno.application.command.alumno;
 
+
+import es.egt.daw.dawes.java.rest.equicampus.alumno.domain.model.identifiers.ProfesorId;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.experimental.Accessors;
@@ -11,5 +13,6 @@ public class CreateAlumnoCommand {
 
     private String nombre;
     private String apellido;
+    private ProfesorId ProfesorId;
 
 }

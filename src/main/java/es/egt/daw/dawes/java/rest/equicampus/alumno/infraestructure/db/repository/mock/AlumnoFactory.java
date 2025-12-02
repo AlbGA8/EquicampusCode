@@ -1,12 +1,14 @@
-package es.egt.daw.dawes.java.rest.equicampus.alumnos.infraestructure.db.repository.mock;
+package es.egt.daw.dawes.java.rest.equicampus.alumno.infraestructure.db.repository.mock;
 
 import java.time.LocalDateTime;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-import es.egt.daw.dawes.java.rest.equicampus.alumnos.domain.model.entity.Alumno;
-import es.egt.daw.dawes.java.rest.equicampus.alumnos.domain.model.identifiers.AlumnoId;
-import es.egt.daw.dawes.java.rest.equicampus.alumnos.domain.model.identifiers.ProfesorId;
+import es.egt.daw.dawes.java.rest.equicampus.alumno.domain.model.entity.Alumno;
+import es.egt.daw.dawes.java.rest.equicampus.alumno.domain.model.identifiers.AlumnoId;
+import es.egt.daw.dawes.java.rest.equicampus.alumno.domain.model.identifiers.ProfesorId;
+
+
 
 public class AlumnoFactory {
 

@@ -1,4 +1,4 @@
-package es.egt.daw.dawes.java.rest.equicampus.alumnos.infraestructure.db.jpa.entity.alumno;
+package es.egt.daw.dawes.java.rest.equicampus.alumno.infraestructure.db.jpa.entity.alumno;
 
 import jakarta.persistence.*;
 import lombok.*;
