@@ -20,5 +20,7 @@ public class AlumnoFactory {
 
         return datos;
     }
+  public static final Alumno create() { return new Alumno(new AlumnoId(1), "Paco", "Pérez", LocalDateTime.now(), new ProfesorId(1)); }
+
 
 }

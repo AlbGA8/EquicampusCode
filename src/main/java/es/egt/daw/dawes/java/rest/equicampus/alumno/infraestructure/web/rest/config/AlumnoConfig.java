@@ -1,4 +1,4 @@
-package es.egt.daw.dawes.java.rest.equicampus.alumno.infraestructure.config;
+package es.egt.daw.dawes.java.rest.equicampus.alumno.infraestructure.web.rest.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -12,17 +12,24 @@ import es.egt.daw.dawes.java.rest.equicampus.alumno.application.usecase.alumno.D
 import es.egt.daw.dawes.java.rest.equicampus.alumno.application.usecase.alumno.EditAlumnoUseCase;
 import es.egt.daw.dawes.java.rest.equicampus.alumno.application.usecase.alumno.FindAlumnoUseCase;
 import es.egt.daw.dawes.java.rest.equicampus.alumno.domain.repository.AlumnoRepository;
+import es.egt.daw.dawes.java.rest.equicampus.alumno.infraestructure.db.jpa.repository.alumno.AlumnoEntityJpaRepository;
+import es.egt.daw.dawes.java.rest.equicampus.alumno.infraestructure.db.jpa.repository.alumno.AlumnoJpaRepositoryImpl;
 import lombok.RequiredArgsConstructor;
 
 @Configuration
 @RequiredArgsConstructor
 public class AlumnoConfig {
 
-   private final AlumnoRepository alumnoRepository;
+   private final AlumnoEntityJpaRepository alumnoRepository;
+
+   @Bean
+   public  AlumnoRepository alumnoRepository(){
+        return new AlumnoJpaRepositoryImpl(alumnoRepository);
+    }
 
       @Bean
     public CreateAlumnoUseCase createAlumnoseCase() {
-        return new CreateAlumnoUseCase(alumnoRepository);
+        return new CreateAlumnoUseCase(alumnoRepository());
     }
     @Bean
     public CreateAlumnoService createAlumnoService(){
@@ -31,7 +38,7 @@ public class AlumnoConfig {
 
     @Bean
     public FindAlumnoUseCase findAlumnoUseCase(){
-        return new FindAlumnoUseCase(alumnoRepository);
+        return new FindAlumnoUseCase(alumnoRepository());
     }
 
     @Bean
@@ -47,13 +54,13 @@ public class AlumnoConfig {
 
     @Bean
     public EditAlumnoUseCase editAlumnoUseCase(){
-        return new EditAlumnoUseCase(alumnoRepository);
+        return new EditAlumnoUseCase(alumnoRepository());
 
     }
 
     @Bean
     public DeleteAlumnoUseCase deleteAlumnoUseCase(){
-        return new DeleteAlumnoUseCase(alumnoRepository);
+        return new DeleteAlumnoUseCase(alumnoRepository());
     }
 
     @Bean

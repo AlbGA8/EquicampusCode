@@ -8,9 +8,8 @@ import es.egt.daw.dawes.java.rest.equicampus.alumno.application.command.profesor
 import es.egt.daw.dawes.java.rest.equicampus.alumno.domain.model.entity.Profesor;
 import es.egt.daw.dawes.java.rest.equicampus.alumno.domain.model.identifiers.ProfesorId;
 import es.egt.daw.dawes.java.rest.equicampus.alumno.infraestructure.db.jpa.entity.profesor.ProfesorEntity;
-import es.egt.daw.dawes.java.rest.equicampus.alumno.infraestructure.web.dto.profesor.ProfesorRequest;
-import es.egt.daw.dawes.java.rest.equicampus.alumno.infraestructure.web.dto.profesor.ProfesorResponse;
-
+import es.egt.daw.dawes.java.rest.equicampus.alumno.infraestructure.web.rest.dto.profesor.ProfesorRequest;
+import es.egt.daw.dawes.java.rest.equicampus.alumno.infraestructure.web.rest.dto.profesor.ProfesorResponse;
 
 public class ProfesorMapper {
 
@@ -34,6 +33,8 @@ public class ProfesorMapper {
         ProfesorId id = p.getProfesorId();
         return ProfesorEntity.builder().profesorId(id != null ? id.getValue() : null)
                 .nombre(p.getNombre())
+                .apellidos(p.getApellidos())
+                .createdAt(p.getCreatedAt())
                 .build();
 
     }
@@ -41,6 +42,8 @@ public class ProfesorMapper {
     public static Profesor toDomain(ProfesorEntity p) {
         return Profesor.builder().profesorId(new ProfesorId(p.getProfesorId()))
                 .nombre(p.getNombre())
+                .apellidos(p.getApellidos())
+                .createdAt(p.getCreatedAt())
                 .build();
 
     }

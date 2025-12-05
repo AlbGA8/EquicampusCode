@@ -1,32 +1,32 @@
--- ========================
--- Insert Alumnos
--- ========================
-INSERT INTO Alumno (nombre, apellidos) VALUES
-('Juan', 'Pérez'),
-('Ana', 'López'),
-('Luis', 'Martínez'),
-('Marta', 'García'),
-('Carlos', 'Sánchez'),
-('Lucía', 'Fernández'),
-('Pedro', 'Gómez'),
-('Laura', 'Ramírez'),
-('David', 'Hernández'),
-('Carmen', 'Jiménez');
+
 
 -- ========================
--- Insert Profesores
+-- Insert PROFESOR 
 -- ========================
-INSERT INTO Profesor (nombre, apellidos) VALUES
-('Miguel', 'Torres'),
-('Sandra', 'Morales'),
-('Javier', 'Ortiz'),
-('María', 'Vega'),
-('Alberto', 'Santos');
+INSERT INTO PROFESOR (profesor_id, nombre, apellidos) VALUES
+(1, 'Miguel', 'Torres'),
+(2, 'Sandra', 'Morales'),
+(3, 'Javier', 'Ortiz'),
+(4, 'María', 'Vega'),
+(5, 'Alberto', 'Santos');
+
+INSERT INTO ALUMNO (nombre, apellidos, profesor_id) VALUES
+('Juan', 'Pérez', 1),
+('Ana', 'López', 2),
+('Luis', 'Martínez', 1),
+('Marta', 'García', 2),
+('Carlos', 'Sánchez', 1),
+('Lucía', 'Fernández', 2),
+('Pedro', 'Gómez', 1),
+('Laura', 'Ramírez', 2),
+('David', 'Hernández', 1),
+('Carmen', 'Jiménez', 2);
+
 
 -- ========================
--- Insert Caballos
+-- Insert CABALLO
 -- ========================
-INSERT INTO Caballo (nombre, edad, raza, alumno_id) VALUES
+INSERT INTO CABALLO (nombre, edad, raza, alumno_id) VALUES
 ('Viento', 5, 'Pura Sangre', 1),
 ('Relámpago', 7, 'Árabe', 2),
 ('Trueno', 4, 'Andaluz', 3),
@@ -39,9 +39,9 @@ INSERT INTO Caballo (nombre, edad, raza, alumno_id) VALUES
 ('Sombra', 7, 'Frisón', 10);
 
 -- ========================
--- Insert Pistas
+-- Insert PISTA
 -- ========================
-INSERT INTO Pista (nombre) VALUES
+INSERT INTO PISTA (nombre) VALUES
 ('Pista Norte'),
 ('Pista Sur'),
 ('Pista Este'),
@@ -49,9 +49,9 @@ INSERT INTO Pista (nombre) VALUES
 ('Pista Central');
 
 -- ========================
--- Insert Clases
+-- Insert CLASE
 -- ========================
-INSERT INTO Clase (nombre, profesor_id, alumno_id, tipo) VALUES
+INSERT INTO CLASE (nombre, profesor_id, alumno_id, tipo) VALUES
 ('Clase Básica 1', 1, 1, 'PRACTICA'),
 ('Clase Básica 2', 2, 2, 'PRACTICA'),
 ('Clase Teórica 1', 3, 3, 'TEORICA'),
@@ -64,9 +64,9 @@ INSERT INTO Clase (nombre, profesor_id, alumno_id, tipo) VALUES
 ('Clase Final 2', 5, 10, 'TEORICA');
 
 -- ========================
--- Insert Reservas
+-- Insert RESERVA
 -- ========================
-INSERT INTO Reserva (alumno_id, clase_id, pista_id, caballo_id) VALUES
+INSERT INTO RESERVA (alumno_id, clase_id, pista_id, caballo_id) VALUES
 (1, 1, 1, 1),
 (2, 2, 2, 2),
 (3, 3, 3, 3),

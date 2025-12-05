@@ -29,8 +29,8 @@ import es.egt.daw.dawes.java.rest.equicampus.alumno.application.services.alumno.
 import es.egt.daw.dawes.java.rest.equicampus.alumno.application.services.alumno.FindAlumnoService;
 import es.egt.daw.dawes.java.rest.equicampus.alumno.domain.model.entity.Alumno;
 import es.egt.daw.dawes.java.rest.equicampus.alumno.domain.model.identifiers.AlumnoId;
-import es.egt.daw.dawes.java.rest.equicampus.alumno.infraestructure.web.dto.alumno.AlumnoRequest;
-import es.egt.daw.dawes.java.rest.equicampus.alumno.infraestructure.web.dto.alumno.AlumnoResponse;
+import es.egt.daw.dawes.java.rest.equicampus.alumno.infraestructure.web.rest.dto.alumno.AlumnoRequest;
+import es.egt.daw.dawes.java.rest.equicampus.alumno.infraestructure.web.rest.dto.alumno.AlumnoResponse;
 import es.egt.daw.dawes.java.rest.equicampus.alumno.infraestructure.web.rest.mapper.AlumnoMapper;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;

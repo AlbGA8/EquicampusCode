@@ -21,9 +21,9 @@ public class CreateAlumnoUseCase {
         .profesor(comando.ProfesorId()).build();
         
 
-        alumnoRepository.save(alumno);
+        
 
-        return alumno;
+        return alumnoRepository.save(alumno);
     }
 
 }

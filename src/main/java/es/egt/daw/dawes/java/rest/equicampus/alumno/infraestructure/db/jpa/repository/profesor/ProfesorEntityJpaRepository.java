@@ -5,9 +5,8 @@ import org.springframework.stereotype.Repository;
 
 import es.egt.daw.dawes.java.rest.equicampus.alumno.infraestructure.db.jpa.entity.profesor.ProfesorEntity;
 
-
-
 @Repository
-public interface ProfesorEntityJpaRepository extends JpaRepository <ProfesorEntity,Integer> {
+public interface ProfesorEntityJpaRepository extends JpaRepository<ProfesorEntity, Integer> {
+  
 
 }
