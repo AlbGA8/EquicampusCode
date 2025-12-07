@@ -1,5 +1,7 @@
 package es.egt.daw.dawes.java.rest.equicampus.alumno.application.services.alumno;
 
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.CachePut;
 import org.springframework.stereotype.Service;
 
 import es.egt.daw.dawes.java.rest.equicampus.alumno.application.command.alumno.EditAlumnoCommand;
@@ -13,7 +15,9 @@ public class EditAlumnoService {
 
     private final EditAlumnoUseCase editAlumnoUseCase;
 
-    public Alumno update(EditAlumnoCommand comando){
+    @CacheEvict(allEntries = true) 
+    @CachePut(key = "#command.id") 
+    public Alumno update(EditAlumnoCommand comando) {
         Alumno alumno = editAlumnoUseCase.update(comando);
         return alumno;
     }

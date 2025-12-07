@@ -13,11 +13,18 @@ import java.lang.annotation.ElementType;
 @Constraint(validatedBy = NombradoAlumnoValidator.class)
 @Documented
 public @interface NombradoAlumno {
-//Definimos el mensaje por defecto
-    String message() default "{es.egt.daw.dawes.java.rest.equicampus.alumno.infraestructure.web.validation.alumno.NombradoAlumno.message}";
-//Permite agrupar validaciones. Es útil cuando quieres validar solo un subconjunto de reglas 
-//(por ejemplo, validar un alumno para "Creación" vs. para "Actualización
+
+    // Definimos el mensaje por defecto
+    String message() default "{es.egt.daw.dawes.java.rest.equicampus.alumno.infraestructure.web.validation.alumno.NombradoAlumno}";
+
+    // Permite agrupar validaciones. Es útil cuando quieres validar solo un
+    // subconjunto de reglas
+    // (por ejemplo, validar un producto para "Creación" vs. para "Actualización").
+    // El valor por defecto es para todos los casos.
     Class<?>[] groups() default {};
 
+    // Una propiedad avanzada que permite definir metadatos o códigos de error
+    // específicos al resultado de la validación.
     Class<? extends Payload>[] payload() default {};
+
 }

@@ -1,6 +1,5 @@
 package es.egt.daw.dawes.java.rest.equicampus.alumno.infraestructure.web.validation.profesor;
 
-
 import java.lang.annotation.Documented;
 import java.lang.annotation.Retention;
 import java.lang.annotation.Target;
@@ -15,15 +14,17 @@ import java.lang.annotation.ElementType;
 @Documented
 public @interface NombradoProfesor {
 
-    //Definimos el mensaje por defecto
-    String message() default "{es.egt.daw.dawes.java.rest.equicampus.alumno.infraestructure.web.validation.profesor.NombradoProfesor.message}";
+    // Definimos el mensaje por defecto
+    String message() default "{es.egt.daw.dawes.java.rest.equicampus.alumno.infraestructure.web.validation.profesor.NombradoProfesor}";
 
-    //Permite agrupar validaciones. Es útil cuando quieres validar solo un subconjunto de reglas 
-    //(por ejemplo, validar un producto para "Creación" vs. para "Actualización"). 
-    //El valor por defecto es para todos los casos.
+    // Permite agrupar validaciones. Es útil cuando quieres validar solo un
+    // subconjunto de reglas
+    // (por ejemplo, validar un producto para "Creación" vs. para "Actualización").
+    // El valor por defecto es para todos los casos.
     Class<?>[] groups() default {};
-    
-    //Una propiedad avanzada que permite definir metadatos  o códigos de error específicos al resultado de la validación.
+
+    // Una propiedad avanzada que permite definir metadatos o códigos de error
+    // específicos al resultado de la validación.
     Class<? extends Payload>[] payload() default {};
 
 }

@@ -1,5 +1,6 @@
 package es.egt.daw.dawes.java.rest.equicampus.alumno.application.services.alumno;
 
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.stereotype.Service;
 
 import es.egt.daw.dawes.java.rest.equicampus.alumno.application.command.alumno.CreateAlumnoCommand;
@@ -9,11 +10,12 @@ import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
 @Service
-public class CreateAlumnoService {
+public class CreateAlumnoService extends AlumnoService {
 
     private final CreateAlumnoUseCase createAlumnoUseCase;
 
-    public Alumno createAlumno(CreateAlumnoCommand comando){
+    @CacheEvict(allEntries = true) // Elimina de cache la lista
+    public Alumno createAlumno(CreateAlumnoCommand comando) {
 
         Alumno alumno = createAlumnoUseCase.create(comando);
         return alumno;

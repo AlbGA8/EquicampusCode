@@ -5,7 +5,7 @@ import jakarta.validation.ConstraintValidatorContext;
 
 public class NombradoProfesorValidator implements ConstraintValidator<NombradoProfesor, String> {
 
-     public final static String STR_BLANCO = " ";
+    public final static String STR_BLANCO = " ";
     public final static String STR_SALTO = "\n";
 
     @Override

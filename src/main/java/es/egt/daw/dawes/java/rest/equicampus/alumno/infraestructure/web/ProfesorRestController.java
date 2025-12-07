@@ -23,7 +23,6 @@ import es.egt.daw.dawes.java.rest.equicampus.alumno.application.services.profeso
 import es.egt.daw.dawes.java.rest.equicampus.alumno.application.services.profesor.EditProfesorService;
 import es.egt.daw.dawes.java.rest.equicampus.alumno.application.services.profesor.FindProfesorService;
 import es.egt.daw.dawes.java.rest.equicampus.alumno.domain.model.entity.Profesor;
-import es.egt.daw.dawes.java.rest.equicampus.alumno.domain.model.identifiers.AlumnoId;
 import es.egt.daw.dawes.java.rest.equicampus.alumno.domain.model.identifiers.ProfesorId;
 import es.egt.daw.dawes.java.rest.equicampus.alumno.infraestructure.web.rest.dto.profesor.ProfesorRequest;
 import es.egt.daw.dawes.java.rest.equicampus.alumno.infraestructure.web.rest.dto.profesor.ProfesorResponse;
