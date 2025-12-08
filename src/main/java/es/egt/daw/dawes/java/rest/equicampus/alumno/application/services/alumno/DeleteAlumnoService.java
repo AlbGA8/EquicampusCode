@@ -9,7 +9,7 @@ import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
 @Service
-public class DeleteAlumnoService extends AlumnoService{
+public class DeleteAlumnoService extends AlumnoService {
     private final DeleteAlumnoUseCase deleteAlumnoUseCase;
 
     @CacheEvict(allEntries = true) // Elimina de cache la lista

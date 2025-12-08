@@ -1,4 +1,4 @@
-package es.egt.daw.dawes.java.rest.equicampus.common.repository;
+package es.egt.daw.dawes.java.rest.equicampus.common.domain.repository;
 
 import java.util.List;
 import java.util.Optional;

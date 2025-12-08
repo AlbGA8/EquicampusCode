@@ -1,5 +1,7 @@
 package es.egt.daw.dawes.java.rest.equicampus.alumno.application.services.profesor;
 
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.CachePut;
 import org.springframework.stereotype.Service;
 
 import es.egt.daw.dawes.java.rest.equicampus.alumno.application.command.profesor.EditProfesorCommand;
@@ -9,12 +11,13 @@ import lombok.RequiredArgsConstructor;
 
 @Service
 @RequiredArgsConstructor
-public class EditProfesorService {
+public class EditProfesorService extends ProfesorService {
     
     private final EditProfesorUseCase EditProfesorUsecase;
-
-    public Profesor update(EditProfesorCommand comando){
-        Profesor profesor = EditProfesorUsecase.update(comando);
-        return profesor;
+    @CacheEvict(allEntries = true) 
+    @CachePut(key = "#command.id") 
+    public Profesor update(EditProfesorCommand command){
+         
+        return EditProfesorUsecase.update(command);
     }
 }

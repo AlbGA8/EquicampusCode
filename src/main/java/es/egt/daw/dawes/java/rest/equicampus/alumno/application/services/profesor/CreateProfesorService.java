@@ -1,5 +1,6 @@
 package es.egt.daw.dawes.java.rest.equicampus.alumno.application.services.profesor;
 
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.stereotype.Service;
 
 import es.egt.daw.dawes.java.rest.equicampus.alumno.application.command.profesor.CreateProfesorCommand;
@@ -10,12 +11,12 @@ import lombok.RequiredArgsConstructor;
 
 @Service
 @RequiredArgsConstructor
-public class CreateProfesorService {
+public class CreateProfesorService extends ProfesorService {
        private final CreateProfesorUseCase createProfesorUseCase;
-
+@CacheEvict(allEntries = true)
 	public Profesor createProfesor(CreateProfesorCommand comando){
-		Profesor profesor = createProfesorUseCase.create(comando);
-		return profesor;
+		
+		return createProfesorUseCase.create(comando);
 	}
 
 

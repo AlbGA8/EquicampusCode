@@ -11,15 +11,15 @@ import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
 @Service
-public class EditAlumnoService {
+public class EditAlumnoService extends AlumnoService {
 
     private final EditAlumnoUseCase editAlumnoUseCase;
 
     @CacheEvict(allEntries = true) 
     @CachePut(key = "#command.id") 
-    public Alumno update(EditAlumnoCommand comando) {
-        Alumno alumno = editAlumnoUseCase.update(comando);
-        return alumno;
+    public Alumno update(EditAlumnoCommand command) {
+        
+        return editAlumnoUseCase.update(command);
     }
 
 }

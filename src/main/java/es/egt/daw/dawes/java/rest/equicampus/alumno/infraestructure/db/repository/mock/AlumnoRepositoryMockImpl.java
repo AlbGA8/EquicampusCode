@@ -48,8 +48,7 @@ public class AlumnoRepositoryMockImpl implements AlumnoRepository {
 
     @Override
     public Optional<Alumno> getById(AlumnoId id) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getById'");
+         return Optional.ofNullable(alumnos.get(id));
     }
 
     @Override

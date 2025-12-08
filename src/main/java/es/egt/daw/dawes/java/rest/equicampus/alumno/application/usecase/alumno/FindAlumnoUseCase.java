@@ -14,7 +14,7 @@ public class FindAlumnoUseCase {
 
     private final AlumnoRepository alumnoRepository;
 
-    public List<Alumno> finAll() {
+    public List<Alumno> findAll() {
 
         List<Alumno> alumnos = alumnoRepository.getAll();
 

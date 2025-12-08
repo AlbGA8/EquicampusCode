@@ -3,7 +3,7 @@ import java.util.Optional;
 
 import es.egt.daw.dawes.java.rest.equicampus.alumno.domain.model.entity.Profesor;
 import es.egt.daw.dawes.java.rest.equicampus.alumno.domain.model.identifiers.ProfesorId;
-import es.egt.daw.dawes.java.rest.equicampus.common.repository.CRUDRepository;
+import es.egt.daw.dawes.java.rest.equicampus.common.domain.repository.CRUDRepository;
 
 public interface ProfesorRepository extends CRUDRepository <Profesor, ProfesorId> {
 

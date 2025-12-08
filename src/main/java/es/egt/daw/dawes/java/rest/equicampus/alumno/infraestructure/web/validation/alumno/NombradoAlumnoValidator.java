@@ -11,7 +11,7 @@ public class NombradoAlumnoValidator implements ConstraintValidator<NombradoAlum
     @Override
     public boolean isValid(String value, ConstraintValidatorContext context) {
         
-        if (value == null || value.length() == 0 || value.contains(STR_BLANCO) || value.contains(STR_SALTO))
+        if (value == null || value.length() == 0 || value.contains(STR_SALTO))
             return false;
 
         return true;

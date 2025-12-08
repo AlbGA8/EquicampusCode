@@ -17,8 +17,8 @@ public class CreateAlumnoService extends AlumnoService {
     @CacheEvict(allEntries = true) // Elimina de cache la lista
     public Alumno createAlumno(CreateAlumnoCommand comando) {
 
-        Alumno alumno = createAlumnoUseCase.create(comando);
-        return alumno;
+       
+        return createAlumnoUseCase.create(comando);
     }
 
 }

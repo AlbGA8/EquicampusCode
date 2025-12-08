@@ -16,7 +16,7 @@ public class FindAlumnoService extends AlumnoService {
     private final FindAlumnoUseCase findAlumnoUseCase;
     @Cacheable
     public List<Alumno> findAll() {
-        return findAlumnoUseCase.finAll();
+        return findAlumnoUseCase.findAll();
     }
 
 }

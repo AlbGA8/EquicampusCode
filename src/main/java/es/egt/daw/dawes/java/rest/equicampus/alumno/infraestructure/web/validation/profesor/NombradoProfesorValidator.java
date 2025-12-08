@@ -13,7 +13,7 @@ public class NombradoProfesorValidator implements ConstraintValidator<NombradoPr
         /* Vamos a validar el campo producto aplicando las siguientes normas:
         *  No es nulo, vacío, ni tiene blancos
         */
-        if(value == null || value.length()==0 || value.contains(STR_BLANCO) || value.contains(STR_SALTO))
+        if(value == null || value.length()==0 ||  value.contains(STR_SALTO))
             return false;
         
         return true;

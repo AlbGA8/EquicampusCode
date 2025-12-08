@@ -2,6 +2,7 @@ package es.egt.daw.dawes.java.rest.equicampus.alumno.application.services.profes
 
 import java.util.List;
 
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import es.egt.daw.dawes.java.rest.equicampus.alumno.application.usecase.profesor.FindProfesorUseCase;
@@ -10,9 +11,9 @@ import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
 @Service
-public class FindProfesorService {
+public class FindProfesorService extends ProfesorService{
 private final FindProfesorUseCase findProfesorUseCase;
-
+@Cacheable
      public List<Profesor> findAll() {
         return findProfesorUseCase.findAll();
      }
