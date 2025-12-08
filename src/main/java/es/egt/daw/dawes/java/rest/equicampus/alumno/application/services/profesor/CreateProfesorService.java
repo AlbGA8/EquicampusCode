@@ -14,9 +14,9 @@ import lombok.RequiredArgsConstructor;
 public class CreateProfesorService extends ProfesorService {
        private final CreateProfesorUseCase createProfesorUseCase;
 @CacheEvict(allEntries = true)
-	public Profesor createProfesor(CreateProfesorCommand comando){
+	public Profesor createProfesor(CreateProfesorCommand command){
 		
-		return createProfesorUseCase.create(comando);
+		return createProfesorUseCase.create(command);
 	}
 
 

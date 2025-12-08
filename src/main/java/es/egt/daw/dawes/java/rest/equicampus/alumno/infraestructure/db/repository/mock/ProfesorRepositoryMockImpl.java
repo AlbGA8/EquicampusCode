@@ -13,6 +13,7 @@ import es.egt.daw.dawes.java.rest.equicampus.alumno.domain.model.identifiers.Pro
 import es.egt.daw.dawes.java.rest.equicampus.alumno.domain.repository.ProfesorRepository;
 
 @Repository
+
 public class ProfesorRepositoryMockImpl implements ProfesorRepository {
 
         private final Map<ProfesorId, Profesor> profesor = ProfesorFactory.getDemoData();

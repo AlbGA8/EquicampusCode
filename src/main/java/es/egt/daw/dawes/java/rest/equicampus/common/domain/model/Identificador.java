@@ -3,7 +3,7 @@ package es.egt.daw.dawes.java.rest.equicampus.common.domain.model;
 import lombok.Data;
 
 @Data
-public abstract  class Identificador {
+public abstract class Identificador {
 
     protected Integer value;
 

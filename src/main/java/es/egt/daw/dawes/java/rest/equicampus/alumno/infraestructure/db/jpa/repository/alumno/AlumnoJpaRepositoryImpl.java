@@ -3,6 +3,8 @@ package es.egt.daw.dawes.java.rest.equicampus.alumno.infraestructure.db.jpa.repo
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.context.annotation.Profile;
+
 import es.egt.daw.dawes.java.rest.equicampus.alumno.domain.model.entity.Alumno;
 import es.egt.daw.dawes.java.rest.equicampus.alumno.domain.model.identifiers.AlumnoId;
 import es.egt.daw.dawes.java.rest.equicampus.alumno.domain.repository.AlumnoRepository;
@@ -11,6 +13,7 @@ import es.egt.daw.dawes.java.rest.equicampus.alumno.infraestructure.web.rest.map
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
+
 public class AlumnoJpaRepositoryImpl implements AlumnoRepository {
     
    private final AlumnoEntityJpaRepository repository;

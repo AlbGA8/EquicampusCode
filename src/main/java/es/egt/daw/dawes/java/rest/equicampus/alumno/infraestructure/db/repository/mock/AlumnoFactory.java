@@ -17,6 +17,7 @@ public class AlumnoFactory {
             datos.put(new AlumnoId(1), new Alumno(new AlumnoId(1), "Juan", "Pérez García", LocalDateTime.now(), new ProfesorId(1)));
             datos.put(new AlumnoId(2), new Alumno(new AlumnoId(2), "María", "López Sánchez", LocalDateTime.now(), new ProfesorId(2)));
             datos.put(new AlumnoId(3), new Alumno(new AlumnoId(3), "Carlos", "Martínez Rodríguez", LocalDateTime.now(), new ProfesorId(1)));
+            
 
         return datos;
     }

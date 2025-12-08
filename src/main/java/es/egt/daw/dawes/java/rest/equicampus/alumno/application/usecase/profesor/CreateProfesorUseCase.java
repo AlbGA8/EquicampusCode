@@ -12,11 +12,11 @@ import lombok.AllArgsConstructor;
 public class CreateProfesorUseCase {
 
     private final ProfesorRepository profesorRepository;
-    public Profesor create(CreateProfesorCommand comando){
+    public Profesor create(CreateProfesorCommand command){
         Profesor profesor = Profesor.builder()
 
-        .nombre(comando.nombre())
-        .apellidos(comando.apellido())
+        .nombre(command.nombre())
+        .apellidos(command.apellido())
         .createdAt(LocalDateTime.now()).build();
         
         

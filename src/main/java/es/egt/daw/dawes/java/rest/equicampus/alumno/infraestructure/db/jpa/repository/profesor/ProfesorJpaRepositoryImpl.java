@@ -3,6 +3,7 @@ package es.egt.daw.dawes.java.rest.equicampus.alumno.infraestructure.db.jpa.repo
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Repository;
 
 import es.egt.daw.dawes.java.rest.equicampus.alumno.domain.model.entity.Profesor;
@@ -13,6 +14,7 @@ import es.egt.daw.dawes.java.rest.equicampus.alumno.infraestructure.web.rest.map
 import lombok.RequiredArgsConstructor;
 @Repository
 @RequiredArgsConstructor
+
 public class ProfesorJpaRepositoryImpl implements ProfesorRepository {
 
     private final ProfesorEntityJpaRepository repository;

@@ -15,10 +15,10 @@ public class CreateAlumnoService extends AlumnoService {
     private final CreateAlumnoUseCase createAlumnoUseCase;
 
     @CacheEvict(allEntries = true) // Elimina de cache la lista
-    public Alumno createAlumno(CreateAlumnoCommand comando) {
+    public Alumno createAlumno(CreateAlumnoCommand command) {
 
        
-        return createAlumnoUseCase.create(comando);
+        return createAlumnoUseCase.create(command);
     }
 
 }

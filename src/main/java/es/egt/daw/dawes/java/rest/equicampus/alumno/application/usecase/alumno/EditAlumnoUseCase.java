@@ -12,13 +12,13 @@ public class EditAlumnoUseCase {
 
     private final AlumnoRepository alumnoRepository;
 
-    public Alumno update(EditAlumnoCommand comando){
-        return alumnoRepository.getById(comando.id())
+    public Alumno update(EditAlumnoCommand command){
+        return alumnoRepository.getById(command.id())
         .map(a ->{
-            a.setNombre(comando.nombre());
-            a.setApellidos(comando.apellido());
+            a.setNombre(command.nombre());
+            a.setApellidos(command.apellido());
             return alumnoRepository.save(a);})
-        .orElseThrow(()-> new AlumnoNotFoundException(comando.id().getValue()));
+        .orElseThrow(()-> new AlumnoNotFoundException(command.id().getValue()));
     }
 
 }

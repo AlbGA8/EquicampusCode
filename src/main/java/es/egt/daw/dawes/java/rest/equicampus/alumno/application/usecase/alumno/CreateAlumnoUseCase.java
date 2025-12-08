@@ -12,13 +12,13 @@ import lombok.AllArgsConstructor;
 @AllArgsConstructor
 public class CreateAlumnoUseCase {
     private final AlumnoRepository alumnoRepository;
-    public Alumno create (CreateAlumnoCommand comando) {
+    public Alumno create (CreateAlumnoCommand command) {
         Alumno alumno = Alumno.builder()
 
-        .nombre(comando.nombre())
-        .apellidos(comando.apellido())
+        .nombre(command.nombre())
+        .apellidos(command.apellido())
         .createdAt(LocalDateTime.now())
-        .profesor(comando.ProfesorId()).build();
+        .profesor(command.ProfesorId()).build();
         
 
         
