@@ -3,4 +3,4 @@
     - Se han utilizado dos ficheros .sql:
       - data.slq para la insercion en las tablas y schema.sql para la creacion de las tablas.
 
-![alt text](/imagenes/image.png)
+![alt text](imagenes/image.png)

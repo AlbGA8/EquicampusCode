@@ -1,31 +1,31 @@
 ## Alumnos
 
 ### POST
-![alt text](/imagenes/alumnopost.png)
+![alt text](imagenes/alumnopost.png)
 
 ### GET
-![alt text](/imagenes/getalumno.png)
+![alt text](imagenes/getalumno.png)
 
 ### DELETE
-![alt text](/imagenes/deletealumno.png)
+![alt text](imagenes/deletealumno.png)
 
 ### PUT
-![alt text](/imagenes/putalumno.png)
+![alt text](imagenes/putalumno.png)
 
 ---
 
 ## Profesor
 
 ### POST
-![alt text](/imagenes/postProfesor.png)
+![alt text](imagenes/postProfesor.png)
 
 ### GET
-![alt text](/imagenes/getProfesor.png)
+![alt text](imagenes/getProfesor.png)
 
 ### DELETE
-![alt text](/imagenes/deleteprofesor.png)
+![alt text](imagenes/deleteprofesor.png)
 
 ### PUT
-![alt text](/imagenes/putProfesor.png)
+![alt text](imagenes/putProfesor.png)
 
   
