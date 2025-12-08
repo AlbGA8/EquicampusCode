@@ -5,6 +5,13 @@ import es.egt.daw.dawes.java.rest.equicampus.alumno.infraestructure.web.validati
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
+/**
+ * 
+ * @author Alba Garcia Puerta
+ * @version 1.0
+ * @since 2025-12-08
+ */
+
 public record AlumnoRequest(
         @NotBlank(message = "{alumno.valid.nombre.no_vacio}") @NombradoAlumno(message = "{alumno.valid.nombre.nombrado_validation}") String nombre,
         @NotBlank(message = "{alumno.valid.apellido.no_vacio}") @NombradoAlumno(message = "{alumno.valid.apellido.nombrado_validation}") String apellido,

@@ -6,6 +6,12 @@ import es.egt.daw.dawes.java.rest.equicampus.alumno.application.usecase.profesor
 import es.egt.daw.dawes.java.rest.equicampus.alumno.domain.model.identifiers.ProfesorId;
 import lombok.AllArgsConstructor;
 
+/**
+ * 
+ * @author Alba Garcia Puerta
+ * @version 1.0
+ * @since 2025-12-08
+ */
 @AllArgsConstructor
 public class DeleteProfesorService extends ProfesorService {
   private final DeleteProfesorUseCase deleteProfesorUseCase;

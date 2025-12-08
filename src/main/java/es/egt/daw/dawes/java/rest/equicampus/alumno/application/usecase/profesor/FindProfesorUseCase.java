@@ -7,6 +7,13 @@ import es.egt.daw.dawes.java.rest.equicampus.alumno.domain.model.entity.Profesor
 import es.egt.daw.dawes.java.rest.equicampus.alumno.domain.repository.ProfesorRepository;
 import lombok.RequiredArgsConstructor;
 
+/**
+ * 
+ * @author Alba Garcia Puerta
+ * @version 1.0
+ * @since 2025-12-08
+ */
+
 @RequiredArgsConstructor
 public class FindProfesorUseCase {
     private final ProfesorRepository profesorRepository;

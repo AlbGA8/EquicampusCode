@@ -14,6 +14,13 @@ import es.egt.daw.dawes.java.rest.equicampus.alumno.infraestructure.db.jpa.repos
 import es.egt.daw.dawes.java.rest.equicampus.alumno.infraestructure.db.repository.mock.AlumnoFactory;
 import es.egt.daw.dawes.java.rest.equicampus.alumno.infraestructure.web.rest.mapper.AlumnoMapper;
 
+/**
+ * 
+ * @author Alba Garcia Puerta
+ * @version 1.0
+ * @since 2025-12-08
+ */
+
 @DataJpaTest(showSql = true)
 public class AlumnoEntityJpaRepositoryTest {
     

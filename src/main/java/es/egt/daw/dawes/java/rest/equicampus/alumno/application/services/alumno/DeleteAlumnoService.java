@@ -7,6 +7,12 @@ import es.egt.daw.dawes.java.rest.equicampus.alumno.application.usecase.alumno.D
 import es.egt.daw.dawes.java.rest.equicampus.alumno.domain.model.identifiers.AlumnoId;
 import lombok.RequiredArgsConstructor;
 
+/**
+ * 
+ * @author Alba Garcia Puerta
+ * @version 1.0
+ * @since 2025-12-08
+ */
 @RequiredArgsConstructor
 @Service
 public class DeleteAlumnoService extends AlumnoService {

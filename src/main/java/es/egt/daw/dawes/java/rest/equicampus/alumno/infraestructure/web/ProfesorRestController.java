@@ -39,6 +39,13 @@ import org.springframework.web.bind.annotation.PutMapping;
 
 
 
+/**
+ * 
+ * @author Alba Garcia Puerta
+ * @version 1.0
+ * @since 2025-12-08
+ */
+
 @RestController
 @RequestMapping("/profesor")
 @RequiredArgsConstructor

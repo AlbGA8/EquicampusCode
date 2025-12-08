@@ -11,6 +11,13 @@ import es.egt.daw.dawes.java.rest.equicampus.alumno.infraestructure.db.jpa.entit
 import es.egt.daw.dawes.java.rest.equicampus.alumno.infraestructure.web.rest.dto.profesor.ProfesorRequest;
 import es.egt.daw.dawes.java.rest.equicampus.alumno.infraestructure.web.rest.dto.profesor.ProfesorResponse;
 
+/**
+ * 
+ * @author Alba Garcia Puerta
+ * @version 1.0
+ * @since 2025-12-08
+ */
+
 public class ProfesorMapper {
 
     public static CreateProfesorCommand toCommand(ProfesorRequest profesorRequest) {

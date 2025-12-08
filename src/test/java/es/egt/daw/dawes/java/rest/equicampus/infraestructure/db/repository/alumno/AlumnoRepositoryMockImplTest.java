@@ -12,6 +12,13 @@ import es.egt.daw.dawes.java.rest.equicampus.alumno.domain.repository.AlumnoRepo
 import es.egt.daw.dawes.java.rest.equicampus.alumno.infraestructure.db.repository.mock.AlumnoFactory;
 import es.egt.daw.dawes.java.rest.equicampus.alumno.infraestructure.db.repository.mock.AlumnoRepositoryMockImpl;
 
+/**
+ * 
+ * @author Alba Garcia Puerta
+ * @version 1.0
+ * @since 2025-12-08
+ */
+
 public class AlumnoRepositoryMockImplTest {
 
      AlumnoRepository repository = new AlumnoRepositoryMockImpl();

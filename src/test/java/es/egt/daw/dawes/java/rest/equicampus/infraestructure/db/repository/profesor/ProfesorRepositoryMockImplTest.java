@@ -12,6 +12,13 @@ import es.egt.daw.dawes.java.rest.equicampus.alumno.domain.repository.ProfesorRe
 import es.egt.daw.dawes.java.rest.equicampus.alumno.infraestructure.db.repository.mock.ProfesorFactory;
 import es.egt.daw.dawes.java.rest.equicampus.alumno.infraestructure.db.repository.mock.ProfesorRepositoryMockImpl;
 
+/**
+ * 
+ * @author Alba Garcia Puerta
+ * @version 1.0
+ * @since 2025-12-08
+ */
+
 public class ProfesorRepositoryMockImplTest {
         ProfesorRepository repository = new ProfesorRepositoryMockImpl();
     @BeforeEach

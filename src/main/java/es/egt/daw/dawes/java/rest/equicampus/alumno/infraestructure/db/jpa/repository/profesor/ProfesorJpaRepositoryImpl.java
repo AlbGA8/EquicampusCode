@@ -3,7 +3,6 @@ package es.egt.daw.dawes.java.rest.equicampus.alumno.infraestructure.db.jpa.repo
 import java.util.List;
 import java.util.Optional;
 
-import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Repository;
 
 import es.egt.daw.dawes.java.rest.equicampus.alumno.domain.model.entity.Profesor;
@@ -12,6 +11,14 @@ import es.egt.daw.dawes.java.rest.equicampus.alumno.domain.repository.ProfesorRe
 import es.egt.daw.dawes.java.rest.equicampus.alumno.infraestructure.db.jpa.entity.profesor.ProfesorEntity;
 import es.egt.daw.dawes.java.rest.equicampus.alumno.infraestructure.web.rest.mapper.ProfesorMapper;
 import lombok.RequiredArgsConstructor;
+
+/**
+ * 
+ * @author Alba Garcia Puerta
+ * @version 1.0
+ * @since 2025-12-08
+ */
+
 @Repository
 @RequiredArgsConstructor
 

@@ -18,6 +18,13 @@ import es.egt.daw.dawes.java.rest.equicampus.alumno.application.services.alumno.
 import es.egt.daw.dawes.java.rest.equicampus.alumno.application.usecase.alumno.FindAlumnoUseCase;
 import es.egt.daw.dawes.java.rest.equicampus.alumno.infraestructure.db.repository.mock.AlumnoFactory;
 
+/**
+ * 
+ * @author Alba Garcia Puerta
+ * @version 1.0
+ * @since 2025-12-08
+ */
+
 @ExtendWith(MockitoExtension.class)
 public class FindAlumnoServiceTest {
 

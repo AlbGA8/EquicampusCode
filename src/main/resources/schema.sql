@@ -1,5 +1,12 @@
 
 
+/**
+ * 
+ * @author Alba Garcia Puerta
+ * @version 1.0
+ * @since 2025-12-08
+ */
+
 -- ========================
 -- Tabla PROFESOR
 -- ========================

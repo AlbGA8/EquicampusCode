@@ -12,6 +12,13 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
+/**
+ * 
+ * @author Alba Garcia Puerta
+ * @version 1.0
+ * @since 2025-12-08
+ */
+
 @Data
 @AllArgsConstructor
 @RestControllerAdvice

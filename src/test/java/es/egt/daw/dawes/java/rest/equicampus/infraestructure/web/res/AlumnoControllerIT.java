@@ -33,6 +33,14 @@ import es.egt.daw.dawes.java.rest.equicampus.alumno.domain.model.identifiers.Alu
 import es.egt.daw.dawes.java.rest.equicampus.alumno.infraestructure.db.repository.mock.AlumnoFactory;
 import es.egt.daw.dawes.java.rest.equicampus.alumno.infraestructure.web.rest.dto.alumno.AlumnoRequest;
 import es.egt.daw.dawes.java.rest.equicampus.alumno.infraestructure.web.rest.dto.alumno.AlumnoResponse;
+
+/**
+ * 
+ * @author Alba Garcia Puerta
+ * @version 1.0
+ * @since 2025-12-08
+ */
+
 @ActiveProfiles("test")
 // Indicamos que es un test de Spring
 @SpringBootTest

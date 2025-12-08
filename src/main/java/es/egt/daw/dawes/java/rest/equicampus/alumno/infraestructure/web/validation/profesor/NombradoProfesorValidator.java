@@ -3,6 +3,13 @@ package es.egt.daw.dawes.java.rest.equicampus.alumno.infraestructure.web.validat
 import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;
 
+/**
+ * 
+ * @author Alba Garcia Puerta
+ * @version 1.0
+ * @since 2025-12-08
+ */
+
 public class NombradoProfesorValidator implements ConstraintValidator<NombradoProfesor, String> {
 
     public final static String STR_BLANCO = " ";
