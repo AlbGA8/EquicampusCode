@@ -60,6 +60,11 @@ Para más detalles: [Plan de pruebas](doc/plan%20de%20pruebas.md)
 1. Clonar el repositorio:
 
 ```bash
-git clone https://github.com/usuario/equicampus-api.git
+git clone https://github.com/AlbGA8/EquicampusCode.git
 
+mvn clean install
 
+mvn spring-boot:run
+
+http://localhost:8080
+```
