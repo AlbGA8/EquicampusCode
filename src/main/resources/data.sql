@@ -84,3 +84,16 @@ INSERT INTO RESERVA (alumno_id, clase_id, pista_id, caballo_id) VALUES
 (8, 8, 3, 8),
 (9, 9, 4, 9),
 (10, 10, 5, 10);
+
+-- ========================
+-- Insert ROLES USUARIOS
+-- ========================
+INSERT INTO USUARIOS (id, firstname, lastname, email, password, role) VALUES
+(3,'ana', 'lopez', 'ana.lopez@a.com', '$2a$12$PB6GwcJCu44g/T895VObduyyMGsX.Rl/QN0kU/IY0l9HOPokGJBpe', 'ALUMNO'),
+(4,'carlos', 'martinez', 'carlos.martinez@a.com', '$2a$12$PB6GwcJCu44g/T895VObduyyMGsX.Rl/QN0kU/IY0l9HOPokGJBpe', 'ALUMNO'),
+(5,'laura', 'gomez', 'laura.gomez@a.com', '$2a$12$PB6GwcJCu44g/T895VObduyyMGsX.Rl/QN0kU/IY0l9HOPokGJBpe', 'ALUMNO'),
+
+(6,'miguel', 'ruiz', 'miguel.ruiz@a.com', '$2a$12$crH/Tuxn/3in7inhgLzoiOTfaXm2sLQy5alm0pwlBXu2z./MzwTMW', 'INSTRUCTOR'),
+(7,'sara', 'fernandez', 'sara.fernandez@a.com', '$2a$12$crH/Tuxn/3in7inhgLzoiOTfaXm2sLQy5alm0pwlBXu2z./MzwTMW', 'INSTRUCTOR'),
+
+(8,'pedro', 'admin', 'pedro.admin@a.com', '$2a$12$crH/Tuxn/3in7inhgLzoiOTfaXm2sLQy5alm0pwlBXu2z./MzwTMW', 'ADMIN');
