@@ -23,7 +23,7 @@ public class CreateProfesorUseCase {
         Profesor profesor = Profesor.builder()
 
         .nombre(command.nombre())
-        .apellidos(command.apellido())
+        .apellido(command.apellido())
         .createdAt(LocalDateTime.now()).build();
         
         

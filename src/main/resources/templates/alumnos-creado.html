@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title th:text="#{student.created.page.title}">Alumno Creado</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Tu CSS externo -->
+    <link rel="stylesheet" type="text/css" th:href="@{/css/estilos.css}" />
+
+    <style>
+        /* Pequeña animación para el icono de éxito */
+        .success-icon {
+            animation: popIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+            opacity: 0;
+            transform: scale(0.5);
+        }
+
+        @keyframes popIn {
+            to { opacity: 1; transform: scale(1); }
+        }
+    </style>
+</head>
+<body class="p-8 flex justify-center items-center min-h-screen bg-gray-50">
+
+    <section class="view-section w-full max-w-sm">
+        
+        <div class="custom-card p-8 text-center">
+            
+            <!-- Círculo Icono Éxito -->
+            <div class="success-icon mx-auto flex items-center justify-center h-20 w-20 rounded-full bg-green-100 mb-6 shadow-sm">
+                <i class="fas fa-check text-4xl text-green-600"></i>
+            </div>
+            
+            <!-- Título -->
+            <h2 class="text-2xl font-bold text-forest mb-3" th:text="#{student.created.title}">
+                ¡Operación Exitosa!
+            </h2>
+            
+            <!-- Mensaje descriptivo -->
+            <p class="text-gray-500 mb-8 leading-relaxed" th:text="#{student.created.message}">
+                El alumno ha sido registrado correctamente en el sistema.
+            </p>
+
+            <!-- Botón Volver -->
+            <a th:href="@{/web/alumnos}" 
+               class="block w-full bg-forest text-white font-bold py-3 px-4 rounded-lg shadow-md hover:bg-opacity-90 transform hover:-translate-y-0.5 transition-all duration-200">
+                <i class="fas fa-arrow-left mr-2"></i>
+                <span th:text="#{student.created.button.back}">Volver al listado</span>
+            </a>
+
+        </div>
+
+    </section>
+
+</body>
+</html>

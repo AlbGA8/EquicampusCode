@@ -30,7 +30,7 @@ public class ProfesorMapper {
     }
 
     public static ProfesorResponse toResponse(Profesor profesor) {
-        return new ProfesorResponse(profesor.getProfesorId().getValue(), profesor.getNombre(), profesor.getApellidos(),
+        return new ProfesorResponse(profesor.getProfesorId().getValue(), profesor.getNombre(), profesor.getApellido(),
                 profesor.getCreatedAt());
 
     }
@@ -40,7 +40,7 @@ public class ProfesorMapper {
         ProfesorId id = p.getProfesorId();
         return ProfesorEntity.builder().profesorId(id != null ? id.getValue() : null)
                 .nombre(p.getNombre())
-                .apellidos(p.getApellidos())
+                .apellido(p.getApellido())
                 .createdAt(p.getCreatedAt())
                 .build();
 
@@ -49,7 +49,7 @@ public class ProfesorMapper {
     public static Profesor toDomain(ProfesorEntity p) {
         return Profesor.builder().profesorId(new ProfesorId(p.getProfesorId()))
                 .nombre(p.getNombre())
-                .apellidos(p.getApellidos())
+                .apellido(p.getApellido())
                 .createdAt(p.getCreatedAt())
                 .build();
 

@@ -7,6 +7,7 @@ import es.egt.daw.dawes.java.rest.equicampus.alumno.domain.model.identifiers.Pro
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 /**
  * 
@@ -18,12 +19,14 @@ import lombok.Data;
 @Data
 @AllArgsConstructor
 @Builder
-
+@NoArgsConstructor
 public class Alumno {
+
     private AlumnoId alumnoId;
     private String nombre;
-    private String apellidos;
+    private String apellido;
     private LocalDateTime createdAt;
     private ProfesorId profesor;// Relación con Profesor
-
+    private String email;
+    
 }

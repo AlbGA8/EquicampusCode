@@ -5,6 +5,11 @@ import static es.egt.daw.dawes.java.rest.equicampus.auth.domain.Permiso.ADMIN_CR
 import static es.egt.daw.dawes.java.rest.equicampus.auth.domain.Permiso.ADMIN_DELETE;
 import static es.egt.daw.dawes.java.rest.equicampus.auth.domain.Permiso.ADMIN_READ;
 import static es.egt.daw.dawes.java.rest.equicampus.auth.domain.Permiso.ADMIN_UPDATE;
+import static es.egt.daw.dawes.java.rest.equicampus.auth.domain.Permiso.INSTRUCTOR_CREATE;
+import static es.egt.daw.dawes.java.rest.equicampus.auth.domain.Permiso.INSTRUCTOR_READ;
+import static es.egt.daw.dawes.java.rest.equicampus.auth.domain.Permiso.INSTRUCTOR_UPDATE;
+import static es.egt.daw.dawes.java.rest.equicampus.auth.domain.Permiso.ALUMN_READ;
+import static es.egt.daw.dawes.java.rest.equicampus.auth.domain.Permiso.ALUMN_UPDATE;
 import static es.egt.daw.dawes.java.rest.equicampus.auth.domain.Permiso.USER_CREATE;
 import static es.egt.daw.dawes.java.rest.equicampus.auth.domain.Permiso.USER_DELETE;
 import static es.egt.daw.dawes.java.rest.equicampus.auth.domain.Permiso.USER_READ;
@@ -18,16 +23,16 @@ public enum Rol {
 
     ALUMN(
         Set.of(
-            USER_READ,
-            USER_UPDATE
+            ALUMN_READ,
+            ALUMN_UPDATE
         )
     ),
     
     INSTRUCTOR(
         Set.of(
-            USER_CREATE,
-            USER_READ,
-            USER_UPDATE
+            INSTRUCTOR_CREATE,
+            INSTRUCTOR_READ,
+            INSTRUCTOR_UPDATE
            
         )
     ),

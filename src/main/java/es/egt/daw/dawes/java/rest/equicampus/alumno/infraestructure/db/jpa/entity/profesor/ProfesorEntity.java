@@ -40,7 +40,7 @@ public class ProfesorEntity {
     private String nombre;
 
     @Column(nullable = false, length = 150)
-    private String apellidos;
+    private String apellido;
 
     @Column(nullable = false)
     private LocalDateTime createdAt;
@@ -53,10 +53,10 @@ public class ProfesorEntity {
     
 
  
-    public ProfesorEntity(Integer profesorId, String nombre, String apellidos) {
+    public ProfesorEntity(Integer profesorId, String nombre, String apellido) {
         this.profesorId = profesorId;
         this.nombre = nombre;
-        this.apellidos = apellidos;
+        this.apellido = apellido;
         
     }
 

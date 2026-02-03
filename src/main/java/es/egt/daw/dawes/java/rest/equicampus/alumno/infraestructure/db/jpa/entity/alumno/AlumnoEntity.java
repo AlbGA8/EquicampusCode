@@ -40,8 +40,8 @@ public class AlumnoEntity {
     @Column(name = "nombre", nullable = false)
     private String nombre;
 
-    @Column(name = "apellidos", nullable = false)
-    private String apellidos;
+    @Column(name = "apellido", nullable = false)
+    private String apellido;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "profesor_id", nullable = false)
@@ -50,6 +50,9 @@ public class AlumnoEntity {
     @Column(name = "created_at", nullable = false)
     private LocalDateTime createdAt;
 
+     @Column(name = "email", nullable = false)
+    private String email;
+
 
     
     // --- Constructores ---
@@ -57,12 +60,13 @@ public class AlumnoEntity {
     }
 
     // Constructor con campos (simplificado)
-    public AlumnoEntity(Integer id, String nombre,String apellidos, LocalDateTime createdAt, ProfesorEntity profesor) {
+    public AlumnoEntity(Integer id, String nombre,String apellido, LocalDateTime createdAt, ProfesorEntity profesor, String email) {
         this.alumnoId = id;
         this.nombre = nombre;
-        this.apellidos = apellidos;
+        this.apellido = apellido;
         this.createdAt = createdAt;
         this.profesor = profesor;
+        this.email = email;
     }
 
   

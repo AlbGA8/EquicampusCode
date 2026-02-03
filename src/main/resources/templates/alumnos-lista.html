@@ -1,0 +1,243 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Directorio de Alumnos</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+
+    <style>
+      /* TUS ESTILOS PERSONALIZADOS */
+      :root {
+        --forest-green: #2d5a3f;
+        --sand-gold: #d4b081;
+        --soft-sky: #e8f4f8;
+      }
+
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        background-color: #f8fafc; /* Slate-50 */
+        color: #334155; /* Slate-700 */
+      }
+
+      /* Clases utilitarias basadas en tus variables */
+      .bg-forest {
+        background-color: var(--forest-green);
+      }
+      .text-forest {
+        color: var(--forest-green);
+      }
+      .hover-bg-forest:hover {
+        background-color: #234732;
+      }
+
+      .bg-sand {
+        background-color: var(--sand-gold);
+      }
+      .text-sand {
+        color: var(--sand-gold);
+      }
+
+      .bg-soft-sky {
+        background-color: var(--soft-sky);
+      }
+
+      .custom-card {
+        background: white;
+        border-radius: 1rem;
+        box-shadow:
+          0 10px 15px -3px rgba(0, 0, 0, 0.1),
+          0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        border: 1px solid #e2e8f0;
+      }
+
+      /* Animación de entrada */
+      .view-section {
+        animation: fadeIn 0.5s ease-out;
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(15px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+    </style>
+  </head>
+  <body class="p-4 md:p-8 min-h-screen">
+    <div class="max-w-6xl mx-auto view-section">
+      <div class="flex justify-end gap-3 mb-6">
+        <a
+          th:href="@{/web/alumnos(lang=es)}"
+          class="transition hover:scale-110 opacity-80 hover:opacity-100"
+        >
+          <img
+            src="https://flagcdn.com/w40/es.png"
+            alt="Español"
+            class="h-6 w-auto shadow-sm rounded-sm"
+          />
+        </a>
+        <a
+          th:href="@{/web/alumnos(lang=en)}"
+          class="transition hover:scale-110 opacity-80 hover:opacity-100"
+        >
+          <img
+            src="https://flagcdn.com/w40/gb.png"
+            alt="English"
+            class="h-6 w-auto shadow-sm rounded-sm"
+          />
+        </a>
+        <a
+          th:href="@{/web/alumnos(lang=ar)}"
+          class="transition hover:scale-110 opacity-80 hover:opacity-100"
+        >
+          <img
+            src="https://flagcdn.com/w40/ma.png"
+            alt="Árabe"
+            class="h-6 w-auto shadow-sm rounded-sm"
+          />
+        </a>
+        <a
+          th:href="@{/web/alumnos(lang=ko)}"
+          class="transition hover:scale-110 opacity-80 hover:opacity-100"
+        >
+          <img
+            src="https://flagcdn.com/w40/kr.png"
+            alt="Coreano"
+            class="h-6 w-auto shadow-sm rounded-sm"
+          />
+        </a>
+      </div>
+
+      <div class="custom-card p-6 md:p-10">
+        <div
+          class="flex flex-col md:flex-row justify-between items-center mb-8 border-b border-gray-100 pb-6"
+        >
+          <div class="mb-4 md:mb-0">
+            <h1
+              class="text-3xl font-bold text-forest"
+              th:text="#{student.list.title}"
+            >
+              Directorio de Alumnos
+            </h1>
+            <p class="text-gray-500 text-sm mt-1">
+              Gestión y control de matriculados
+            </p>
+          </div>
+
+          <div class="flex gap-3">
+            <a
+              th:href="@{/web/alumnos/nuevo}"
+              class="bg-forest text-white px-5 py-2.5 rounded-lg shadow hover-bg-forest transition duration-200 flex items-center gap-2 font-medium"
+            >
+              <i class="fa-solid fa-plus"></i>
+              <span th:text="#{generic.link.create}">Nuevo Alumno</span>
+            </a>
+
+            <a
+              th:href="@{/web/alumnos/pdf}"
+              class="border border-red-200 bg-red-50 text-red-700 px-4 py-2.5 rounded-lg hover:bg-red-100 transition duration-200 flex items-center gap-2"
+              title="Exportar a PDF"
+            >
+              <i class="fa-solid fa-file-pdf text-xl"></i>
+              <span class="hidden md:inline font-medium">PDF</span>
+            </a>
+          </div>
+        </div>
+
+        <div class="overflow-x-auto rounded-lg border border-gray-200">
+          <table class="w-full text-left border-collapse">
+            <thead class="bg-forest text-white">
+              <tr>
+                <th
+                  class="p-4 font-semibold text-sm tracking-wide"
+                  th:text="#{student.table.header.id}"
+                >
+                  ID
+                </th>
+                <th
+                  class="p-4 font-semibold text-sm tracking-wide"
+                  th:text="#{student.table.header.name}"
+                >
+                  Nombre
+                </th>
+                <th
+                  class="p-4 font-semibold text-sm tracking-wide"
+                  th:text="#{student.table.header.surname}"
+                >
+                  Apellido
+                </th>
+                <th
+                  class="p-4 font-semibold text-sm tracking-wide"
+                  th:text="#{student.table.header.email}"
+                >
+                  Email
+                </th>
+                <th class="p-4 font-semibold text-center text-sm tracking-wide">
+                  Acciones
+                </th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-gray-100">
+              <tr
+                th:each="alumno : ${alumnos}"
+                class="hover:bg-soft-sky transition duration-150"
+              >
+                <td
+                  class="p-4 font-medium text-gray-700"
+                  th:text="${alumno.alumnoId}"
+                >
+                  1
+                </td>
+                <td class="p-4 text-gray-600" th:text="${alumno.nombre}">
+                  Juan
+                </td>
+                <td class="p-4 text-gray-600" th:text="${alumno.apellido}">
+                  Pérez
+                </td>
+                <td class="p-4 text-gray-500" th:text="${alumno.email}">
+                  juan@ejemplo.com
+                </td>
+
+                <td class="p-4 text-center">
+                  <a href="#" class="text-sand hover:text-orange-600 mx-1"
+                    ><i class="fa-solid fa-pen-to-square"></i
+                  ></a>
+                  <a href="#" class="text-red-400 hover:text-red-600 mx-1"
+                    ><i class="fa-solid fa-trash"></i
+                  ></a>
+                </td>
+              </tr>
+
+              <tr th:remove="all-but-first">
+                <td class="p-4 font-medium text-gray-700">#001</td>
+                <td class="p-4 text-gray-600">María</td>
+                <td class="p-4 text-gray-600">García López</td>
+                <td class="p-4 text-gray-500">maria.garcia@school.com</td>
+                <td class="p-4 text-center">
+                  <button class="text-sand hover:text-orange-600 mx-1">
+                    <i class="fa-solid fa-pen-to-square"></i>
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div
+          class="mt-6 flex justify-between items-center text-sm text-gray-500"
+        >
+          <p>Mostrando lista completa</p>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

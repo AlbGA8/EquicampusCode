@@ -22,7 +22,7 @@ import lombok.Data;
 public class Profesor {
 
     private String nombre;
-    private String apellidos;
+    private String apellido;
     private ProfesorId profesorId;
     private LocalDateTime createdAt;
 }

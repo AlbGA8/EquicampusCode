@@ -21,7 +21,7 @@ public class EditProfesorUseCase {
         return profesorRepository.getById(command.id())
                 .map(p -> { // Actualizamos los atributos del objeto
                     p.setNombre(command.nombre());
-                    p.setApellidos(command.apellido());
+                    p.setApellido(command.apellido());
                     return profesorRepository.save(p);
                 })
                 .orElseThrow(() -> new AlumnoNotFoundException(command.id().getValue())); // Lo cambiamos

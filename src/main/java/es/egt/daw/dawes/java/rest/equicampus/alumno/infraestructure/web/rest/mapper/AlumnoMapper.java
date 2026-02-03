@@ -22,59 +22,65 @@ import es.egt.daw.dawes.java.rest.equicampus.alumno.infraestructure.web.rest.dto
 
 public class AlumnoMapper {
 
-    public static CreateAlumnoCommand toCommand(AlumnoRequest alumnoRequest){
-        return new CreateAlumnoCommand(alumnoRequest.nombre(),alumnoRequest.apellido(), new ProfesorId(alumnoRequest.profesor()));
+    public static CreateAlumnoCommand toCommand(AlumnoRequest alumnoRequest) {
+        return new CreateAlumnoCommand(alumnoRequest.nombre(), alumnoRequest.apellido(),
+                new ProfesorId(alumnoRequest.profesor()), alumnoRequest.email());
     }
 
-    public static EditAlumnoCommand toCommand(int id, AlumnoRequest alumnoRequest ){
-        return new EditAlumnoCommand(new AlumnoId(id), alumnoRequest.nombre(), alumnoRequest.apellido());
+    public static EditAlumnoCommand toCommand(int id, AlumnoRequest alumnoRequest) {
+        return new EditAlumnoCommand(new AlumnoId(id), alumnoRequest.nombre(), alumnoRequest.apellido(),alumnoRequest.email());
     }
 
-    public static AlumnoResponse toResponse( Alumno alumno){
+    public static AlumnoResponse toResponse(Alumno alumno) {
         return new AlumnoResponse(alumno.getAlumnoId().getValue(),
                 alumno.getNombre(),
-                alumno.getApellidos(),
+                alumno.getApellido(),
                 alumno.getCreatedAt(),
-                alumno.getProfesor().getValue());
-
-    
+                alumno.getProfesor().getValue(),
+                alumno.getEmail());
     }
-
 
     public static AlumnoEntity toEntity(Alumno a) {
 
-    // Defino el profesor
-    ProfesorEntity prof = new ProfesorEntity();
-    prof.setProfesorId(a.getProfesor().getValue());
+        // Defino el profesor
+        ProfesorEntity prof = new ProfesorEntity();
+        prof.setProfesorId(a.getProfesor().getValue());
 
-    AlumnoId id = a.getAlumnoId();
-    return AlumnoEntity.builder()
-            .alumnoId(id != null ? id.getValue() : null)
-            .nombre(a.getNombre())
-            .apellidos(a.getApellidos())
-            .createdAt(a.getCreatedAt())
-            .profesor(prof) // Relación 1:N
-            .build();
-}
-
-public static Alumno toDomain(AlumnoEntity a) {
-    return Alumno.builder()
-            .alumnoId(new AlumnoId(a.getAlumnoId()))
-            .nombre(a.getNombre())
-            .apellidos(a.getApellidos())
-            .createdAt(a.getCreatedAt())
-            .profesor(new ProfesorId(a.getProfesor().getProfesorId()))
-            .build();
-}
-
-public static List<Alumno> toDomain(List<AlumnoEntity> lista) {
-    List<Alumno> la = new ArrayList<>();
-    for (AlumnoEntity ae : lista) {
-        la.add(toDomain(ae));
+        AlumnoId id = a.getAlumnoId();
+        return AlumnoEntity.builder()
+                .alumnoId(id != null ? id.getValue() : null)
+                .nombre(a.getNombre())
+                .apellido(a.getApellido())
+                .createdAt(a.getCreatedAt())
+                .profesor(prof) // Relación 1:N
+                .email(a.getEmail())
+                .build();
     }
-    return la;
-}
 
-    
+    public static Alumno toDomain(AlumnoEntity a) {
+        return Alumno.builder()
+                .alumnoId(new AlumnoId(a.getAlumnoId()))
+                .nombre(a.getNombre())
+                .apellido(a.getApellido())
+                .createdAt(a.getCreatedAt())
+                .profesor(new ProfesorId(a.getProfesor().getProfesorId()))
+                .email(a.getEmail())
+                .build();
+    }
+
+    public static List<Alumno> toDomain(List<AlumnoEntity> lista) {
+        List<Alumno> la = new ArrayList<>();
+        for (AlumnoEntity ae : lista) {
+            la.add(toDomain(ae));
+        }
+        return la;
+    }
+     public static AlumnoRequest toRequest(Alumno alumno) {
+        return new AlumnoRequest(
+                alumno.getNombre(),
+                alumno.getApellido(),
+                alumno.getProfesor().getValue(),
+                alumno.getEmail());
+    }
 
 }

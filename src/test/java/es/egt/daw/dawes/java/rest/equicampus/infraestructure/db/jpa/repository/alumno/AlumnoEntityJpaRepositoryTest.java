@@ -57,7 +57,7 @@ public class AlumnoEntityJpaRepositoryTest {
             () -> assertNotNull(alumno),
             () -> assertEquals(alumno.getAlumnoId(), a.getAlumnoId().getValue()),
             () -> assertEquals(alumno.getNombre(), a.getNombre()),
-            ()-> assertEquals(alumno.getApellidos(),a.getApellidos())
+            ()-> assertEquals(alumno.getApellido(),a.getApellido())
         );
     }
 
@@ -75,7 +75,7 @@ public class AlumnoEntityJpaRepositoryTest {
             () -> assertNotNull(alumno),
             () -> assertEquals(alumno.getAlumnoId(), a.getAlumnoId().getValue()),
             () -> assertEquals(alumno.getNombre(), a.getNombre()),
-            ()-> assertEquals(alumno.getApellidos(),a.getApellidos())
+            ()-> assertEquals(alumno.getApellido(),a.getApellido())
             
         );
     }    

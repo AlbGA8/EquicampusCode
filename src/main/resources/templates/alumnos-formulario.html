@@ -1,0 +1,244 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title th:text="#{student.form.page.title}">Registrar Alumno</title>
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome para iconos -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+
+    <!-- Tu CSS externo -->
+    <link rel="stylesheet" type="text/css" th:href="@{/css/estilos.css}" />
+
+    <style>
+      /* --- VARIABLES GLOBALES --- */
+      :root {
+        --forest-green: #2d5a3f;
+        --sand-gold: #d4b081;
+        --soft-sky: #e8f4f8;
+        --sidebar-width: 260px;
+      }
+
+      /* --- ESTILOS GENERALES --- */
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        background-color: #f8fafc;
+        overflow-x: hidden; /* Evita scroll horizontal */
+      }
+
+      /* --- UTILIDADES DE COLOR (Para usar junto a Tailwind) --- */
+      .bg-forest {
+        background-color: var(--forest-green);
+      }
+
+      .text-forest {
+        color: var(--forest-green);
+      }
+
+      .bg-sand {
+        background-color: var(--sand-gold);
+      }
+
+      .text-sand {
+        color: var(--sand-gold);
+      }
+
+      .border-sand {
+        border-color: var(--sand-gold);
+      }
+
+      /* --- COMPONENTES --- */
+
+      /* Tarjeta flotante con sombra suave */
+      .custom-card {
+        background: white;
+        border-radius: 1rem;
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+        border: 1px solid #f1f5f9;
+      }
+
+      /* Sidebar (Si lo usas en otras páginas) */
+      .sidebar {
+        width: var(--sidebar-width);
+        background-color: var(--forest-green);
+        height: 100vh;
+        position: fixed;
+        left: 0;
+        top: 0;
+        z-index: 50;
+        transition: transform 0.3s ease;
+      }
+
+      /* --- ANIMACIONES --- */
+      .view-section {
+        animation: fadeIn 0.4s ease-out;
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(10px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+    </style>
+  </head>
+  <body class="p-8 flex justify-center items-center min-h-screen">
+    <section class="view-section w-full max-w-md">
+      <!-- Cabecera del Formulario -->
+      <div class="mb-6 text-center">
+        <h1
+          class="text-2xl font-bold text-forest tracking-tight"
+          th:text="#{student.form.title}"
+        >
+          REGISTRAR ALUMNO
+        </h1>
+        <p class="text-gray-400 text-sm mt-1">
+          Introduce los datos del nuevo alumno
+        </p>
+      </div>
+
+      <!-- Tarjeta contenedora -->
+      <div class="custom-card p-8">
+        <!-- Acción actualizada a /alumnos/nuevo y objeto 'alumno' -->
+        <form
+          th:action="@{/web/alumnos/nuevo}"
+          th:object="${alumno}"
+          method="POST"
+          class="space-y-5"
+        >
+          <!-- Input: Nombre -->
+          <div>
+            <label
+              class="block text-xs font-bold text-gray-500 uppercase tracking-wider mb-2"
+              th:text="#{student.form.label.name}"
+            >
+              Nombre:
+            </label>
+            <div class="relative">
+              <span
+                class="absolute inset-y-0 left-0 flex items-center pl-3 text-gray-400"
+              >
+                <i class="fas fa-user"></i>
+              </span>
+              <input
+                type="text"
+                th:field="*{nombre}"
+                required
+                class="w-full pl-10 pr-4 py-3 border border-gray-200 rounded-lg text-gray-700 bg-gray-50 focus:bg-white focus:outline-none focus:border-[var(--forest-green)] focus:ring-1 focus:ring-[var(--forest-green)] transition-all"
+                placeholder="Ej. Ana"
+              />
+            </div>
+          </div>
+
+          <!-- Input: Apellido (Nuevo) -->
+          <div>
+            <label
+              class="block text-xs font-bold text-gray-500 uppercase tracking-wider mb-2"
+              th:text="#{student.form.label.surname}"
+            >
+              Apellido:
+            </label>
+            <div class="relative">
+              <span
+                class="absolute inset-y-0 left-0 flex items-center pl-3 text-gray-400"
+              >
+                <i class="fas fa-signature"></i>
+              </span>
+              <input
+                type="text"
+                th:field="*{apellido}"
+                required
+                class="w-full pl-10 pr-4 py-3 border border-gray-200 rounded-lg text-gray-700 bg-gray-50 focus:bg-white focus:outline-none focus:border-[var(--forest-green)] focus:ring-1 focus:ring-[var(--forest-green)] transition-all"
+                placeholder="Ej. García"
+              />
+            </div>
+          </div>
+          <!-- Input: Email (Reintegrado) -->
+          <div>
+            <label
+              class="block text-xs font-bold text-gray-500 uppercase tracking-wider mb-2"
+              th:text="#{student.form.label.email}"
+            >
+              Correo Electrónico:
+            </label>
+            <div class="relative">
+              <span
+                class="absolute inset-y-0 left-0 flex items-center pl-3 text-gray-400"
+              >
+                <i class="fas fa-envelope"></i>
+              </span>
+              <input
+                type="email"
+                th:field="*{email}"
+                required
+                class="w-full pl-10 pr-4 py-3 border border-gray-200 rounded-lg text-gray-700 bg-gray-50 focus:bg-white focus:outline-none focus:border-[var(--forest-green)] focus:ring-1 focus:ring-[var(--forest-green)] transition-all"
+                placeholder="Ej. alumno@email.com"
+              />
+            </div>
+          </div>
+
+          <!-- Input: Profesor (Nuevo) -->
+          <div class="relative">
+            <span
+              class="absolute inset-y-0 left-0 flex items-center pl-3 text-gray-400 pointer-events-none"
+            >
+              <i class="fas fa-chalkboard-user"></i>
+            </span>
+
+            <select
+              th:field="*{profesor}"
+              required
+              class="w-full pl-10 pr-4 py-3 border border-gray-200 rounded-lg text-gray-700 bg-gray-50 focus:bg-white focus:outline-none focus:border-[var(--forest-green)] focus:ring-1 focus:ring-[var(--forest-green)] transition-all appearance-none"
+            >
+              <!-- Opción por defecto -->
+              <option value="">Selecciona un profesor</option>
+
+              <!-- Opciones dinámicas -->
+              <option
+                th:each="profesor : ${profesores}"
+                th:value="${profesor.profesorId}"
+                th:text="${profesor.nombre + ' ' + profesor.apellido}"
+              ></option>
+            </select>
+
+            <div
+              class="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none text-gray-400"
+            >
+              <i class="fas fa-chevron-down text-xs"></i>
+            </div>
+          </div>
+
+          <!-- Botón de Guardar -->
+          <div class="pt-2">
+            <button
+              type="submit"
+              class="w-full bg-forest text-white font-bold py-3 rounded-lg shadow-md hover:bg-opacity-90 transform hover:-translate-y-0.5 transition-all duration-200 flex justify-center items-center gap-2"
+            >
+              <i class="fas fa-save"></i>
+              <span th:text="#{generic.button.save}">Guardar Alumno</span>
+            </button>
+          </div>
+        </form>
+      </div>
+
+      <div class="text-center mt-6">
+        <a
+          th:href="@{/web/alumnos}"
+          class="text-xs text-gray-400 hover:text-forest transition font-semibold"
+        >
+          Cancelar y volver al listado
+        </a>
+      </div>
+    </section>
+  </body>
+</html>

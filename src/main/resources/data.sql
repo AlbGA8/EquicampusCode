@@ -10,24 +10,25 @@
 -- ========================
 -- Insert PROFESOR 
 -- ========================
-INSERT INTO PROFESOR (profesor_id, nombre, apellidos) VALUES
+INSERT INTO PROFESOR (profesor_id, nombre, apellido) VALUES
 (1, 'Miguel', 'Torres'),
 (2, 'Sandra', 'Morales'),
 (3, 'Javier', 'Ortiz'),
 (4, 'María', 'Vega'),
 (5, 'Alberto', 'Santos');
 
-INSERT INTO ALUMNO (nombre, apellidos, profesor_id) VALUES
-('Juan', 'Pérez', 1),
-('Ana', 'López', 2),
-('Luis', 'Martínez', 1),
-('Marta', 'García', 2),
-('Carlos', 'Sánchez', 1),
-('Lucía', 'Fernández', 2),
-('Pedro', 'Gómez', 1),
-('Laura', 'Ramírez', 2),
-('David', 'Hernández', 1),
-('Carmen', 'Jiménez', 2);
+INSERT INTO ALUMNO (nombre, apellido, email, profesor_id) VALUES
+('Juan', 'Pérez', 'juan.perez@email.com', 1),
+('Ana', 'López', 'ana.lopez@email.com', 2),
+('Luis', 'Martínez', 'luis.martinez@email.com', 1),
+('Marta', 'García', 'marta.garcia@email.com', 2),
+('Carlos', 'Sánchez', 'carlos.sanchez@email.com', 1),
+('Lucía', 'Fernández', 'lucia.fernandez@email.com', 2),
+('Pedro', 'Gómez', 'pedro.gomez@email.com', 1),
+('Laura', 'Ramírez', 'laura.ramirez@email.com', 2),
+('David', 'Hernández', 'david.hernandez@email.com', 1),
+('Carmen', 'Jiménez', 'carmen.jimenez@email.com', 2);
+
 
 
 -- ========================

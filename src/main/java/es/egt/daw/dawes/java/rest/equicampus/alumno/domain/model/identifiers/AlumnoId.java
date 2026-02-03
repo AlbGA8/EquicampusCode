@@ -14,4 +14,8 @@ public class AlumnoId extends Identificador {
      public AlumnoId(Integer value) {
         super(value);
     }
+    
+    @Override
+    public String toString() {return String.valueOf(this.value);
+    }
 }

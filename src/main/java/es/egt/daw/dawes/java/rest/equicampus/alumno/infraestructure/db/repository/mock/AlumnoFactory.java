@@ -21,14 +21,14 @@ public class AlumnoFactory {
 
         public static final Map<AlumnoId, Alumno> getDemoData(){
         Map<AlumnoId, Alumno> datos = new LinkedHashMap<>();
-            datos.put(new AlumnoId(1), new Alumno(new AlumnoId(1), "Juan", "Pérez García", LocalDateTime.now(), new ProfesorId(1)));
-            datos.put(new AlumnoId(2), new Alumno(new AlumnoId(2), "María", "López Sánchez", LocalDateTime.now(), new ProfesorId(2)));
-            datos.put(new AlumnoId(3), new Alumno(new AlumnoId(3), "Carlos", "Martínez Rodríguez", LocalDateTime.now(), new ProfesorId(1)));
+            datos.put(new AlumnoId(1), new Alumno(new AlumnoId(1), "Juan", "Pérez García", LocalDateTime.now(), new ProfesorId(1), "juan.perez@example.com"));
+            datos.put(new AlumnoId(2), new Alumno(new AlumnoId(2), "María", "López Sánchez", LocalDateTime.now(), new ProfesorId(2), "maria.lopez@example.com"));
+            datos.put(new AlumnoId(3), new Alumno(new AlumnoId(3), "Carlos", "Martínez Rodríguez", LocalDateTime.now(), new ProfesorId(1), "carlos.martinez@example.com"));
             
 
         return datos;
     }
-  public static final Alumno create() { return new Alumno(new AlumnoId(1), "Paco", "Pérez", LocalDateTime.now(), new ProfesorId(1)); }
+  public static final Alumno create() { return new Alumno(new AlumnoId(1), "Paco", "Pérez", LocalDateTime.now(), new ProfesorId(1), "paco.perez@example.com"); }
 
 
 }
