@@ -15,84 +15,51 @@
 
     <!-- Tu CSS externo -->
     <link rel="stylesheet" type="text/css" th:href="@{/css/estilos.css}" />
-
-    <style>
-      /* --- VARIABLES GLOBALES --- */
-      :root {
-        --forest-green: #2d5a3f;
-        --sand-gold: #d4b081;
-        --soft-sky: #e8f4f8;
-        --sidebar-width: 260px;
-      }
-
-      /* --- ESTILOS GENERALES --- */
-      body {
-        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-        background-color: #f8fafc;
-        overflow-x: hidden; /* Evita scroll horizontal */
-      }
-
-      /* --- UTILIDADES DE COLOR (Para usar junto a Tailwind) --- */
-      .bg-forest {
-        background-color: var(--forest-green);
-      }
-
-      .text-forest {
-        color: var(--forest-green);
-      }
-
-      .bg-sand {
-        background-color: var(--sand-gold);
-      }
-
-      .text-sand {
-        color: var(--sand-gold);
-      }
-
-      .border-sand {
-        border-color: var(--sand-gold);
-      }
-
-      /* --- COMPONENTES --- */
-
-      /* Tarjeta flotante con sombra suave */
-      .custom-card {
-        background: white;
-        border-radius: 1rem;
-        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
-        border: 1px solid #f1f5f9;
-      }
-
-      /* Sidebar (Si lo usas en otras páginas) */
-      .sidebar {
-        width: var(--sidebar-width);
-        background-color: var(--forest-green);
-        height: 100vh;
-        position: fixed;
-        left: 0;
-        top: 0;
-        z-index: 50;
-        transition: transform 0.3s ease;
-      }
-
-      /* --- ANIMACIONES --- */
-      .view-section {
-        animation: fadeIn 0.4s ease-out;
-      }
-
-      @keyframes fadeIn {
-        from {
-          opacity: 0;
-          transform: translateY(10px);
-        }
-        to {
-          opacity: 1;
-          transform: translateY(0);
-        }
-      }
-    </style>
   </head>
   <body class="p-8 flex justify-center items-center min-h-screen">
+        <div class="max-w-6xl mx-auto view-section">
+      <div class="flex justify-end gap-3 mb-6">
+        <a
+          th:href="@{/web/alumnos(lang=es)}"
+          class="transition hover:scale-110 opacity-80 hover:opacity-100"
+        >
+          <img
+            src="https://flagcdn.com/w40/es.png"
+            alt="Español"
+            class="h-6 w-auto shadow-sm rounded-sm"
+          />
+        </a>
+        <a
+          th:href="@{/web/alumnos(lang=en)}"
+          class="transition hover:scale-110 opacity-80 hover:opacity-100"
+        >
+          <img
+            src="https://flagcdn.com/w40/gb.png"
+            alt="English"
+            class="h-6 w-auto shadow-sm rounded-sm"
+          />
+        </a>
+        <a
+          th:href="@{/web/alumnos(lang=ar)}"
+          class="transition hover:scale-110 opacity-80 hover:opacity-100"
+        >
+          <img
+            src="https://flagcdn.com/w40/ma.png"
+            alt="Árabe"
+            class="h-6 w-auto shadow-sm rounded-sm"
+          />
+        </a>
+        <a
+          th:href="@{/web/alumnos(lang=ko)}"
+          class="transition hover:scale-110 opacity-80 hover:opacity-100"
+        >
+          <img
+            src="https://flagcdn.com/w40/kr.png"
+            alt="Coreano"
+            class="h-6 w-auto shadow-sm rounded-sm"
+          />
+        </a>
+      </div>
     <section class="view-section w-full max-w-md">
       <!-- Cabecera del Formulario -->
       <div class="mb-6 text-center">

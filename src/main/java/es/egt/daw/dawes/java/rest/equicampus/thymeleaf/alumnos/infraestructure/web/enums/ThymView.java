@@ -5,7 +5,7 @@ package es.egt.daw.dawes.java.rest.equicampus.thymeleaf.alumnos.infraestructure.
  */
 public enum ThymView {
 
-    ALUMN_LIST("alumnos-lista"),
+    ALUMN_LIST("index"),
     ALUMN_LIST_PDF("/pdf/alumnos-lista"),
     ALUMN_FORM("alumnos-formulario"),
     ALUMN_CREATED("alumnos-creado"),

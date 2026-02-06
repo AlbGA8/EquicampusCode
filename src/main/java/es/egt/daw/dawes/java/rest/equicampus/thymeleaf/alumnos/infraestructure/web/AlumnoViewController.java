@@ -3,16 +3,13 @@ package es.egt.daw.dawes.java.rest.equicampus.thymeleaf.alumnos.infraestructure.
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.thymeleaf.TemplateEngine;
 import java.io.OutputStream;
 import java.util.List;
-
 import com.openhtmltopdf.pdfboxout.PdfRendererBuilder;
 import org.thymeleaf.context.Context;
-
 import es.egt.daw.dawes.java.rest.equicampus.alumno.application.command.alumno.CreateAlumnoCommand;
 import es.egt.daw.dawes.java.rest.equicampus.alumno.application.services.alumno.CreateAlumnoService;
 import es.egt.daw.dawes.java.rest.equicampus.alumno.application.services.alumno.FindAlumnoService;
@@ -60,7 +57,7 @@ public class AlumnoViewController {
 
         // Preparo la respuesta diciendole que voy a devolver un pdf
         response.setContentType("application/pdf");
-        response.setHeader("Content-Disposition", "attachment; filename=productos.pdf");
+        response.setHeader("Content-Disposition", "attachment; filename=alumnos.pdf");
 
         // Código OpenHTML to PDF - CAMBIOS
         // ******************************
@@ -68,30 +65,23 @@ public class AlumnoViewController {
         PdfRendererBuilder builder = new PdfRendererBuilder();
         builder.withHtmlContent(htmlContent, null); // El 'null' es la base URL
         builder.toStream(outputStream);
-
         builder.run();
 
     }
 
-    @GetMapping(WebRoutes.ALUMNOS_BASE)
-    public String listar(Model model) {
-        // Consulto todos los alumnos y los meto en un atributo del modelo para poder
-        // acceder a ellos en la JSP.
+
+    @GetMapping(WebRoutes.ALUMNOS_BASE) // O la ruta que uses para el home
+    public String index(Model model) {
+        // 1. Cargar lista de alumnos para la tabla
         model.addAttribute(ModelAttribute.ALUMN_LIST.getName(), findAlumnoServiceTf.findAll());
-        return ThymView.ALUMN_LIST.getPath(); // Busca alumnos-lista.jsp
-    }
 
-    // Carga la vista del formulario http://localhost:8082/web/alumnos/nuevo
-    @GetMapping(WebRoutes.ALUMNOS_NUEVO)
-    public String formulario(Model model) {
-
-        // Agrego un atributo con el nombre "alumno" y con los datos vacíos, este
-        // alumno se rellenará con los datos de la vista.
-        // es necesario que alumno tenga el constructor vacío: @NoArgsConstructor
-        model.addAttribute(ModelAttribute.SINGLE_ALUMN.getName(), new Alumno());
+        // 2. Cargar lista de profesores para el select del formulario
         model.addAttribute("profesores", findProfesorService.findAll());
 
-        return ThymView.ALUMN_FORM.getPath(); // Devuelvo la vista que carga el formulario
+        // 3. Objeto vacío para el formulario "Nuevo Alumno"
+        model.addAttribute("alumno", new Alumno());
+
+        return ThymView.ALUMN_LIST.getPath(); // Devuelve la vista del listado de alumnos
     }
 
     // Este método crea el alumno y devuelve la vista del mensaje de creado
@@ -101,11 +91,9 @@ public class AlumnoViewController {
             @RequestParam Integer profesor,
             @RequestParam String email,
             Model model) {
-
         ProfesorId profId = new ProfesorId(profesor);
-
         createAlumnoServiceTf.createAlumno(new CreateAlumnoCommand(nombre, apellido, profId, email));
-        return ThymView.ALUMN_CREATED.getPath();
+        return "alumnos-creado";
     }
 
 }

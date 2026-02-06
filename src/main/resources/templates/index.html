@@ -1,0 +1,1465 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title th:text="#{app.title}">EquiCampus - Gestión Integral</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="icon" href="/imagenes/LogoEquiCampus.png" />
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+      rel="stylesheet"
+    />
+    <!-- Tu CSS externo -->
+    <link rel="stylesheet" type="text/css" th:href="@{/css/estilos.css}" />
+  </head>
+  <body>
+    <!-- SIDEBAR (Navegación) -->
+    <aside id="sidebar" class="sidebar">
+      <div class="p-6">
+        <div class="flex items-center space-x-3 mb-10">
+          <div class="logo-container">
+            <i class="fas fa-horse-head text-3xl text-white"></i>
+          </div>
+          <span class="text-xl font-bold text-white tracking-tight"
+            >Equi<span class="text-sand">Campus</span></span
+          >
+        </div>
+
+        <nav class="space-y-1">
+          <div
+            onclick="switchView('dashboard')"
+            class="nav-item active"
+            data-view="dashboard"
+          >
+            <i class="fas fa-th-large text-center w-6 mr-3"></i>
+            <span th:text="#{menu.dashboard}">Dashboard</span>
+          </div>
+          <div
+            onclick="switchView('pupilajes')"
+            class="nav-item"
+            data-view="pupilajes"
+          >
+            <i class="fas fa-horse-head text-center w-6 mr-3"></i>
+            <span th:text="#{menu.stables}">Pupilajes</span>
+          </div>
+          <div
+            onclick="switchView('clases')"
+            class="nav-item"
+            data-view="clases"
+          >
+            <i class="fas fa-calendar-check text-center w-6 mr-3"></i>
+            <span th:text="#{menu.classes}">Clases</span>
+          </div>
+          <div
+            onclick="switchView('pistas')"
+            class="nav-item"
+            data-view="pistas"
+          >
+            <i class="fas fa-map-marked-alt text-center w-6 mr-3"></i>
+            <span th:text="#{menu.arenas}">Pistas</span>
+          </div>
+          <div
+            onclick="switchView('alumnos')"
+            class="nav-item"
+            data-view="alumnos"
+          >
+            <i class="fas fa-user-graduate text-center w-6 mr-3"></i>
+            <span th:text="#{menu.students}">Alumnos</span>
+          </div>
+          <div
+            onclick="switchView('profesores')"
+            class="nav-item"
+            data-view="profesores"
+          >
+            <i class="fas fa-chalkboard-teacher text-center w-6 mr-3"></i>
+            <span th:text="#{menu.teachers}">Profesorado</span>
+          </div>
+          <div onclick="switchView('pagos')" class="nav-item" data-view="pagos">
+            <i class="fas fa-credit-card text-center w-6 mr-3"></i>
+            <span th:text="#{menu.payments}">Pagos</span>
+          </div>
+
+          <div class="pt-10 border-t border-white/10 mt-6">
+            <div class="nav-item opacity-60">
+              <i class="fas fa-cog text-center w-6 mr-3"></i>
+              <span th:text="#{menu.settings}">Configuración</span>
+            </div>
+            <div onclick="logout()" class="nav-item text-red-300">
+              <i class="fas fa-sign-out-alt text-center w-6 mr-3"></i>
+              <span th:text="#{menu.logout}">Salir</span>
+            </div>
+          </div>
+        </nav>
+      </div>
+    </aside>
+
+    <!-- MAIN CONTENT -->
+    <main class="main-content">
+      <!-- HEADER SUPERIOR -->
+      <header
+        class="bg-white border-b border-gray-200 px-4 md:px-8 py-4 flex justify-between items-center sticky top-0 z-40"
+      >
+        <div class="flex items-center">
+          <button
+            onclick="toggleSidebar()"
+            class="lg:hidden mr-4 p-2 text-gray-600"
+          >
+            <i class="fas fa-bars"></i>
+          </button>
+          <h1
+            id="view-title"
+            class="text-xl font-bold text-gray-800"
+            th:text="#{header.title}"
+          >
+            Panel de Control
+          </h1>
+        </div>
+
+        <div class="flex items-center gap-4">
+          <!-- BANDERAS DE IDIOMA (Estilo Thymeleaf solicitado) -->
+          <div class="flex gap-2 mr-4 hidden sm:flex">
+            <a
+              th:href="@{''(lang=es)}"
+              class="hover:scale-110 transition"
+              th:title="#{lang.spanish}"
+            >
+              <img
+                src="https://flagcdn.com/w40/es.png"
+                class="h-5 w-auto rounded-sm shadow-sm"
+                alt="Español"
+              />
+            </a>
+            <a
+              th:href="@{''(lang=en)}"
+              class="hover:scale-110 transition"
+              th:title="#{lang.english}"
+            >
+              <img
+                src="https://flagcdn.com/w40/gb.png"
+                class="h-5 w-auto rounded-sm shadow-sm"
+                alt="English"
+              />
+            </a>
+            <a
+              th:href="@{''(lang=ar)}"
+              class="hover:scale-110 transition"
+              th:title="#{lang.arabic}"
+            >
+              <img
+                src="https://flagcdn.com/w40/ma.png"
+                class="h-5 w-auto rounded-sm shadow-sm"
+                alt="Arabic"
+              />
+            </a>
+            <a
+              th:href="@{''(lang=ko)}"
+              class="hover:scale-110 transition"
+              th:title="#{lang.korean}"
+            >
+              <img
+                src="https://flagcdn.com/w40/kr.png"
+                class="h-5 w-auto rounded-sm shadow-sm"
+                alt="Korean"
+              />
+            </a>
+          </div>
+
+          <!-- Perfil -->
+          <div class="relative">
+            <button
+              onclick="toggleDropdown('profile-dropdown')"
+              class="flex items-center space-x-3 focus:outline-none"
+            >
+              <div class="text-right hidden sm:block">
+                <p
+                  class="text-sm font-bold text-gray-700"
+                  th:text="#{user.admin}"
+                >
+                  Admin
+                </p>
+              </div>
+              <img
+                th:src="@{https://ui-avatars.com/api/?name=Admin&background=2D5A3F&color=fff}"
+                class="w-10 h-10 rounded-full border-2 border-sand"
+              />
+            </button>
+            <div id="profile-dropdown" class="dropdown-content mt-2 shadow-xl">
+              <a
+                href="#"
+                class="block px-4 py-2 text-sm text-red-600 hover:bg-red-50"
+                th:text="#{menu.logout}"
+                >Cerrar Sesión</a
+              >
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <!-- CONTENEDOR DE VISTAS -->
+      <div id="views-container" class="p-4 md:p-8">
+        <!-- 1. DASHBOARD -->
+        <section id="view-dashboard" class="view-section active">
+          <div
+            class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8"
+          >
+            <div
+              class="custom-card p-6 flex items-center space-x-4 border-l-4 border-forest"
+            >
+              <div class="bg-forest/10 p-4 rounded-xl text-forest">
+                <i class="fas fa-horse-head text-2xl"></i>
+              </div>
+              <div>
+                <p
+                  class="text-xs text-gray-500 font-bold uppercase"
+                  th:text="#{menu.stables}"
+                >
+                  Pupilajes
+                </p>
+                <h3 class="text-2xl font-bold">58</h3>
+              </div>
+            </div>
+            <div
+              class="custom-card p-6 flex items-center space-x-4 border-l-4 border-blue-500"
+            >
+              <div class="bg-blue-50 p-4 rounded-xl text-blue-600">
+                <i class="fas fa-users text-2xl"></i>
+              </div>
+              <div>
+                <p
+                  class="text-xs text-gray-500 font-bold uppercase"
+                  th:text="#{menu.students}"
+                >
+                  Alumnos
+                </p>
+                <h3
+                  class="text-2xl font-bold"
+                  th:text="${#lists.size(alumnos)}"
+                >
+                  0
+                </h3>
+              </div>
+            </div>
+            <div
+              class="custom-card p-6 flex items-center space-x-4 border-l-4 border-amber-500"
+            >
+              <div class="bg-amber-50 p-4 rounded-xl text-amber-600">
+                <i class="fas fa-calendar-alt text-2xl"></i>
+              </div>
+              <div>
+                <p
+                  class="text-xs text-gray-500 font-bold uppercase"
+                  th:text="#{dashboard.classes_today}"
+                >
+                  Clases Hoy
+                </p>
+                <h3 class="text-2xl font-bold">24</h3>
+              </div>
+            </div>
+            <div
+              class="custom-card p-6 flex items-center space-x-4 border-l-4 border-emerald-500"
+            >
+              <div class="bg-emerald-50 p-4 rounded-xl text-emerald-600">
+                <i class="fas fa-euro-sign text-2xl"></i>
+              </div>
+              <div>
+                <p
+                  class="text-xs text-gray-500 font-bold uppercase"
+                  th:text="#{dashboard.income_month}"
+                >
+                  Caja Mes
+                </p>
+                <h3 class="text-2xl font-bold">15.8k</h3>
+              </div>
+            </div>
+          </div>
+
+          <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            <div class="lg:col-span-2 custom-card overflow-hidden">
+              <div
+                class="p-6 border-b flex justify-between items-center bg-gray-50/30"
+              >
+                <h2
+                  class="font-bold text-gray-800"
+                  th:text="#{dashboard.schedule.title}"
+                >
+                  Próximas Clases y Pistas
+                </h2>
+                <button
+                  onclick="switchView('clases')"
+                  class="text-xs font-bold bg-forest text-white px-3 py-1 rounded-full"
+                  th:text="#{generic.view_agenda}"
+                >
+                  Ver Agenda
+                </button>
+              </div>
+              <div class="p-6 overflow-x-auto">
+                <table class="w-full text-left text-sm">
+                  <thead
+                    class="text-gray-400 uppercase text-[10px] font-bold tracking-widest"
+                  >
+                    <tr>
+                      <th class="pb-4" th:text="#{generic.time}">Hora</th>
+                      <th class="pb-4" th:text="#{generic.activity}">
+                        Actividad
+                      </th>
+                      <th class="pb-4" th:text="#{generic.arena}">Pista</th>
+                      <th class="pb-4" th:text="#{generic.status}">Estado</th>
+                    </tr>
+                  </thead>
+                  <tbody class="divide-y divide-gray-50">
+                    <tr>
+                      <td class="py-4 font-bold text-forest">17:00</td>
+                      <td class="py-4" th:text="#{activity.jump_pro}">
+                        Salto - Nivel Pro
+                      </td>
+                      <td class="py-4" th:text="#{arena.main}">Principal</td>
+                      <td>
+                        <span
+                          class="text-[9px] bg-green-100 text-green-700 px-2 py-0.5 rounded-full font-bold"
+                          th:text="#{status.active}"
+                          >ACTIVA</span
+                        >
+                      </td>
+                    </tr>
+                    <tr>
+                      <td class="py-4 font-bold text-forest">18:30</td>
+                      <td class="py-4" th:text="#{activity.kids_init}">
+                        Iniciación Niños
+                      </td>
+                      <td class="py-4" th:text="#{arena.pony}">Pony Park</td>
+                      <td>
+                        <span
+                          class="text-[9px] bg-amber-100 text-amber-700 px-2 py-0.5 rounded-full font-bold"
+                          th:text="#{status.next}"
+                          >PRÓXIMA</span
+                        >
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            <div class="custom-card p-6">
+              <div class="flex justify-between items-center mb-4">
+                <h2
+                  class="font-bold text-gray-800"
+                  th:text="#{dashboard.tasks.title}"
+                >
+                  Tareas de Cuadra
+                </h2>
+                <button
+                  class="text-xs text-forest font-bold hover:underline"
+                  th:text="#{generic.view_all}"
+                >
+                  Ver todas
+                </button>
+              </div>
+              <div class="space-y-4">
+                <div
+                  class="flex items-start gap-3 p-3 bg-red-50 rounded-lg border-l-4 border-red-500"
+                >
+                  <div class="mt-0.5">
+                    <i class="fas fa-exclamation-triangle text-red-500"></i>
+                  </div>
+                  <div>
+                    <p
+                      class="text-xs font-bold text-red-800"
+                      th:text="#{task.vaccine}"
+                    >
+                      Vacuna pendiente
+                    </p>
+                    <p class="text-[10px] text-red-600">
+                      <span th:text="#{horse.label}">Caballo</span>: Spirit (Box
+                      4)
+                    </p>
+                  </div>
+                </div>
+                <div
+                  class="flex items-start gap-3 p-3 bg-blue-50 rounded-lg border-l-4 border-blue-500"
+                >
+                  <div class="mt-0.5">
+                    <i class="fas fa-truck-loading text-blue-500"></i>
+                  </div>
+                  <div>
+                    <p
+                      class="text-xs font-bold text-blue-800"
+                      th:text="#{task.delivery}"
+                    >
+                      Recepción Pedido
+                    </p>
+                    <p class="text-[10px] text-blue-600">
+                      <span th:text="#{task.delivery.feed}">Forraje</span> -
+                      Mañana 09:00
+                    </p>
+                  </div>
+                </div>
+                <div
+                  class="flex items-start gap-3 p-3 bg-amber-50 rounded-lg border-l-4 border-amber-500"
+                >
+                  <div class="mt-0.5">
+                    <i class="fas fa-tools text-amber-500"></i>
+                  </div>
+                  <div>
+                    <p
+                      class="text-xs font-bold text-amber-800"
+                      th:text="#{task.repair}"
+                    >
+                      Reparar Bebedero
+                    </p>
+                    <p class="text-[10px] text-amber-600">Box #12 (Rayo)</p>
+                  </div>
+                </div>
+              </div>
+              <button
+                class="w-full mt-4 py-2 border border-gray-200 text-gray-500 rounded-lg font-bold text-xs hover:bg-gray-50 transition"
+                th:text="#{dashboard.tasks.manage}"
+              >
+                Gestionar Lista
+              </button>
+            </div>
+          </div>
+        </section>
+
+        <!-- 2. ALUMNOS -->
+        <section id="view-alumnos" class="view-section">
+          <div class="flex justify-between items-center mb-6">
+            <h2
+              class="text-3xl font-bold text-forest"
+              th:text="#{student.list.title}"
+            >
+              Directorio de Alumnos
+            </h2>
+            <div class="flex gap-3">
+              <a
+                th:href="@{/web/alumnos/pdf}"
+                class="border border-red-200 bg-red-50 text-red-700 px-4 py-2.5 rounded-lg hover:bg-red-100 transition duration-200 flex items-center gap-2 shadow-sm"
+                th:title="#{generic.button.export_pdf}"
+              >
+                <i class="fa-solid fa-file-pdf text-xl"></i>
+                <span
+                  class="hidden md:inline font-medium"
+                  th:text="#{generic.button.pdf}"
+                  >PDF</span
+                >
+              </a>
+              <button
+                onclick="openModal('modal-nuevo-alumno')"
+                class="bg-forest text-white px-5 py-2.5 rounded-lg shadow hover:bg-opacity-90 transition flex items-center gap-2 font-medium"
+              >
+                <i class="fa-solid fa-plus"></i>
+                <span th:text="#{generic.link.create}">Nuevo</span>
+              </button>
+            </div>
+          </div>
+          <div class="custom-card overflow-hidden">
+            <div class="overflow-x-auto overflow-y-auto max-h-[55vh] relative">
+              <table class="w-full text-left border-collapse">
+                <thead class="bg-forest text-white sticky top-0 z-10">
+                  <tr>
+                    <th
+                      class="p-4 font-semibold text-sm"
+                      th:text="#{student.table.name}"
+                    >
+                      Alumno
+                    </th>
+                    <th
+                      class="p-4 font-semibold text-sm"
+                      th:text="#{student.table.level}"
+                    >
+                      Nivel
+                    </th>
+                    <th
+                      class="p-4 font-semibold text-sm"
+                      th:text="#{student.table.horse}"
+                    >
+                      Caballo
+                    </th>
+                    <th
+                      class="p-4 font-semibold text-sm"
+                      th:text="#{student.table.balance}"
+                    >
+                      Saldo
+                    </th>
+                    <th
+                      class="p-4 font-semibold text-center text-sm"
+                      th:text="#{generic.actions}"
+                    >
+                      Acciones
+                    </th>
+                  </tr>
+                </thead>
+                <tbody class="divide-y divide-gray-100">
+                  <!-- Datos Dinámicos -->
+                  <tr
+                    th:each="alumno : ${alumnos}"
+                    class="hover:bg-soft-sky transition duration-150"
+                  >
+                    <td class="px-6 py-4 flex items-center gap-3">
+                      <img
+                        th:src="'https://ui-avatars.com/api/?name=' + ${alumno.nombre} + '&background=D4B081&color=fff'"
+                        class="w-8 h-8 rounded-full"
+                      />
+                      <div>
+                        <p
+                          class="font-bold"
+                          th:text="${alumno.nombre} + ' ' + ${alumno.apellido}"
+                        >
+                          Nombre
+                        </p>
+                        <p
+                          class="text-[10px] text-gray-400"
+                          th:text="${alumno.email}"
+                        >
+                          email
+                        </p>
+                      </div>
+                    </td>
+                    <td class="px-6 py-4">
+                      <span
+                        class="bg-blue-100 text-blue-700 px-2 py-1 rounded text-[10px] font-bold"
+                        th:text="#{student.level.label}"
+                        >NIVEL</span
+                      >
+                    </td>
+                    <td
+                      class="px-6 py-4 text-gray-600"
+                      th:text="#{horse.school}"
+                    >
+                      Escuela
+                    </td>
+                    <td class="px-6 py-4 text-emerald-600 font-bold">0.00 €</td>
+                    <td class="px-6 py-4 text-right">
+                      <a href="#" class="text-sand hover:text-orange-600 mx-1"
+                        ><i class="fa-solid fa-pen-to-square"></i
+                      ></a>
+                      <a href="#" class="text-red-400 hover:text-red-600 mx-1"
+                        ><i class="fa-solid fa-trash"></i
+                      ></a>
+                    </td>
+                  </tr>
+                  <!-- Fallback si está vacío -->
+                  <tr th:if="${#lists.isEmpty(alumnos)}">
+                    <td
+                      colspan="5"
+                      class="p-8 text-center text-gray-400 italic"
+                      th:text="#{student.list.empty}"
+                    >
+                      No hay alumnos registrados.
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <!-- 3. PROFESORES -->
+        <section id="view-profesores" class="view-section">
+          <div class="flex justify-between items-center mb-6">
+            <h2
+              class="text-2xl font-bold text-forest"
+              th:text="#{teacher.list.title}"
+            >
+              Gestión de Profesorado
+            </h2>
+            <button
+              class="bg-forest text-white px-4 py-2 rounded-lg text-sm font-bold"
+              th:text="#{teacher.button.add}"
+            >
+              Añadir Profesor
+            </button>
+          </div>
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            <!-- Iteración dinámica -->
+            <div
+              th:each="profe : ${profesores}"
+              class="custom-card p-6 flex flex-col items-center text-center"
+            >
+              <img
+                th:src="'https://ui-avatars.com/api/?name=' + ${profe.nombre} + '&background=2D5A3F&color=fff&size=128'"
+                class="w-20 h-20 rounded-full mb-4 border-4 border-sand"
+              />
+              <h3
+                class="text-lg font-bold"
+                th:text="${profe.nombre} + ' ' + ${profe.apellido}"
+              >
+                Nombre
+              </h3>
+              <p
+                class="text-xs text-sand font-bold uppercase tracking-wider mb-4"
+                th:text="#{teacher.role.instructor}"
+              >
+                Instructor
+              </p>
+              <button
+                class="w-full py-2 bg-gray-50 text-forest rounded font-bold text-xs hover:bg-forest hover:text-white transition"
+                th:text="#{teacher.button.schedule}"
+              >
+                Ver Horario
+              </button>
+            </div>
+
+            <!-- Mensaje si no hay profesores -->
+            <div
+              th:if="${#lists.isEmpty(profesores)}"
+              class="col-span-full text-center text-gray-400 p-8 border-2 border-dashed rounded-xl"
+              th:text="#{teacher.list.empty}"
+            >
+              No hay profesores registrados.
+            </div>
+          </div>
+        </section>
+
+        <!-- 4. PUPILAJES -->
+        <section id="view-pupilajes" class="view-section">
+          <div
+            class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-6"
+          >
+            <h2
+              class="text-2xl font-bold text-forest"
+              th:text="#{stable.list.title}"
+            >
+              Gestión de Pupilajes
+            </h2>
+            <div class="flex gap-2 w-full sm:w-auto">
+              <input
+                type="text"
+                th:placeholder="#{stable.search.placeholder}"
+                class="flex-grow p-2 border rounded-lg text-sm focus:ring-forest outline-none"
+              />
+              <button
+                onclick="openModal('modal-caballo')"
+                class="bg-forest text-white px-4 py-2 rounded-lg text-sm font-bold"
+              >
+                <i class="fas fa-plus mr-2"></i>
+                <span th:text="#{stable.button.add}">Alta</span>
+              </button>
+            </div>
+          </div>
+          <div
+            class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6"
+          >
+            <!-- Caballo 1 -->
+            <div class="custom-card overflow-hidden group">
+              <div class="h-40 bg-gray-200 relative">
+                <img
+                  src="https://images.unsplash.com/photo-1553284965-83fd3e82fa5a?auto=format&fit=crop&w=400&q=80"
+                  class="w-full h-full object-cover"
+                />
+                <div
+                  class="absolute bottom-2 left-4 bg-white/90 px-2 py-1 rounded text-xs font-bold text-forest shadow"
+                >
+                  Box #12
+                </div>
+              </div>
+              <div class="p-4">
+                <h3 class="font-bold text-lg mb-1">Rayo Macqueen</h3>
+                <p class="text-xs text-gray-500 mb-4">
+                  <span th:text="#{horse.prop}">Prop</span>: Alberto Soler
+                </p>
+                <div class="space-y-1 mb-4">
+                  <div class="flex justify-between text-xs">
+                    <span class="text-gray-400" th:text="#{horse.diet}"
+                      >Dieta:</span
+                    >
+                    <span class="font-bold text-forest">Avena + Heno</span>
+                  </div>
+                  <div class="flex justify-between text-xs">
+                    <span class="text-gray-400" th:text="#{horse.health}"
+                      >Salud:</span
+                    >
+                    <span
+                      class="text-emerald-600 font-bold"
+                      th:text="#{horse.health.ok}"
+                      >Al día</span
+                    >
+                  </div>
+                </div>
+                <button
+                  class="w-full py-2 border border-forest text-forest rounded-lg text-xs font-bold hover:bg-forest hover:text-white transition"
+                  th:text="#{horse.card}"
+                >
+                  Ficha
+                </button>
+              </div>
+            </div>
+            <!-- Caballo 2 -->
+            <div class="custom-card overflow-hidden group">
+              <div class="h-40 bg-gray-200 relative">
+                <img
+                  src="/imagenes/alazan.jpg"
+                  class="w-full h-full object-cover"
+                />
+                <div
+                  class="absolute bottom-2 left-4 bg-white/90 px-2 py-1 rounded text-xs font-bold text-forest shadow"
+                >
+                  Box #05
+                </div>
+              </div>
+              <div class="p-4">
+                <h3 class="font-bold text-lg mb-1">Luna Nueva</h3>
+                <p class="text-xs text-gray-500 mb-4">
+                  <span th:text="#{horse.prop}">Prop</span>: Marta Ruiz
+                </p>
+                <div class="space-y-1 mb-4">
+                  <div class="flex justify-between text-xs">
+                    <span class="text-gray-400" th:text="#{horse.diet}"
+                      >Dieta:</span
+                    >
+                    <span class="font-bold text-forest">Forraje Mix</span>
+                  </div>
+                  <div class="flex justify-between text-xs">
+                    <span class="text-gray-400" th:text="#{horse.health}"
+                      >Salud:</span
+                    >
+                    <span
+                      class="text-amber-600 font-bold"
+                      th:text="#{horse.health.dental}"
+                      >Rev. Dental</span
+                    >
+                  </div>
+                </div>
+                <button
+                  class="w-full py-2 border border-forest text-forest rounded-lg text-xs font-bold hover:bg-forest hover:text-white transition"
+                  th:text="#{horse.card}"
+                >
+                  Ficha
+                </button>
+              </div>
+            </div>
+            <!-- Caballo 3 -->
+            <div class="custom-card overflow-hidden group">
+              <div class="h-40 bg-gray-200 relative">
+                <img
+                  src="/imagenes/spirit.jpg"
+                  class="w-full h-full object-cover"
+                />
+                <div
+                  class="absolute bottom-2 left-4 bg-white/90 px-2 py-1 rounded text-xs font-bold text-forest shadow"
+                >
+                  Box #08
+                </div>
+              </div>
+              <div class="p-4">
+                <h3 class="font-bold text-lg mb-1">Spirit</h3>
+                <p class="text-xs text-gray-500 mb-4">
+                  <span th:text="#{horse.prop}">Prop</span>: Hípica (Escuela)
+                </p>
+                <div class="space-y-1 mb-4">
+                  <div class="flex justify-between text-xs">
+                    <span class="text-gray-400" th:text="#{horse.diet}"
+                      >Dieta:</span
+                    >
+                    <span class="font-bold text-forest">Pienso Alta E.</span>
+                  </div>
+                  <div class="flex justify-between text-xs">
+                    <span class="text-gray-400" th:text="#{horse.health}"
+                      >Salud:</span
+                    >
+                    <span
+                      class="text-red-500 font-bold"
+                      th:text="#{horse.health.vaccine}"
+                      >Vacuna Pend.</span
+                    >
+                  </div>
+                </div>
+                <button
+                  class="w-full py-2 border border-forest text-forest rounded-lg text-xs font-bold hover:bg-forest hover:text-white transition"
+                  th:text="#{horse.card}"
+                >
+                  Ficha
+                </button>
+              </div>
+            </div>
+            <!-- Caballo 4 -->
+            <div class="custom-card overflow-hidden group">
+              <div class="h-40 bg-gray-200 relative">
+                <img
+                  src="/imagenes/frison.jpg"
+                  class="w-full h-full object-cover"
+                />
+                <div
+                  class="absolute bottom-2 left-4 bg-white/90 px-2 py-1 rounded text-xs font-bold text-forest shadow"
+                >
+                  Box #15
+                </div>
+              </div>
+              <div class="p-4">
+                <h3 class="font-bold text-lg mb-1">Tornado</h3>
+                <p class="text-xs text-gray-500 mb-4">
+                  <span th:text="#{horse.prop}">Prop</span>: Juan Belmonte
+                </p>
+                <div class="space-y-1 mb-4">
+                  <div class="flex justify-between text-xs">
+                    <span class="text-gray-400" th:text="#{horse.diet}"
+                      >Dieta:</span
+                    >
+                    <span class="font-bold text-forest">Heno + Ajo</span>
+                  </div>
+                  <div class="flex justify-between text-xs">
+                    <span class="text-gray-400" th:text="#{horse.health}"
+                      >Salud:</span
+                    >
+                    <span
+                      class="text-emerald-600 font-bold"
+                      th:text="#{horse.health.ok}"
+                      >Al día</span
+                    >
+                  </div>
+                </div>
+                <button
+                  class="w-full py-2 border border-forest text-forest rounded-lg text-xs font-bold hover:bg-forest hover:text-white transition"
+                  th:text="#{horse.card}"
+                >
+                  Ficha
+                </button>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- 5. CLASES -->
+        <section id="view-clases" class="view-section">
+          <div class="grid grid-cols-1 lg:grid-cols-4 gap-8">
+            <div class="lg:col-span-3 custom-card p-6">
+              <div class="flex justify-between items-center mb-6">
+                <h2
+                  class="text-xl font-bold text-forest"
+                  th:text="#{schedule.calendar.title}"
+                >
+                  Calendario de Reservas
+                </h2>
+                <div class="flex gap-2">
+                  <button class="p-2 border rounded hover:bg-gray-50">
+                    <i class="fas fa-chevron-left"></i>
+                  </button>
+                  <span
+                    class="px-4 py-2 font-bold text-sm"
+                    th:text="#{generic.date.jan2024}"
+                    >Enero 2024</span
+                  >
+                  <button class="p-2 border rounded hover:bg-gray-50">
+                    <i class="fas fa-chevron-right"></i>
+                  </button>
+                </div>
+              </div>
+              <div
+                class="grid grid-cols-7 gap-2 text-center text-[10px] font-bold text-gray-400 mb-4 tracking-widest uppercase"
+              >
+                <div th:text="#{day.mon}">LUN</div>
+                <div th:text="#{day.tue}">MAR</div>
+                <div th:text="#{day.wed}">MIÉ</div>
+                <div th:text="#{day.thu}">JUE</div>
+                <div th:text="#{day.fri}">VIE</div>
+                <div th:text="#{day.sat}">SÁB</div>
+                <div th:text="#{day.sun}">DOM</div>
+              </div>
+              <div
+                class="relative h-[500px] border rounded-lg p-2 bg-gray-50/20 divide-x flex overflow-x-auto"
+              >
+                <div class="flex-1 p-1 space-y-2">
+                  <div
+                    class="bg-blue-100 text-blue-700 p-2 rounded text-[10px] font-bold border-l-4 border-blue-500"
+                  >
+                    09:00 Doma - Carlos
+                  </div>
+                  <div
+                    class="bg-amber-100 text-amber-700 p-2 rounded text-[10px] font-bold border-l-4 border-amber-500"
+                  >
+                    17:00 Salto - Lucía
+                  </div>
+                </div>
+                <!-- ... resto de eventos (simplificado, normalmente vendrían de BBDD) ... -->
+                <div class="flex-1 p-1 space-y-2">
+                  <div
+                    class="bg-purple-100 text-purple-700 p-2 rounded text-[10px] font-bold border-l-4 border-purple-500"
+                  >
+                    10:00 Pony Club
+                  </div>
+                </div>
+                <div class="flex-1 p-1 space-y-2">
+                  <div
+                    class="bg-blue-100 text-blue-700 p-2 rounded text-[10px] font-bold border-l-4 border-blue-500"
+                  >
+                    16:00 Doma
+                  </div>
+                  <div
+                    class="bg-emerald-100 text-emerald-700 p-2 rounded text-[10px] font-bold border-l-4 border-emerald-500"
+                  >
+                    18:00 Pista Alquiler
+                  </div>
+                </div>
+                <div class="flex-1"></div>
+                <div class="flex-1"></div>
+                <div class="flex-1"></div>
+                <div class="flex-1"></div>
+              </div>
+            </div>
+            <div class="custom-card p-6">
+              <h3
+                class="font-bold mb-4 text-forest uppercase text-sm tracking-widest"
+                th:text="#{schedule.form.title}"
+              >
+                Nueva Reserva
+              </h3>
+              <form class="space-y-4">
+                <select class="w-full p-2 border rounded-lg text-sm">
+                  <option th:text="#{schedule.form.select_student}">
+                    Seleccionar Alumno
+                  </option>
+                </select>
+                <select class="w-full p-2 border rounded-lg text-sm">
+                  <option th:text="#{activity.dressage}">Doma</option>
+                  <option th:text="#{activity.jump}">Salto</option>
+                </select>
+                <input
+                  type="datetime-local"
+                  class="w-full p-2 border rounded-lg text-sm"
+                />
+                <button
+                  type="button"
+                  class="w-full bg-sand text-white py-3 rounded-xl font-bold hover:shadow-lg transition"
+                  th:text="#{schedule.button.book}"
+                >
+                  Agendar
+                </button>
+              </form>
+            </div>
+          </div>
+        </section>
+
+        <!-- 6. PISTAS -->
+        <section id="view-pistas" class="view-section">
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div
+              class="custom-card p-6 border-t-4 border-emerald-500 hover:shadow-2xl transition-all duration-300 group cursor-pointer"
+            >
+              <div class="flex justify-between items-start mb-4">
+                <h3 class="font-bold text-gray-800" th:text="#{arena.main}">
+                  Pista Principal
+                </h3>
+                <span
+                  class="bg-emerald-100 text-emerald-700 text-[10px] font-bold px-2 py-1 rounded"
+                  th:text="#{status.available}"
+                  >DISPONIBLE</span
+                >
+              </div>
+              <div
+                class="aspect-video bg-gray-100 rounded-lg mb-4 flex items-center justify-center overflow-hidden border-2 border-dashed border-gray-200"
+              >
+                <img
+                  src="/imagenes/salto.jpg"
+                  alt="Pista Principal"
+                  class="w-full h-full object-cover group-hover:scale-110 transition duration-700"
+                  onerror="
+                    this.outerHTML =
+                      '<i class=\'fas fa-horse text-gray-300 text-4xl\'></i>'
+                  "
+                />
+              </div>
+              <div class="space-y-3">
+                <p
+                  class="text-xs text-gray-500 italic"
+                  th:text="#{arena.status.free_until}"
+                >
+                  Libre hasta las 18:00h
+                </p>
+                <button
+                  class="w-full py-2 bg-gray-50 text-gray-600 rounded text-xs font-bold hover:bg-forest hover:text-white transition"
+                  th:text="#{arena.button.book}"
+                >
+                  Reservar Espacio
+                </button>
+              </div>
+            </div>
+            <div
+              class="custom-card p-6 border-t-4 border-amber-500 hover:shadow-2xl transition-all duration-300 group cursor-pointer"
+            >
+              <div class="flex justify-between items-start mb-4">
+                <h3 class="font-bold text-gray-800" th:text="#{arena.covered}">
+                  Pista Cubierta
+                </h3>
+                <span
+                  class="bg-amber-100 text-amber-700 text-[10px] font-bold px-2 py-1 rounded"
+                  th:text="#{status.occupied}"
+                  >OCUPADA</span
+                >
+              </div>
+              <div
+                class="aspect-video bg-amber-50 rounded-lg mb-4 flex flex-col items-center justify-center overflow-hidden border border-amber-100"
+              >
+                <img
+                  src="/imagenes/doma.jpg"
+                  alt="Pista Cubierta"
+                  class="w-full h-full object-cover group-hover:scale-110 transition duration-700"
+                  onerror="
+                    this.outerHTML =
+                      '<p class=\'text-xs font-bold text-amber-800\'>Clase Doma</p>'
+                  "
+                />
+              </div>
+              <div class="space-y-3">
+                <p class="text-xs text-gray-500 italic">Prof: Carlos M.</p>
+                <button
+                  class="w-full py-2 bg-gray-50 text-gray-600 rounded text-xs font-bold hover:bg-forest hover:text-white transition"
+                  th:text="#{generic.button.details}"
+                >
+                  Ver Detalles
+                </button>
+              </div>
+            </div>
+            <div
+              class="custom-card p-6 border-t-4 border-emerald-500 hover:shadow-2xl transition-all duration-300 group cursor-pointer"
+            >
+              <div class="flex justify-between items-start mb-4">
+                <h3 class="font-bold text-gray-800" th:text="#{arena.pony}">
+                  Pony Park
+                </h3>
+                <span
+                  class="bg-emerald-100 text-emerald-700 text-[10px] font-bold px-2 py-1 rounded"
+                  th:text="#{status.available}"
+                  >DISPONIBLE</span
+                >
+              </div>
+              <div
+                class="aspect-video bg-gray-100 rounded-lg mb-4 flex items-center justify-center overflow-hidden border-2 border-dashed border-gray-200"
+              >
+                <img
+                  src="/imagenes/ponypark.jpg"
+                  alt="Pony Park"
+                  class="w-full h-full object-cover group-hover:scale-110 transition duration-700"
+                  onerror="
+                    this.outerHTML =
+                      '<i class=\'fas fa-child text-gray-300 text-4xl\'></i>'
+                  "
+                />
+              </div>
+              <div class="space-y-3">
+                <p
+                  class="text-xs text-gray-500 italic"
+                  th:text="#{arena.status.maintenance}"
+                >
+                  Mantenimiento mañana a las 10:00
+                </p>
+                <button
+                  class="w-full py-2 bg-gray-50 text-gray-600 rounded text-xs font-bold hover:bg-forest hover:text-white transition"
+                  th:text="#{generic.button.check}"
+                >
+                  Consultar
+                </button>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- 7. PAGOS -->
+        <section id="view-pagos" class="view-section">
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+            <div class="bg-emerald-600 text-white p-6 rounded-2xl shadow-lg">
+              <p
+                class="text-xs font-bold uppercase opacity-80 mb-2"
+                th:text="#{payments.card.estimated}"
+              >
+                Ingresos Estimados Mes
+              </p>
+              <h3 class="text-3xl font-bold">14.280,00 €</h3>
+            </div>
+            <div class="bg-amber-500 text-white p-6 rounded-2xl shadow-lg">
+              <p
+                class="text-xs font-bold uppercase opacity-80 mb-2"
+                th:text="#{payments.card.pending}"
+              >
+                Pendiente de Cobro
+              </p>
+              <h3 class="text-3xl font-bold">2.150,00 €</h3>
+            </div>
+            <div class="bg-white p-6 rounded-2xl shadow border border-gray-100">
+              <p
+                class="text-xs font-bold uppercase text-gray-400 mb-2"
+                th:text="#{payments.card.expenses}"
+              >
+                Gastos Mantenimiento
+              </p>
+              <h3 class="text-3xl font-bold text-gray-800">5.400,00 €</h3>
+            </div>
+          </div>
+          <div class="custom-card overflow-hidden">
+            <div
+              class="p-6 border-b flex justify-between items-center bg-gray-50/50"
+            >
+              <h2
+                class="font-bold text-gray-800 text-lg"
+                th:text="#{payments.history.title}"
+              >
+                Historial de Facturación
+              </h2>
+              <div class="flex gap-2">
+                <input
+                  type="text"
+                  th:placeholder="#{payments.search.placeholder}"
+                  class="p-2 border rounded-lg text-sm w-48 outline-none"
+                />
+                <button
+                  class="bg-forest text-white px-4 py-2 rounded text-sm font-bold flex items-center"
+                >
+                  <i class="fas fa-file-export mr-2"></i>
+                  <span th:text="#{generic.button.export}">Exportar</span>
+                </button>
+              </div>
+            </div>
+            <div class="p-0 overflow-x-auto">
+              <table class="w-full text-left text-sm">
+                <thead
+                  class="bg-gray-50 text-gray-400 uppercase text-[10px] font-bold tracking-widest border-b"
+                >
+                  <tr>
+                    <th class="px-6 py-4">ID</th>
+                    <th class="px-6 py-4" th:text="#{payments.table.client}">
+                      Cliente
+                    </th>
+                    <th class="px-6 py-4" th:text="#{payments.table.concept}">
+                      Concepto
+                    </th>
+                    <th class="px-6 py-4" th:text="#{payments.table.date}">
+                      Fecha
+                    </th>
+                    <th class="px-6 py-4" th:text="#{payments.table.amount}">
+                      Importe
+                    </th>
+                    <th class="px-6 py-4" th:text="#{payments.table.status}">
+                      Estado
+                    </th>
+                  </tr>
+                </thead>
+                <tbody class="divide-y">
+                  <tr>
+                    <td class="px-6 py-4 text-gray-400">#FAC-102</td>
+                    <td class="px-6 py-4 font-bold">Elena Martínez</td>
+                    <td class="px-6 py-4 italic">Pupilaje Enero - Box 3</td>
+                    <td class="px-6 py-4">15/01/2024</td>
+                    <td class="px-6 py-4 font-bold">450.00 €</td>
+                    <td class="px-6 py-4">
+                      <span
+                        class="bg-emerald-100 text-emerald-700 px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-tighter"
+                        th:text="#{status.paid}"
+                        >PAGADO</span
+                      >
+                    </td>
+                  </tr>
+                  <tr>
+                    <td class="px-6 py-4 text-gray-400">#FAC-103</td>
+                    <td class="px-6 py-4 font-bold">Julián Costa</td>
+                    <td class="px-6 py-4 italic">Bono 10 Clases Salto</td>
+                    <td class="px-6 py-4">18/01/2024</td>
+                    <td class="px-6 py-4 font-bold">280.00 €</td>
+                    <td class="px-6 py-4">
+                      <span
+                        class="bg-red-100 text-red-700 px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-tighter"
+                        th:text="#{status.pending}"
+                        >PENDIENTE</span
+                      >
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+      </div>
+    </main>
+
+    <!-- MODAL: CREAR ALUMNO -->
+    <div id="modal-nuevo-alumno" class="modal-overlay">
+      <div
+        class="bg-white rounded-3xl w-full max-w-lg p-0 shadow-2xl relative overflow-hidden transform transition-all scale-100"
+      >
+        <div class="bg-forest p-4 flex justify-between items-center">
+          <h3
+            class="text-white font-bold text-lg"
+            th:text="#{student.form.title}"
+          >
+            REGISTRAR ALUMNO
+          </h3>
+          <button
+            onclick="closeModal('modal-nuevo-alumno')"
+            class="text-white hover:text-sand transition"
+          >
+            <i class="fas fa-times text-xl"></i>
+          </button>
+        </div>
+        <div class="p-8">
+          <form
+            th:action="@{/web/alumnos/nuevo}"
+            th:object="${alumno}"
+            method="POST"
+            class="space-y-5"
+          >
+            <div>
+              <label
+                class="block text-xs font-bold text-gray-500 uppercase tracking-wider mb-2"
+                th:text="#{student.form.label.name}"
+                >Nombre</label
+              >
+              <div class="relative">
+                <span
+                  class="absolute inset-y-0 left-0 flex items-center pl-3 text-gray-400"
+                  ><i class="fas fa-user"></i
+                ></span>
+                <input
+                  type="text"
+                  th:field="*{nombre}"
+                  required
+                  class="w-full pl-10 pr-4 py-3 border border-gray-200 rounded-lg text-gray-700 bg-gray-50 focus:bg-white focus:outline-none focus:border-[var(--forest-green)] focus:ring-1 focus:ring-[var(--forest-green)] transition-all"
+                  th:placeholder="#{student.form.placeholder.name}"
+                />
+              </div>
+            </div>
+            <div>
+              <label
+                class="block text-xs font-bold text-gray-500 uppercase tracking-wider mb-2"
+                th:text="#{student.form.label.surname}"
+                >Apellido</label
+              >
+              <div class="relative">
+                <span
+                  class="absolute inset-y-0 left-0 flex items-center pl-3 text-gray-400"
+                  ><i class="fas fa-signature"></i
+                ></span>
+                <input
+                  type="text"
+                  th:field="*{apellido}"
+                  required
+                  class="w-full pl-10 pr-4 py-3 border border-gray-200 rounded-lg text-gray-700 bg-gray-50 focus:bg-white focus:outline-none focus:border-[var(--forest-green)] focus:ring-1 focus:ring-[var(--forest-green)] transition-all"
+                  th:placeholder="#{student.form.placeholder.surname}"
+                />
+              </div>
+            </div>
+            <div>
+              <label
+                class="block text-xs font-bold text-gray-500 uppercase tracking-wider mb-2"
+                th:text="#{student.form.label.email}"
+                >Email</label
+              >
+              <div class="relative">
+                <span
+                  class="absolute inset-y-0 left-0 flex items-center pl-3 text-gray-400"
+                  ><i class="fas fa-envelope"></i
+                ></span>
+                <input
+                  type="email"
+                  th:field="*{email}"
+                  required
+                  class="w-full pl-10 pr-4 py-3 border border-gray-200 rounded-lg text-gray-700 bg-gray-50 focus:bg-white focus:outline-none focus:border-[var(--forest-green)] focus:ring-1 focus:ring-[var(--forest-green)] transition-all"
+                  th:placeholder="#{student.form.placeholder.email}"
+                />
+              </div>
+            </div>
+            <div class="relative">
+              <span
+                class="absolute inset-y-0 left-0 flex items-center pl-3 text-gray-400 pointer-events-none"
+                ><i class="fas fa-chalkboard-user"></i
+              ></span>
+              <select
+                th:field="*{profesor}"
+                required
+                class="w-full pl-10 pr-4 py-3 border border-gray-200 rounded-lg text-gray-700 bg-gray-50 focus:bg-white focus:outline-none focus:border-[var(--forest-green)] focus:ring-1 focus:ring-[var(--forest-green)] transition-all appearance-none"
+              >
+                <option
+                  value=""
+                  th:text="#{student.form.placeholder.teacher}"
+                ></option>
+                <option
+                  th:each="profe : ${profesores}"
+                  th:value="${profe.profesorId}"
+                  th:text="${profe.nombre + ' ' + profe.apellido}"
+                ></option>
+              </select>
+              <div
+                class="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none text-gray-400"
+              >
+                <i class="fas fa-chevron-down text-xs"></i>
+              </div>
+            </div>
+            <div class="pt-4">
+              <button
+                type="submit"
+                class="w-full bg-forest text-white font-bold py-3 rounded-lg shadow-md hover:bg-opacity-90 transform hover:-translate-y-0.5 transition-all duration-200 flex justify-center items-center gap-2"
+              >
+                <i class="fas fa-save"></i>
+                <span th:text="#{generic.button.save}">Guardar Alumno</span>
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <!-- MODAL: EXITO -->
+    <div id="modal-exito" class="modal-overlay" th:if="${param.exito}">
+      <div
+        class="bg-white rounded-3xl w-full max-w-sm p-8 text-center shadow-2xl"
+      >
+        <div
+          class="mx-auto flex items-center justify-center h-20 w-20 rounded-full bg-green-100 mb-6 shadow-sm"
+        >
+          <i class="fas fa-check text-4xl text-green-600"></i>
+        </div>
+        <h2
+          class="text-2xl font-bold text-forest mb-3"
+          th:text="#{student.created.title}"
+        >
+          ¡Éxito!
+        </h2>
+        <p class="text-gray-500 mb-8" th:text="#{student.created.message}">
+          Operación realizada correctamente.
+        </p>
+        <button
+          onclick="closeModal('modal-exito')"
+          class="w-full bg-forest text-white font-bold py-3 rounded-lg hover:bg-opacity-90"
+          th:text="#{generic.button.understood}"
+        >
+          Entendido
+        </button>
+      </div>
+    </div>
+
+    <!-- MODAL ESTÁTICO DE EJEMPLO PARA CABALLOS -->
+    <div id="modal-caballo" class="modal-overlay">
+      <div class="bg-white rounded-3xl w-full max-w-lg p-8 shadow-2xl relative">
+        <button
+          onclick="closeModal('modal-caballo')"
+          class="absolute top-4 right-4 text-gray-400 hover:text-red-500"
+        >
+          <i class="fas fa-times"></i>
+        </button>
+        <h3
+          class="text-xl font-bold text-forest mb-4"
+          th:text="#{horse.form.title}"
+        >
+          Nuevo Caballo
+        </h3>
+        <form class="space-y-4">
+          <input
+            type="text"
+            th:placeholder="#{horse.form.name}"
+            class="w-full p-3 bg-gray-50 border rounded-xl"
+          />
+          <button
+            type="button"
+            onclick="closeModal('modal-caballo')"
+            class="w-full bg-forest text-white py-3 rounded-xl font-bold"
+            th:text="#{generic.button.save}"
+          >
+            Guardar
+          </button>
+        </form>
+      </div>
+    </div>
+
+    <script>
+      // LOGIN VISUAL
+      document
+        .getElementById("login-form")
+        ?.addEventListener("submit", function (e) {
+          e.preventDefault();
+          document.getElementById("login-screen").classList.add("hidden");
+          document.getElementById("app-container").classList.remove("hidden");
+          setTimeout(
+            () =>
+              document
+                .getElementById("app-container")
+                .classList.add("opacity-100"),
+            50,
+          );
+        });
+
+      function logout() {
+        document
+          .getElementById("app-container")
+          ?.classList.remove("opacity-100");
+        setTimeout(() => {
+          document.getElementById("app-container")?.classList.add("hidden");
+          document.getElementById("login-screen")?.classList.remove("hidden");
+        }, 500);
+      }
+
+      // LÓGICA DE PESTAÑAS (SPA) CON MEMORIA
+      function switchView(viewId) {
+        // Guardamos la vista actual en el hash de la URL para que al recargar se mantenga
+        window.location.hash = viewId;
+
+        document
+          .querySelectorAll(".nav-item")
+          .forEach((item) => item.classList.remove("active"));
+        const navItem = document.querySelector(`[data-view="${viewId}"]`);
+        if (navItem) navItem.classList.add("active");
+
+        document
+          .querySelectorAll(".view-section")
+          .forEach((section) => section.classList.remove("active"));
+        const target = document.getElementById(`view-${viewId}`);
+        if (target) target.classList.add("active");
+
+        if (
+          window.innerWidth < 1024 &&
+          document.getElementById("sidebar").classList.contains("open")
+        )
+          toggleSidebar();
+      }
+
+      // FUNCIÓN PARA CAMBIAR IDIOMA SIN PERDER LA VISTA ACTUAL
+      // (Mantenida por compatibilidad con el prototipo, aunque ahora se usan enlaces th:href)
+      function changeLang(lang) {
+        const currentUrl = new URL(window.location.href);
+        currentUrl.searchParams.set("lang", lang);
+        window.location.href = currentUrl.toString();
+      }
+
+      function toggleSidebar() {
+        document.getElementById("sidebar").classList.toggle("open");
+      }
+      function openModal(id) {
+        document.getElementById(id).classList.add("active");
+      }
+      function closeModal(id) {
+        document.getElementById(id).classList.remove("active");
+      }
+      function toggleDropdown(id) {
+        document.getElementById(id).classList.toggle("show");
+      }
+
+      window.onclick = function (e) {
+        if (!e.target.closest(".relative"))
+          document
+            .querySelectorAll(".dropdown-content")
+            .forEach((d) => d.classList.remove("show"));
+      };
+
+      // AL CARGAR: Restaurar vista desde el Hash o detectar éxito
+      document.addEventListener("DOMContentLoaded", () => {
+        const urlParams = new URLSearchParams(window.location.search);
+        const hash = window.location.hash.replace("#", "");
+
+        // 1. Si venimos de un éxito en el formulario
+        if (urlParams.has("exito")) {
+          switchView("alumnos");
+          const modalExito = document.getElementById("modal-exito");
+          if (modalExito) modalExito.classList.add("active");
+
+          setTimeout(() => {
+            window.history.replaceState(
+              {},
+              document.title,
+              window.location.pathname + window.location.hash,
+            );
+          }, 1000);
+        }
+        // 2. Si solo hay un hash (navegación normal)
+        else if (hash) {
+          switchView(hash);
+        }
+      });
+    </script>
+  </body>
+</html>

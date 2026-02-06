@@ -4,52 +4,112 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title th:text="#{student.created.page.title}">Alumno Creado</title>
-    
-    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- FontAwesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
-    <!-- Tu CSS externo -->
-    <link rel="stylesheet" type="text/css" th:href="@{/css/estilos.css}" />
-
     <style>
-        /* Pequeña animación para el icono de éxito */
+        /* --- VARIABLES GLOBALES --- */
+        :root {
+            --forest-green: #2d5a3f;
+            --sand-gold: #d4b081;
+            --soft-sky: #e8f4f8;
+            --sidebar-width: 260px;
+        }
+
+        /* --- ESTILOS GENERALES --- */
+        body {
+            font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f8fafc; /* Slate-50 */
+            color: #334155; /* Slate-700 */
+            margin: 0;
+            overflow-x: hidden;
+        }
+
+        /* --- UTILIDADES DE COLOR --- */
+        .bg-forest {
+            background-color: var(--forest-green) !important;
+        }
+
+        .text-forest {
+            color: var(--forest-green);
+        }
+
+        .hover-bg-forest:hover {
+            background-color: #234732 !important;
+        }
+
+        .bg-sand {
+            background-color: var(--sand-gold);
+        }
+
+        /* --- COMPONENTES --- */
+        .custom-card {
+            background: white;
+            border-radius: 1.5rem; /* Más redondeado según tu HTML rounded-3xl */
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            border: 1px solid #e2e8f0;
+        }
+
+        /* --- ANIMACIONES --- */
+        .view-section {
+            animation: fadeIn 0.6s ease-out forwards;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Animación específica para el icono de éxito */
         .success-icon {
-            animation: popIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+            animation: popIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) 0.2s forwards;
             opacity: 0;
             transform: scale(0.5);
         }
 
         @keyframes popIn {
-            to { opacity: 1; transform: scale(1); }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        /* Efecto hover suave para el botón */
+        .btn-back {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .btn-back:hover {
+            box-shadow: 0 10px 15px -3px rgba(45, 90, 63, 0.3);
         }
     </style>
 </head>
-<body class="p-8 flex justify-center items-center min-h-screen bg-gray-50">
+<body class="flex justify-center items-center min-h-screen p-6">
 
     <section class="view-section w-full max-w-sm">
         
-        <div class="custom-card p-8 text-center">
+        <div class="custom-card p-10 text-center">
             
-            <!-- Círculo Icono Éxito -->
-            <div class="success-icon mx-auto flex items-center justify-center h-20 w-20 rounded-full bg-green-100 mb-6 shadow-sm">
-                <i class="fas fa-check text-4xl text-green-600"></i>
+            <div class="success-icon mx-auto flex items-center justify-center h-24 w-24 rounded-full bg-green-100 mb-8 shadow-sm">
+                <i class="fas fa-check text-5xl text-green-600"></i>
             </div>
             
-            <!-- Título -->
-            <h2 class="text-2xl font-bold text-forest mb-3" th:text="#{student.created.title}">
+            <h2 class="text-3xl font-bold text-forest mb-4" th:text="#{student.created.title}">
                 ¡Operación Exitosa!
             </h2>
             
-            <!-- Mensaje descriptivo -->
-            <p class="text-gray-500 mb-8 leading-relaxed" th:text="#{student.created.message}">
+            <p class="text-gray-500 mb-10 text-lg leading-relaxed" th:text="#{student.created.message}">
                 El alumno ha sido registrado correctamente en el sistema.
             </p>
 
-            <!-- Botón Volver -->
             <a th:href="@{/web/alumnos}" 
-               class="block w-full bg-forest text-white font-bold py-3 px-4 rounded-lg shadow-md hover:bg-opacity-90 transform hover:-translate-y-0.5 transition-all duration-200">
+               class="btn-back block w-full bg-forest text-white font-bold py-4 px-6 rounded-xl shadow-lg hover:bg-opacity-90 transform hover:-translate-y-1 transition-all">
                 <i class="fas fa-arrow-left mr-2"></i>
                 <span th:text="#{student.created.button.back}">Volver al listado</span>
             </a>
