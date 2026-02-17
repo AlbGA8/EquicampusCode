@@ -6,6 +6,7 @@ package es.egt.daw.dawes.java.rest.equicampus.thymeleaf.alumnos.infraestructure.
  */
 public enum ModelAttribute {
     ALUMN("alumnos"),
+    CONTENIDO("contenidoVista"),
     SINGLE_ALUMN("alumno"),
     ERROR_MESSAGE("errorMsg"),
     TEACHER("profesores"),

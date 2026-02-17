@@ -5,6 +5,8 @@ package es.egt.daw.dawes.java.rest.equicampus.thymeleaf.alumnos.infraestructure.
  */
 public enum ThymView {
     MAIN_DASHBOARD("index"),
+    ALUMNOS("/web/alumnos"),
+    PROFESORES("/web/profesores"),
     ALUMN_LIST_PDF("/pdf/alumnos-lista"),
     ALUMN_DETAIL("alumnos-detalle"),
     ERROR_GENERIC("error/error-general");

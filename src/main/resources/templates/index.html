@@ -1,37 +1,51 @@
 <!doctype html>
 <html xmlns:th="http://www.thymeleaf.org">
+  <head th:replace="~{fragments/head :: head-css(title=#{app.title})}"> </head>
 
-<head th:replace="~{fragments/head :: head-css(title=#{app.title})}"></head>
+  <body>
+    <aside th:replace="~{fragments/sidebar :: sidebar}"></aside>
 
-<body>
-<aside th:replace="~{fragments/sidebar :: sidebar}"></aside>
+    <main class="main-content">
+      <header th:replace="~{fragments/topbar :: topbar}"></header>
 
-<main class="main-content">
+      <div id="views-container" class="p-4 md:p-8">
+        <div th:replace="${contenidoVista} :: contenidoVista"></div>
+      </div>
+      <div
+        id="modal-exito"
+        class="modal-overlay active"
+        th:if="${param.exito}"
+        style="display: flex !important; opacity: 1 !important; z-index: 9999"
+      >
+        <div
+          class="bg-white rounded-3xl w-full max-w-sm p-8 text-center shadow-2xl"
+        >
+          <div
+            class="mx-auto flex items-center justify-center h-20 w-20 rounded-full bg-green-100 mb-6 shadow-sm"
+          >
+            <i class="fas fa-check text-4xl text-green-600"></i>
+          </div>
+          <h2
+            class="text-2xl font-bold text-forest mb-3"
+            th:text="#{student.created.title}"
+          >
+            ¡Éxito!
+          </h2>
+          <p class="text-gray-500 mb-8" th:text="#{student.created.message}">
+            Operación realizada correctamente.
+          </p>
+          <button
+            onclick="this.closest('.modal-overlay').remove()"
+            class="w-full bg-forest text-white font-bold py-3 rounded-lg hover:bg-opacity-90 transition"
+          >
+            Entendido
+          </button>
+        </div>
+      </div>
+    </main>
 
-    <header th:replace="~{fragments/topbar :: topbar}"></header>
-
-    <div id="views-container" class="p-4 md:p-8">
-        
-        <div th:replace="~{views/dashboard :: dashboard-view}"></div>
-
-        <div th:replace="~{views/pupilajes :: pupilajes-view}"></div>
-
-        <div th:replace="~{views/clases :: clases-view}"></div>
-
-        <div th:replace="~{views/pistas :: pistas-view}"></div>
-
-        <div th:replace="~{views/alumnos :: alumnos-view}"></div>
-
-        <div th:replace="~{views/profesores :: profesores-view}"></div>
-
-        <div th:replace="~{views/pagos :: pagos-view}"></div>
-
-    </div>
-</main>
-
-<div th:replace="~{fragments/modals :: app-modals}"></div>
-
-<div th:replace="~{fragments/scripts :: app-scripts}"></div>
-
-</body>
+    <div th:replace="~{fragments/scripts :: app-scripts}"></div>
+    <script src="https://unpkg.com/htmx.org@1.9.10"></script>
+    <div id="contenedor-modales"></div>
+  </body>
 </html>
