@@ -4,62 +4,72 @@
       <div class="logo-container">
         <i class="fas fa-horse-head text-3xl text-white"></i>
       </div>
-      <span class="text-xl font-bold text-white tracking-tight"
-        >Equi<span class="text-sand">Campus</span></span
-      >
+      <span class="text-xl font-bold text-white tracking-tight">
+        Equi<span class="text-sand">Campus</span>
+      </span>
     </div>
 
     <nav class="space-y-1">
-      <div
-        onclick="switchView('dashboard')"
-        class="nav-item active"
-        data-view="dashboard"
-      >
+      
+      <a th:href="@{/web/dashboard}" 
+         class="nav-item block cursor-pointer"
+         th:classappend="${contenidoVista == 'views/dashboard'} ? 'active' : ''">
         <i class="fas fa-th-large text-center w-6 mr-3"></i>
         <span th:text="#{menu.dashboard}">Dashboard</span>
-      </div>
-      <div
-        onclick="switchView('pupilajes')"
-        class="nav-item"
-        data-view="pupilajes"
-      >
+      </a>
+
+      <a th:href="@{/web/pupilajes}" 
+         class="nav-item block cursor-pointer"
+         th:classappend="${contenidoVista == 'views/pupilajes'} ? 'active' : ''">
         <i class="fas fa-horse-head text-center w-6 mr-3"></i>
         <span th:text="#{menu.stables}">Pupilajes</span>
-      </div>
-      <div onclick="switchView('clases')" class="nav-item" data-view="clases">
+      </a>
+
+      <a th:href="@{/web/clases}" 
+         class="nav-item block cursor-pointer"
+         th:classappend="${contenidoVista == 'views/clases'} ? 'active' : ''">
         <i class="fas fa-calendar-check text-center w-6 mr-3"></i>
         <span th:text="#{menu.classes}">Clases</span>
-      </div>
-      <div onclick="switchView('pistas')" class="nav-item" data-view="pistas">
+      </a>
+
+      <a th:href="@{/web/pistas}" 
+         class="nav-item block cursor-pointer"
+         th:classappend="${contenidoVista == 'views/pistas'} ? 'active' : ''">
         <i class="fas fa-map-marked-alt text-center w-6 mr-3"></i>
         <span th:text="#{menu.arenas}">Pistas</span>
-      </div>
-      <div onclick="switchView('alumnos')" class="nav-item" data-view="alumnos">
+      </a>
+
+      <a th:href="@{/web/alumnos}" 
+         class="nav-item block cursor-pointer"
+         th:classappend="${contenidoVista == 'views/alumnos'} ? 'active' : ''">
         <i class="fas fa-user-graduate text-center w-6 mr-3"></i>
         <span th:text="#{menu.students}">Alumnos</span>
-      </div>
-      <div
-        onclick="switchView('profesores')"
-        class="nav-item"
-        data-view="profesores"
-      >
+      </a>
+
+      <a th:href="@{/web/profesores}" 
+         class="nav-item block cursor-pointer"
+         th:classappend="${contenidoVista == 'views/profesores'} ? 'active' : ''">
         <i class="fas fa-chalkboard-teacher text-center w-6 mr-3"></i>
         <span th:text="#{menu.teachers}">Profesorado</span>
-      </div>
-      <div onclick="switchView('pagos')" class="nav-item" data-view="pagos">
+      </a>
+
+      <a th:href="@{/web/pagos}" 
+         class="nav-item block cursor-pointer"
+         th:classappend="${contenidoVista == 'views/pagos'} ? 'active' : ''">
         <i class="fas fa-credit-card text-center w-6 mr-3"></i>
         <span th:text="#{menu.payments}">Pagos</span>
-      </div>
+      </a>
 
       <div class="pt-10 border-t border-white/10 mt-6">
-        <div class="nav-item opacity-60">
+        <a href="#" class="nav-item block cursor-pointer opacity-60 hover:opacity-100">
           <i class="fas fa-cog text-center w-6 mr-3"></i>
           <span th:text="#{menu.settings}">Configuración</span>
-        </div>
-        <div onclick="logout()" class="nav-item text-red-300">
+        </a>
+        
+        <a th:href="@{/logout}" class="nav-item block cursor-pointer text-red-300 hover:text-red-100 hover:bg-red-900/20">
           <i class="fas fa-sign-out-alt text-center w-6 mr-3"></i>
           <span th:text="#{menu.logout}">Salir</span>
-        </div>
+        </a>
       </div>
     </nav>
   </div>

@@ -64,19 +64,6 @@ body {
 }
 
 /* =========================================
-   4. SISTEMA DE VISTAS (SPA) - ¡CRÍTICO!
-   ========================================= */
-.view-section {
-  display: none; /* Oculto por defecto */
-  opacity: 0; /* Transparente inicial para animación */
-}
-
-.view-section.active {
-  display: block; /* Visible */
-  animation: slideUpFade 0.4s ease-out forwards;
-}
-
-/* =========================================
    5. COMPONENTES UI
    ========================================= */
 

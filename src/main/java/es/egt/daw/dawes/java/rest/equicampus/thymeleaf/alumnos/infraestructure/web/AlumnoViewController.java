@@ -20,6 +20,7 @@ import es.egt.daw.dawes.java.rest.equicampus.alumno.application.services.profeso
 import es.egt.daw.dawes.java.rest.equicampus.alumno.domain.model.entity.Alumno;
 import es.egt.daw.dawes.java.rest.equicampus.alumno.domain.model.entity.Profesor;
 import es.egt.daw.dawes.java.rest.equicampus.alumno.domain.model.identifiers.ProfesorId;
+import es.egt.daw.dawes.java.rest.equicampus.thymeleaf.alumnos.infraestructure.web.Fragments.FragmentoContenido;
 import es.egt.daw.dawes.java.rest.equicampus.thymeleaf.alumnos.infraestructure.web.constants.WebRoutes;
 import es.egt.daw.dawes.java.rest.equicampus.thymeleaf.alumnos.infraestructure.web.enums.ThymView;
 import jakarta.servlet.http.HttpServletResponse;
@@ -28,8 +29,7 @@ import jakarta.servlet.http.HttpServletResponse;
 
 public class AlumnoViewController {
 
-    String REDIRECT_ALUMNO = "redirect:%s?exito=true#alumnos";
-    String REDIRECT_PROFESOR = "redirect:%s?exito=true#profesores";
+    String REDIRECT = "redirect:%s?exito=true";
 
     private FindAlumnoService findAlumnoServiceTf;
     private CreateAlumnoService createAlumnoServiceTf;
@@ -38,7 +38,7 @@ public class AlumnoViewController {
     private TemplateEngine templateEngine; // Motor de Thymeleaf
 
     public AlumnoViewController(FindAlumnoService findAlumnoServiceTf, CreateAlumnoService createAlumnoServiceTf,
-            FindProfesorService findProfesorService,CreateProfesorService createProfesorService,
+            FindProfesorService findProfesorService, CreateProfesorService createProfesorService,
             TemplateEngine templateEngine) {
         this.findAlumnoServiceTf = findAlumnoServiceTf;
         this.createAlumnoServiceTf = createAlumnoServiceTf;
@@ -77,19 +77,76 @@ public class AlumnoViewController {
 
     }
 
-    @GetMapping(WebRoutes.ALUMNOS_BASE) // O la ruta que uses para el home
-    public String index(Model model) {
-        // Cargar lista de alumnos para la tabla
+    // 1. RUTA DASHBOARD
+    @GetMapping(WebRoutes.DASHBOARD)
+    public String dashboard(Model model) {
         model.addAttribute(ModelAttribute.ALUMN.getName(), findAlumnoServiceTf.findAll());
+        // Solo pasamos la ruta del archivo HTML.
+        // Thymeleaf lo unirá con ":: contenidoVista" gracias a tu index.html
+        model.addAttribute(ModelAttribute.CONTENIDO.getName(), FragmentoContenido.DASHBOARD.getPath());
+        return ThymView.MAIN_DASHBOARD.getPath(); // Siempre devolvemos el layout base
+    }
 
+    // 2. RUTA ALUMNOS
+    @GetMapping(WebRoutes.ALUMNOS_BASE)
+    public String alumnos(Model model) {
+        // Cargamos SOLO los datos de alumnos
+        model.addAttribute(ModelAttribute.ALUMN.getName(), findAlumnoServiceTf.findAll());
         model.addAttribute(ModelAttribute.TEACHER.getName(), findProfesorService.findAll());
-        model.addAttribute(ModelAttribute.SINGLE_TEACHER.getName(), new Profesor());
-        model.addAttribute(ModelAttribute.SINGLE_ALUMN.getName(), new Alumno());
-        model.addAttribute(ModelAttribute.PUPILAJES.getName(), List.of());
-        model.addAttribute(ModelAttribute.CLASSES.getName(), List.of());
-        model.addAttribute(ModelAttribute.PAYMENTS.getName(), List.of());
 
-        return ThymView.MAIN_DASHBOARD.getPath(); // Devuelve la vista del listado de alumnos
+        // Le indicamos el archivo de la vista
+        model.addAttribute(ModelAttribute.CONTENIDO.getName(), FragmentoContenido.ALUMNOS.getPath());
+        return ThymView.MAIN_DASHBOARD.getPath();
+    }
+
+    // 3. RUTA PROFESORES
+    @GetMapping(WebRoutes.PROFESORES_BASE)
+    public String profesores(Model model) {
+        // Cargamos SOLO los datos de profesores
+        model.addAttribute(ModelAttribute.TEACHER.getName(), findProfesorService.findAll());
+
+        // Le indicamos el archivo de la vista
+        model.addAttribute(ModelAttribute.CONTENIDO.getName(), FragmentoContenido.PROFESORES.getPath());
+        return ThymView.MAIN_DASHBOARD.getPath();
+    }
+
+    @GetMapping(WebRoutes.PAGOS)
+    public String pagos(Model model) {
+        model.addAttribute(ModelAttribute.CONTENIDO.getName(), FragmentoContenido.PAGOS.getPath());
+        return ThymView.MAIN_DASHBOARD.getPath();
+    }
+
+    @GetMapping(WebRoutes.PUPILAJES)
+    public String pupilajes(Model model) {
+        model.addAttribute(ModelAttribute.CONTENIDO.getName(), FragmentoContenido.PUPILAJES.getPath());
+        return ThymView.MAIN_DASHBOARD.getPath();
+    }
+
+    @GetMapping(WebRoutes.PISTAS)
+    public String pistas(Model model) {
+        model.addAttribute(ModelAttribute.CONTENIDO.getName(), FragmentoContenido.PISTAS.getPath());
+        return ThymView.MAIN_DASHBOARD.getPath();
+    }
+
+    @GetMapping(WebRoutes.CLASES)
+    public String clases(Model model) {
+        model.addAttribute(ModelAttribute.CONTENIDO.getName(), FragmentoContenido.CLASES.getPath());
+        return ThymView.MAIN_DASHBOARD.getPath();
+    }
+
+    @GetMapping(WebRoutes.NUEVO_ALUMNO)
+    public String obtenerModalNuevo(Model model) {
+        model.addAttribute(ModelAttribute.ALUMN.getName(), new Alumno());
+        model.addAttribute(ModelAttribute.TEACHER.getName(), findProfesorService.findAll());
+        // Apuntamos al fragmento específico
+        return "fragments/modals :: modal-nuevo-alumno";
+    }
+
+    // AÑADIMOS ESTE MÉTODO PARA EL MODAL DE PROFESORES
+    @GetMapping(WebRoutes.NUEVO_PROFESOR)
+    public String obtenerModalNuevoProfesor(Model model) {
+        model.addAttribute(ModelAttribute.SINGLE_TEACHER.getName(), new Profesor());
+        return "fragments/modals :: modal-nuevo-profesor";
     }
 
     // Este método crea el alumno y devuelve la vista del mensaje de creado
@@ -102,10 +159,10 @@ public class AlumnoViewController {
         ProfesorId profId = new ProfesorId(profesor);
         createAlumnoServiceTf.createAlumno(new CreateAlumnoCommand(nombre, apellido, profId, email));
         // return "redirect:" + WebRoutes.ALUMNOS_BASE + "?exito=true#alumnos";
-        return String.format(REDIRECT_ALUMNO, WebRoutes.ALUMNOS_BASE);
+        return String.format(REDIRECT, ThymView.ALUMNOS.getPath());
     }
 
-    @PostMapping("/web/profesores/nuevo") // Asegúrate de definir esta ruta en tus WebRoutes
+    @PostMapping(WebRoutes.PROFESOR_NUEVO) // Asegúrate de definir esta ruta en tus WebRoutes
     public String crearProfesor(@RequestParam String nombre,
             @RequestParam String apellido,
             Model model) {
@@ -115,7 +172,7 @@ public class AlumnoViewController {
         createProfesorService.createProfesor(new CreateProfesorCommand(nombre, apellido));
         // Redirigir al dashboard con la pestaña de profesores activa y mensaje de éxito
         // Usamos el hash #profesores para que el JS active esa pestaña al recargar
-        return String.format(REDIRECT_PROFESOR, WebRoutes.ALUMNOS_BASE);
+        return String.format(REDIRECT, ThymView.PROFESORES.getPath());
     }
 
 }

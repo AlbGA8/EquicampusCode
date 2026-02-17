@@ -1,47 +1,46 @@
 package es.egt.daw.dawes.java.rest.equicampus.auth.infraestructure.config;
 
-import java.util.Arrays;
-
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
-import org.springframework.web.cors.CorsConfiguration;
-import org.springframework.web.cors.CorsConfigurationSource;
-import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
 @Configuration
+@EnableWebSecurity // Importante para habilitar la seguridad web
 public class SecurityConfig {
-       @Bean
+
+    @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
-        .cors(cors -> cors.configure(http)) // Habilita CORS dentro de Spring Security
-        .csrf(csrf -> csrf.disable()) // Deshabilitar CSRF para pruebas (opcional)
-        .authorizeHttpRequests(auth -> auth.anyRequest().permitAll());
-    
+            .csrf(csrf -> csrf.disable()) // Mantener deshabilitado si vas a usar HTMX con métodos POST/DELETE sin configurar el token CSRF todavía
+            .authorizeHttpRequests(auth -> auth
+                .requestMatchers("/css/**", "/js/**", "/images/**", "/webjars/**").permitAll() // Recursos estáticos libres
+                .requestMatchers("/login", "/register", "/error").permitAll() // Páginas de acceso público
+                .anyRequest().authenticated() // El resto requiere estar logueado
+            )
+            .formLogin(form -> form
+                .loginPage("/login") // Nuestra ruta personalizada de login
+                .loginProcessingUrl("/login") // La URL que Spring Security escuchará (POST)
+                .defaultSuccessUrl("/web/dashboard", true) // A dónde ir tras loguearse
+                .failureUrl("/login?error=true")
+                .permitAll()
+            )
+            .logout(logout -> logout
+                .logoutUrl("/logout")
+                .logoutSuccessUrl("/login?logout=true")
+                .invalidateHttpSession(true)
+                .deleteCookies("JSESSIONID")
+                .permitAll()
+            );
+
         return http.build();
     }
 
-    /** Configuración para evitar el error de CORS que dará el navegador */
     @Bean
-    public CorsConfigurationSource corsConfigurationSource() {
-        CorsConfiguration configuration = new CorsConfiguration();
-        
-        // Permitimos todos los orígenes
-        configuration.setAllowedOriginPatterns(Arrays.asList("*"));
-        
-        // Permitimos los métodos necesarios
-        configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS"));
-        
-        // Permitimos todas las cabeceras
-        configuration.setAllowedHeaders(Arrays.asList("*"));
-        
-        // Permitimos que el navegador reciba la respuesta
-        configuration.setAllowCredentials(true);
-
-        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-        source.registerCorsConfiguration("/**", configuration);
-        return source;
+    public PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder(); // Para encriptar las contraseñas en la DB
     }
-
 }

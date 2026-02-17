@@ -1,11 +1,7 @@
 <!doctype html>
 <html xmlns:th="http://www.thymeleaf.org">
   <body>
-    <section
-      th:fragment="profesores-view"
-      id="view-profesores"
-      class="view-section"
-    >
+    <section th:fragment="contenidoVista" id="view-profesores">
       <div class="flex justify-between items-center mb-6">
         <h2
           class="text-2xl font-bold text-forest"
@@ -15,7 +11,9 @@
         </h2>
 
         <button
-          onclick="openModal('modal-nuevo-profesor')"
+          hx-get="/web/profesores/modal-nuevo"
+          hx-target="#contenedor-modales"
+          hx-swap="innerHTML"
           class="bg-forest text-white px-4 py-2 rounded-lg text-sm font-bold"
           th:text="#{teacher.button.add}"
         >
