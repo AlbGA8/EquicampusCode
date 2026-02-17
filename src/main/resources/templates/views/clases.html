@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+<section th:fragment="clases-view" id="view-clases" class="view-section">
+ <div class="grid grid-cols-1 lg:grid-cols-4 gap-8">
+            <div class="lg:col-span-3 custom-card p-6">
+              <div class="flex justify-between items-center mb-6">
+                <h2
+                  class="text-xl font-bold text-forest"
+                  th:text="#{schedule.calendar.title}"
+                >
+                  Calendario de Reservas
+                </h2>
+                <div class="flex gap-2">
+                  <button class="p-2 border rounded hover:bg-gray-50">
+                    <i class="fas fa-chevron-left"></i>
+                  </button>
+                  <span
+                    class="px-4 py-2 font-bold text-sm"
+                    th:text="#{generic.date.jan2024}"
+                    >Enero 2024</span
+                  >
+                  <button class="p-2 border rounded hover:bg-gray-50">
+                    <i class="fas fa-chevron-right"></i>
+                  </button>
+                </div>
+              </div>
+              <div
+                class="grid grid-cols-7 gap-2 text-center text-[10px] font-bold text-gray-400 mb-4 tracking-widest uppercase"
+              >
+                <div th:text="#{day.mon}">LUN</div>
+                <div th:text="#{day.tue}">MAR</div>
+                <div th:text="#{day.wed}">MIÉ</div>
+                <div th:text="#{day.thu}">JUE</div>
+                <div th:text="#{day.fri}">VIE</div>
+                <div th:text="#{day.sat}">SÁB</div>
+                <div th:text="#{day.sun}">DOM</div>
+              </div>
+              <div
+                class="relative h-[500px] border rounded-lg p-2 bg-gray-50/20 divide-x flex overflow-x-auto"
+              >
+                <div class="flex-1 p-1 space-y-2">
+                  <div
+                    class="bg-blue-100 text-blue-700 p-2 rounded text-[10px] font-bold border-l-4 border-blue-500"
+                  >
+                    09:00 Doma - Carlos
+                  </div>
+                  <div
+                    class="bg-amber-100 text-amber-700 p-2 rounded text-[10px] font-bold border-l-4 border-amber-500"
+                  >
+                    17:00 Salto - Lucía
+                  </div>
+                </div>
+                <!-- ... resto de eventos (simplificado, normalmente vendrían de BBDD) ... -->
+                <div class="flex-1 p-1 space-y-2">
+                  <div
+                    class="bg-purple-100 text-purple-700 p-2 rounded text-[10px] font-bold border-l-4 border-purple-500"
+                  >
+                    10:00 Pony Club
+                  </div>
+                </div>
+                <div class="flex-1 p-1 space-y-2">
+                  <div
+                    class="bg-blue-100 text-blue-700 p-2 rounded text-[10px] font-bold border-l-4 border-blue-500"
+                  >
+                    16:00 Doma
+                  </div>
+                  <div
+                    class="bg-emerald-100 text-emerald-700 p-2 rounded text-[10px] font-bold border-l-4 border-emerald-500"
+                  >
+                    18:00 Pista Alquiler
+                  </div>
+                </div>
+                <div class="flex-1"></div>
+                <div class="flex-1"></div>
+                <div class="flex-1"></div>
+                <div class="flex-1"></div>
+              </div>
+            </div>
+            <div class="custom-card p-6">
+              <h3
+                class="font-bold mb-4 text-forest uppercase text-sm tracking-widest"
+                th:text="#{schedule.form.title}"
+              >
+                Nueva Reserva
+              </h3>
+              <form class="space-y-4">
+                <select class="w-full p-2 border rounded-lg text-sm">
+                  <option th:text="#{schedule.form.select_student}">
+                    Seleccionar Alumno
+                  </option>
+                </select>
+                <select class="w-full p-2 border rounded-lg text-sm">
+                  <option th:text="#{activity.dressage}">Doma</option>
+                  <option th:text="#{activity.jump}">Salto</option>
+                </select>
+                <input
+                  type="datetime-local"
+                  class="w-full p-2 border rounded-lg text-sm"
+                />
+                <button
+                  type="button"
+                  class="w-full bg-sand text-white py-3 rounded-xl font-bold hover:shadow-lg transition"
+                  th:text="#{schedule.button.book}"
+                >
+                  Agendar
+                </button>
+              </form>
+            </div>
+          </div>
+</section>
+</body>
+</html>

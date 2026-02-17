@@ -17,5 +17,6 @@ public class CreateProfesorCommand {
 
     protected String nombre;
     protected String apellido;
+    
 
 }

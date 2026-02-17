@@ -10,14 +10,17 @@ import java.io.OutputStream;
 import java.util.List;
 import com.openhtmltopdf.pdfboxout.PdfRendererBuilder;
 import org.thymeleaf.context.Context;
+import es.egt.daw.dawes.java.rest.equicampus.thymeleaf.alumnos.infraestructure.web.enums.ModelAttribute;
 import es.egt.daw.dawes.java.rest.equicampus.alumno.application.command.alumno.CreateAlumnoCommand;
+import es.egt.daw.dawes.java.rest.equicampus.alumno.application.command.profesor.CreateProfesorCommand;
 import es.egt.daw.dawes.java.rest.equicampus.alumno.application.services.alumno.CreateAlumnoService;
 import es.egt.daw.dawes.java.rest.equicampus.alumno.application.services.alumno.FindAlumnoService;
+import es.egt.daw.dawes.java.rest.equicampus.alumno.application.services.profesor.CreateProfesorService;
 import es.egt.daw.dawes.java.rest.equicampus.alumno.application.services.profesor.FindProfesorService;
 import es.egt.daw.dawes.java.rest.equicampus.alumno.domain.model.entity.Alumno;
+import es.egt.daw.dawes.java.rest.equicampus.alumno.domain.model.entity.Profesor;
 import es.egt.daw.dawes.java.rest.equicampus.alumno.domain.model.identifiers.ProfesorId;
 import es.egt.daw.dawes.java.rest.equicampus.thymeleaf.alumnos.infraestructure.web.constants.WebRoutes;
-import es.egt.daw.dawes.java.rest.equicampus.thymeleaf.alumnos.infraestructure.web.enums.ModelAttribute;
 import es.egt.daw.dawes.java.rest.equicampus.thymeleaf.alumnos.infraestructure.web.enums.ThymView;
 import jakarta.servlet.http.HttpServletResponse;
 
@@ -25,18 +28,23 @@ import jakarta.servlet.http.HttpServletResponse;
 
 public class AlumnoViewController {
 
+    String REDIRECT_ALUMNO = "redirect:%s?exito=true#alumnos";
+    String REDIRECT_PROFESOR = "redirect:%s?exito=true#profesores";
+
     private FindAlumnoService findAlumnoServiceTf;
     private CreateAlumnoService createAlumnoServiceTf;
+    private CreateProfesorService createProfesorService;
     private FindProfesorService findProfesorService;
     private TemplateEngine templateEngine; // Motor de Thymeleaf
 
     public AlumnoViewController(FindAlumnoService findAlumnoServiceTf, CreateAlumnoService createAlumnoServiceTf,
-            FindProfesorService findProfesorService,
+            FindProfesorService findProfesorService,CreateProfesorService createProfesorService,
             TemplateEngine templateEngine) {
         this.findAlumnoServiceTf = findAlumnoServiceTf;
         this.createAlumnoServiceTf = createAlumnoServiceTf;
         this.templateEngine = templateEngine;
         this.findProfesorService = findProfesorService;
+        this.createProfesorService = createProfesorService;
     }
 
     // Listado de Alumnos http://localhost:8082/web/alumnos/pdf
@@ -69,19 +77,19 @@ public class AlumnoViewController {
 
     }
 
-
     @GetMapping(WebRoutes.ALUMNOS_BASE) // O la ruta que uses para el home
     public String index(Model model) {
-        // 1. Cargar lista de alumnos para la tabla
-        model.addAttribute(ModelAttribute.ALUMN_LIST.getName(), findAlumnoServiceTf.findAll());
+        // Cargar lista de alumnos para la tabla
+        model.addAttribute(ModelAttribute.ALUMN.getName(), findAlumnoServiceTf.findAll());
 
-        // 2. Cargar lista de profesores para el select del formulario
-        model.addAttribute("profesores", findProfesorService.findAll());
+        model.addAttribute(ModelAttribute.TEACHER.getName(), findProfesorService.findAll());
+        model.addAttribute(ModelAttribute.SINGLE_TEACHER.getName(), new Profesor());
+        model.addAttribute(ModelAttribute.SINGLE_ALUMN.getName(), new Alumno());
+        model.addAttribute(ModelAttribute.PUPILAJES.getName(), List.of());
+        model.addAttribute(ModelAttribute.CLASSES.getName(), List.of());
+        model.addAttribute(ModelAttribute.PAYMENTS.getName(), List.of());
 
-        // 3. Objeto vacío para el formulario "Nuevo Alumno"
-        model.addAttribute("alumno", new Alumno());
-
-        return ThymView.ALUMN_LIST.getPath(); // Devuelve la vista del listado de alumnos
+        return ThymView.MAIN_DASHBOARD.getPath(); // Devuelve la vista del listado de alumnos
     }
 
     // Este método crea el alumno y devuelve la vista del mensaje de creado
@@ -93,7 +101,21 @@ public class AlumnoViewController {
             Model model) {
         ProfesorId profId = new ProfesorId(profesor);
         createAlumnoServiceTf.createAlumno(new CreateAlumnoCommand(nombre, apellido, profId, email));
-        return "alumnos-creado";
+        // return "redirect:" + WebRoutes.ALUMNOS_BASE + "?exito=true#alumnos";
+        return String.format(REDIRECT_ALUMNO, WebRoutes.ALUMNOS_BASE);
+    }
+
+    @PostMapping("/web/profesores/nuevo") // Asegúrate de definir esta ruta en tus WebRoutes
+    public String crearProfesor(@RequestParam String nombre,
+            @RequestParam String apellido,
+            Model model) {
+
+        // Llamar a tu servicio de creación de profesores
+        // createProfesorService.createProfesor(command);
+        createProfesorService.createProfesor(new CreateProfesorCommand(nombre, apellido));
+        // Redirigir al dashboard con la pestaña de profesores activa y mensaje de éxito
+        // Usamos el hash #profesores para que el JS active esa pestaña al recargar
+        return String.format(REDIRECT_PROFESOR, WebRoutes.ALUMNOS_BASE);
     }
 
 }

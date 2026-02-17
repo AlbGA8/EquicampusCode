@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+<div th:fragment="app-scripts">
+    
+    <script th:inline="javascript">
+        const APP_CONFIG = {
+            loginUrl: /*[[@{/login}]]*/ '/login',
+            homeUrl: /*[[@{/}]]*/ '/'
+        };
+    </script>
+
+    <script th:src="@{/js/main.js}"></script>
+    
+</div>
+</body>
+</html>

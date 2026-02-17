@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+<section th:fragment="pistas-view" id="view-pistas" class="view-section">
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div
+              class="custom-card p-6 border-t-4 border-emerald-500 hover:shadow-2xl transition-all duration-300 group cursor-pointer"
+            >
+              <div class="flex justify-between items-start mb-4">
+                <h3 class="font-bold text-gray-800" th:text="#{arena.main}">
+                  Pista Principal
+                </h3>
+                <span
+                  class="bg-emerald-100 text-emerald-700 text-[10px] font-bold px-2 py-1 rounded"
+                  th:text="#{status.available}"
+                  >DISPONIBLE</span
+                >
+              </div>
+              <div
+                class="aspect-video bg-gray-100 rounded-lg mb-4 flex items-center justify-center overflow-hidden border-2 border-dashed border-gray-200"
+              >
+                <img
+                  src="/imagenes/salto.jpg"
+                  alt="Pista Principal"
+                  class="w-full h-full object-cover group-hover:scale-110 transition duration-700"
+                  onerror="
+                    this.outerHTML =
+                      '<i class=\'fas fa-horse text-gray-300 text-4xl\'></i>'
+                  "
+                />
+              </div>
+              <div class="space-y-3">
+                <p
+                  class="text-xs text-gray-500 italic"
+                  th:text="#{arena.status.free_until}"
+                >
+                  Libre hasta las 18:00h
+                </p>
+                <button
+                  class="w-full py-2 bg-gray-50 text-gray-600 rounded text-xs font-bold hover:bg-forest hover:text-white transition"
+                  th:text="#{arena.button.book}"
+                >
+                  Reservar Espacio
+                </button>
+              </div>
+            </div>
+            <div
+              class="custom-card p-6 border-t-4 border-amber-500 hover:shadow-2xl transition-all duration-300 group cursor-pointer"
+            >
+              <div class="flex justify-between items-start mb-4">
+                <h3 class="font-bold text-gray-800" th:text="#{arena.covered}">
+                  Pista Cubierta
+                </h3>
+                <span
+                  class="bg-amber-100 text-amber-700 text-[10px] font-bold px-2 py-1 rounded"
+                  th:text="#{status.occupied}"
+                  >OCUPADA</span
+                >
+              </div>
+              <div
+                class="aspect-video bg-amber-50 rounded-lg mb-4 flex flex-col items-center justify-center overflow-hidden border border-amber-100"
+              >
+                <img
+                  src="/imagenes/doma.jpg"
+                  alt="Pista Cubierta"
+                  class="w-full h-full object-cover group-hover:scale-110 transition duration-700"
+                  onerror="
+                    this.outerHTML =
+                      '<p class=\'text-xs font-bold text-amber-800\'>Clase Doma</p>'
+                  "
+                />
+              </div>
+              <div class="space-y-3">
+                <p class="text-xs text-gray-500 italic">Prof: Carlos M.</p>
+                <button
+                  class="w-full py-2 bg-gray-50 text-gray-600 rounded text-xs font-bold hover:bg-forest hover:text-white transition"
+                  th:text="#{generic.button.details}"
+                >
+                  Ver Detalles
+                </button>
+              </div>
+            </div>
+            <div
+              class="custom-card p-6 border-t-4 border-emerald-500 hover:shadow-2xl transition-all duration-300 group cursor-pointer"
+            >
+              <div class="flex justify-between items-start mb-4">
+                <h3 class="font-bold text-gray-800" th:text="#{arena.pony}">
+                  Pony Park
+                </h3>
+                <span
+                  class="bg-emerald-100 text-emerald-700 text-[10px] font-bold px-2 py-1 rounded"
+                  th:text="#{status.available}"
+                  >DISPONIBLE</span
+                >
+              </div>
+              <div
+                class="aspect-video bg-gray-100 rounded-lg mb-4 flex items-center justify-center overflow-hidden border-2 border-dashed border-gray-200"
+              >
+                <img
+                  src="/imagenes/ponypark.jpg"
+                  alt="Pony Park"
+                  class="w-full h-full object-cover group-hover:scale-110 transition duration-700"
+                  onerror="
+                    this.outerHTML =
+                      '<i class=\'fas fa-child text-gray-300 text-4xl\'></i>'
+                  "
+                />
+              </div>
+              <div class="space-y-3">
+                <p
+                  class="text-xs text-gray-500 italic"
+                  th:text="#{arena.status.maintenance}"
+                >
+                  Mantenimiento mañana a las 10:00
+                </p>
+                <button
+                  class="w-full py-2 bg-gray-50 text-gray-600 rounded text-xs font-bold hover:bg-forest hover:text-white transition"
+                  th:text="#{generic.button.check}"
+                >
+                  Consultar
+                </button>
+              </div>
+            </div>
+          </div>
+</section>
+</body>
+</html>

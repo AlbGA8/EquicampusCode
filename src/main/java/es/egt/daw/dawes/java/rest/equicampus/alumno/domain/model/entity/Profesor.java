@@ -7,6 +7,7 @@ import es.egt.daw.dawes.java.rest.equicampus.alumno.domain.model.identifiers.Pro
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 /**
  * 
@@ -18,6 +19,7 @@ import lombok.Data;
 @Data
 @AllArgsConstructor
 @Builder
+@NoArgsConstructor
 
 public class Profesor {
 

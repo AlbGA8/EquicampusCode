@@ -4,11 +4,8 @@ package es.egt.daw.dawes.java.rest.equicampus.thymeleaf.alumnos.infraestructure.
  * Contiene el listado de plantillas Thymeleaf
  */
 public enum ThymView {
-
-    ALUMN_LIST("index"),
+    MAIN_DASHBOARD("index"),
     ALUMN_LIST_PDF("/pdf/alumnos-lista"),
-    ALUMN_FORM("alumnos-formulario"),
-    ALUMN_CREATED("alumnos-creado"),
     ALUMN_DETAIL("alumnos-detalle"),
     ERROR_GENERIC("error/error-general");
 
@@ -20,5 +17,5 @@ public enum ThymView {
 
     public String getPath() {
         return this.path;
-    } 
+    }
 }

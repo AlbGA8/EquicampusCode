@@ -5,10 +5,17 @@ package es.egt.daw.dawes.java.rest.equicampus.thymeleaf.alumnos.infraestructure.
  * en los modelos de la vista
  */
 public enum ModelAttribute {
-    ALUMN_LIST("alumnos"),
+    ALUMN("alumnos"),
     SINGLE_ALUMN("alumno"),
     ERROR_MESSAGE("errorMsg"),
+    TEACHER("profesores"),
+    SINGLE_TEACHER("profesor"),
+    PUPILAJES("pupilajes"),
+    CLASSES("clases"),
+    PAYMENTS("pagos"),
+    FRAGMENTS("content"),
     SUCCESS_MESSAGE("successMsg");
+
 
     private final String name;
 

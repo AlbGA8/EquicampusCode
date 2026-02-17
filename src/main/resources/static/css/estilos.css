@@ -1,4 +1,6 @@
-/* --- VARIABLES GLOBALES --- */
+/* =========================================
+   1. VARIABLES GLOBALES
+   ========================================= */
 :root {
   --forest-green: #2d5a3f;
   --sand-gold: #d4b081;
@@ -6,57 +8,20 @@
   --sidebar-width: 260px;
 }
 
-/* --- ESTILOS GENERALES --- */
+/* =========================================
+   2. ESTILOS BASE Y RESET
+   ========================================= */
 body {
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   background-color: #f8fafc; /* Slate-50 */
   color: #334155; /* Slate-700 */
   margin: 0;
-  overflow-x: hidden;
+  overflow-x: hidden; /* Evita scroll horizontal en móvil */
 }
 
-/* --- UTILIDADES DE COLOR --- */
-.bg-forest {
-  background-color: var(--forest-green) !important;
-}
-
-.text-forest {
-  color: var(--forest-green);
-}
-
-.hover-bg-forest:hover {
-  background-color: #234732 !important;
-}
-
-.bg-sand {
-  background-color: var(--sand-gold);
-}
-
-.text-sand {
-  color: var(--sand-gold);
-}
-
-.border-sand {
-  border-color: var(--sand-gold);
-}
-
-.bg-soft-sky {
-  background-color: var(--soft-sky);
-}
-
-/* --- COMPONENTES --- */
-
-/* Tarjeta principal con sombra y bordes suaves */
-.custom-card {
-  background: white;
-  border-radius: 1rem;
-  box-shadow:
-    0 10px 15px -3px rgba(0, 0, 0, 0.1),
-    0 4px 6px -2px rgba(0, 0, 0, 0.05);
-  border: 1px solid #e2e8f0;
-}
-
-/* Sidebar (Opcional) */
+/* =========================================
+   3. LAYOUT (SIDEBAR Y MAIN)
+   ========================================= */
 .sidebar {
   width: var(--sidebar-width);
   background-color: var(--forest-green);
@@ -66,85 +31,16 @@ body {
   top: 0;
   z-index: 50;
   transition: transform 0.3s ease;
-}
-
-/* --- ANIMACIONES --- */
-.view-section {
-  animation: fadeIn 0.5s ease-out forwards;
-}
-
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(15px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-/* Animación específica para el icono de éxito */
-.success-icon {
-  animation: popIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
-  opacity: 0;
-  transform: scale(0.5);
-}
-
-@keyframes popIn {
-  to {
-    opacity: 1;
-    transform: scale(1);
-  }
-}
-
-/* Estilos base necesarios para la estructura SPA */
-:root {
-  --forest-green: #2d5a3f;
-  --sand-gold: #d4b081;
-  --soft-sky: #e8f4f8;
-  --sidebar-width: 260px;
-}
-
-body {
-  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-  background-color: #f8fafc;
-  overflow-x: hidden;
-}
-
-.bg-forest {
-  background-color: var(--forest-green);
-}
-.text-forest {
-  color: var(--forest-green);
-}
-.bg-sand {
-  background-color: var(--sand-gold);
-}
-.text-sand {
-  color: var(--sand-gold);
-}
-.border-sand {
-  border-color: var(--sand-gold);
-}
-
-.sidebar {
-  width: var(--sidebar-width);
-  background-color: var(--forest-green);
-  height: 100vh;
-  position: fixed;
-  left: 0;
-  top: 0;
-  z-index: 50;
-  transition: transform 0.3s ease;
+  overflow-y: auto; /* Permite scroll si el menú es muy alto */
 }
 
 .main-content {
-  margin-left: var(--sidebar-width);
+  margin-left: var(--sidebar-width); /* Deja espacio al sidebar */
   min-height: 100vh;
   transition: margin-left 0.3s ease;
 }
 
+/* --- Menú de Navegación --- */
 .nav-item {
   display: flex;
   align-items: center;
@@ -155,58 +51,106 @@ body {
   border-left: 4px solid transparent;
 }
 
-.nav-item:hover,
-.nav-item.active {
+.nav-item:hover {
   color: white;
-  background-color: rgba(255, 255, 255, 0.1);
-  border-left-color: var(--sand-gold);
+  background-color: rgba(255, 255, 255, 0.05);
 }
 
+.nav-item.active {
+  color: white;
+  background-color: rgba(255, 255, 255, 0.15);
+  border-left-color: var(--sand-gold);
+  font-weight: 600;
+}
+
+/* =========================================
+   4. SISTEMA DE VISTAS (SPA) - ¡CRÍTICO!
+   ========================================= */
 .view-section {
   display: none; /* Oculto por defecto */
-  animation: fadeIn 0.3s ease-in-out;
+  opacity: 0; /* Transparente inicial para animación */
 }
 
 .view-section.active {
-  display: block; /* Visible si tiene clase active */
+  display: block; /* Visible */
+  animation: slideUpFade 0.4s ease-out forwards;
 }
 
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(10px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
+/* =========================================
+   5. COMPONENTES UI
+   ========================================= */
 
+/* Cards personalizadas */
 .custom-card {
   background: white;
   border-radius: 1rem;
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+  box-shadow:
+    0 4px 6px -1px rgba(0, 0, 0, 0.05),
+    0 10px 15px -3px rgba(0, 0, 0, 0.1);
   border: 1px solid #f1f5f9;
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
 }
 
-/* Modales */
+.custom-card:hover {
+  /* Efecto hover suave opcional */
+  transform: translateY(-2px);
+  box-shadow: 0 10px 20px -3px rgba(0, 0, 0, 0.1);
+}
+
+/* Utilidades de Color */
+.bg-forest {
+  background-color: var(--forest-green) !important;
+}
+.text-forest {
+  color: var(--forest-green) !important;
+}
+
+.bg-sand {
+  background-color: var(--sand-gold) !important;
+}
+.text-sand {
+  color: var(--sand-gold) !important;
+}
+.border-sand {
+  border-color: var(--sand-gold) !important;
+}
+
+.bg-soft-sky {
+  background-color: var(--soft-sky) !important;
+}
+
+/* =========================================
+   6. MODALES Y POPUPS
+   ========================================= */
 .modal-overlay {
-  background-color: rgba(0, 0, 0, 0.5);
-  backdrop-filter: blur(4px);
-  display: none;
+  background-color: rgba(0, 0, 0, 0.6); /* Fondo oscuro semitransparente */
+  backdrop-filter: blur(4px); /* Efecto borroso elegante */
+  display: none; /* Oculto por defecto */
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  z-index: 100;
+  z-index: 100; /* Por encima de todo */
   align-items: center;
   justify-content: center;
-}
-.modal-overlay.active {
-  display: flex;
+  opacity: 0;
+  transition: opacity 0.3s ease;
 }
 
+.modal-overlay.active {
+  display: flex; /* Centrado Flexbox */
+  opacity: 1;
+}
+
+/* Animación de entrada del contenido del modal */
+.modal-overlay.active > div {
+  animation: popIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+/* Dropdown (Perfil) */
 .dropdown-content {
   display: none;
   position: absolute;
@@ -216,26 +160,64 @@ body {
   min-width: 200px;
   box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
   border-radius: 0.5rem;
-  z-index: 100;
+  z-index: 90;
   border: 1px solid #e2e8f0;
-}
-.dropdown-content.show {
-  display: block;
+  margin-top: 0.5rem;
 }
 
-.logo-container img {
-  max-height: 45px;
-  width: auto;
-  object-fit: contain;
+.dropdown-content.show {
+  display: block;
+  animation: fadeIn 0.2s ease-out;
 }
+
+/* =========================================
+   7. ANIMACIONES
+   ========================================= */
+@keyframes slideUpFade {
+  from {
+    opacity: 0;
+    transform: translateY(15px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes popIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* =========================================
+   8. RESPONSIVE (MÓVIL)
+   ========================================= */
 @media (max-width: 1024px) {
   .sidebar {
-    transform: translateX(-100%);
+    transform: translateX(-100%); /* Oculto a la izquierda */
   }
+
   .sidebar.open {
-    transform: translateX(0);
+    transform: translateX(0); /* Visible */
+    box-shadow: 5px 0 15px rgba(0, 0, 0, 0.2);
   }
+
   .main-content {
-    margin-left: 0;
+    margin-left: 0; /* Ocupa todo el ancho */
   }
 }

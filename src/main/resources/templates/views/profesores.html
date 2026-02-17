@@ -1,0 +1,63 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <body>
+    <section
+      th:fragment="profesores-view"
+      id="view-profesores"
+      class="view-section"
+    >
+      <div class="flex justify-between items-center mb-6">
+        <h2
+          class="text-2xl font-bold text-forest"
+          th:text="#{teacher.list.title}"
+        >
+          Gestión de Profesorado
+        </h2>
+
+        <button
+          onclick="openModal('modal-nuevo-profesor')"
+          class="bg-forest text-white px-4 py-2 rounded-lg text-sm font-bold"
+          th:text="#{teacher.button.add}"
+        >
+          Añadir Profesor
+        </button>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div
+          th:each="profe : ${profesores}"
+          class="custom-card p-6 flex flex-col items-center text-center"
+        >
+          <img
+            th:src="'https://ui-avatars.com/api/?name=' + ${profe.nombre} + '&background=2D5A3F&color=fff&size=128'"
+            class="w-20 h-20 rounded-full mb-4 border-4 border-sand"
+          />
+          <h3
+            class="text-lg font-bold"
+            th:text="${profe.nombre} + ' ' + ${profe.apellido}"
+          >
+            Nombre
+          </h3>
+          <p
+            class="text-xs text-sand font-bold uppercase tracking-wider mb-4"
+            th:text="#{teacher.role.instructor}"
+          >
+            Instructor
+          </p>
+          <button
+            class="w-full py-2 bg-gray-50 text-forest rounded font-bold text-xs hover:bg-forest hover:text-white transition"
+            th:text="#{teacher.button.schedule}"
+          >
+            Ver Horario
+          </button>
+        </div>
+        <div
+          th:if="${#lists.isEmpty(profesores)}"
+          class="col-span-full text-center text-gray-400 p-8 border-2 border-dashed rounded-xl"
+          th:text="#{teacher.list.empty}"
+        >
+          No hay profesores registrados.
+        </div>
+      </div>
+    </section>
+  </body>
+</html>
