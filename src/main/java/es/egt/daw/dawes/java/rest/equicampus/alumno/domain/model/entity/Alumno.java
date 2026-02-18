@@ -4,6 +4,10 @@ import java.time.LocalDateTime;
 
 import es.egt.daw.dawes.java.rest.equicampus.alumno.domain.model.identifiers.AlumnoId;
 import es.egt.daw.dawes.java.rest.equicampus.alumno.domain.model.identifiers.ProfesorId;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -20,8 +24,11 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Builder
 @NoArgsConstructor
+@Table(name="alumnos")
 public class Alumno {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private AlumnoId alumnoId;
     private String nombre;
     private String apellido;

@@ -28,41 +28,37 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 
         http
-            // Deshabilitamos CSRF temporalmente para llamadas POST o HTMX
-            .csrf(csrf -> csrf.disable())
-            
-            // Configuración de rutas
-            .authorizeHttpRequests(requests -> requests
-                // Login y recursos públicos
-                .requestMatchers("/css/**", "/js/**", "/images/**", "/webjars/**", "favicon.ico").permitAll()
-                
-                // Solo ADMIN puede gestionar profesores
-                .requestMatchers("/web/profesores/**").hasRole(Rol.ADMIN.name())
-                
-                // ADMIN puede leer alumnos
-                .requestMatchers(HttpMethod.GET, "/web/alumnos/**")
-                    .hasAuthority(Permiso.ADMIN_READ.getPermiso())
-                    
-                
-                // El resto de la app requiere autenticación
-                .anyRequest().authenticated()
-            )
-            
-            // Configuración del login con Thymeleaf
-            .formLogin(login -> login
-                .loginPage("/login")           // tu login.html
-                .defaultSuccessUrl("/web/dashboard", true)  // redirige al layout principal
-                .permitAll()
-            )
-            
-            // Configuración de logout
-            .logout(logout -> logout
-                .logoutUrl("/logout")
-                .logoutSuccessUrl("/login?logout")
-            )
-            
-            // Habilita autenticación básica si quieres usar Postman o AJAX
-            .httpBasic(withDefaults());
+                // Deshabilitamos CSRF temporalmente para llamadas POST o HTMX
+                .csrf(csrf -> csrf.disable())
+
+                // Configuración de rutas
+                .authorizeHttpRequests(requests -> requests
+                        // Login y recursos públicos
+                        .requestMatchers("/css/**", "/js/**", "/images/**", "/webjars/**", "favicon.ico").permitAll()
+
+                        // Solo ADMIN puede gestionar profesores
+                        .requestMatchers("/web/profesores/**").hasRole(Rol.ADMIN.name())
+
+                        // ADMIN puede leer alumnos
+                        .requestMatchers(HttpMethod.GET, "/web/alumnos/**")
+                        .hasAuthority(Permiso.ADMIN_READ.getPermiso())
+
+                        // El resto de la app requiere autenticación
+                        .anyRequest().authenticated())
+
+                // Configuración del login con Thymeleaf
+                .formLogin(login -> login
+                        .loginPage("/login") // tu login.html
+                        .defaultSuccessUrl("/web/dashboard", true) // redirige al layout principal
+                        .permitAll())
+
+                // Configuración de logout
+                .logout(logout -> logout
+                        .logoutUrl("/logout")
+                        .logoutSuccessUrl("/login?logout"))
+
+                // Habilita autenticación básica si quieres usar Postman o AJAX
+                .httpBasic(withDefaults());
 
         return http.build();
     }
@@ -71,8 +67,7 @@ public class SecurityConfig {
     @Bean
     public UserDetailsService userDetailsService() {
         return username -> UserMapper.toAuth(
-            UserMapper.toDomain(repository.findByEmail(username))
-        );
+                UserMapper.toDomain(repository.findByEmail(username)));
     }
 
     // Encoder de passwords
