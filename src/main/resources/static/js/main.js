@@ -91,3 +91,4 @@ document.addEventListener("DOMContentLoaded", () => {
     switchView(hash);
   }
 });
+

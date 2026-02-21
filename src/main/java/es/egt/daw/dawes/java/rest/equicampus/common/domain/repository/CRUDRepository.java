@@ -16,5 +16,6 @@ public interface CRUDRepository <T, ID> {
     public List<T> getAll();
     public Optional<T> getById(ID id);
     public void deteteById(ID id);
+    
 
 }

@@ -15,7 +15,8 @@ public enum ModelAttribute {
     CLASSES("clases"),
     PAYMENTS("pagos"),
     FRAGMENTS("content"),
-    SUCCESS_MESSAGE("successMsg");
+    SUCCESS_MESSAGE("successMsg"),
+    ID("id");
 
 
     private final String name;

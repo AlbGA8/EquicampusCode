@@ -4,6 +4,10 @@ package es.egt.daw.dawes.java.rest.equicampus.thymeleaf.alumnos.infraestructure.
  * Contiene las rutas de acceso desde el navegador
  */
 public interface WebRoutes {
+    public static final String ALUMNOS_ELIMINAR = "/web/alumnos/eliminar/{id}";
+    public static final String ALUMNOS_ELIMINAR_MODAL = "/web/alumnos/confirmar-eliminacion/{id}";
+    public static final String ALUMNOS_EDITAR = "/web/alumnos/editar/{id}";
+    public static final String ALUMNOS_EDITAR_MODAL = "/web/alumnos/modal-edicion/{id}";
     public static final String ALUMNOS_BASE = "/web/alumnos";
     public static final String PROFESORES_BASE = "/web/profesores";
     public static final String PAGOS = "/web/pagos";

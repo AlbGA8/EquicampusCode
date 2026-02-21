@@ -28,7 +28,7 @@ public class AlumnoMapper {
     }
 
     public static EditAlumnoCommand toCommand(int id, AlumnoRequest alumnoRequest) {
-        return new EditAlumnoCommand(new AlumnoId(id), alumnoRequest.nombre(), alumnoRequest.apellido(),alumnoRequest.email());
+        return new EditAlumnoCommand(new AlumnoId(id), alumnoRequest.nombre(), alumnoRequest.apellido(), new ProfesorId(alumnoRequest.profesor()), alumnoRequest.email());
     }
 
     public static AlumnoResponse toResponse(Alumno alumno) {

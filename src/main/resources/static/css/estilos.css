@@ -208,3 +208,7 @@ body {
     margin-left: 0; /* Ocupa todo el ancho */
   }
 }
+#contenedor-modales, #contenedor-modales-edicion {
+    position: relative;
+    z-index: 999;
+}
