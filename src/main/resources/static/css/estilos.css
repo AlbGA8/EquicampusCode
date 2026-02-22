@@ -212,3 +212,40 @@ body {
     position: relative;
     z-index: 999;
 }
+   
+      :root {
+        --forest-green: #2d5a3f;
+        --sand-gold: #d4b081;
+      }
+
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      }
+
+      .bg-forest {
+        background-color: var(--forest-green);
+      }
+      .text-forest {
+        color: var(--forest-green);
+      }
+      .text-sand {
+        color: var(--sand-gold);
+      }
+
+      #login-screen {
+        background:
+          linear-gradient(rgba(45, 90, 63, 0.9), rgba(45, 90, 63, 0.9)),
+          url("https://images.unsplash.com/photo-1553284965-83fd3e82fa5a?auto=format&fit=crop&w=1350&q=80");
+        background-size: cover;
+        background-position: center;
+      }
+
+      .login-card {
+        background: white;
+        border-radius: 1.5rem;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        width: 100%;
+        max-width: 400px;
+        padding: 2.5rem;
+        text-align: center;
+      }
