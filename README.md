@@ -6,24 +6,54 @@ Permite crear, consultar, modificar y eliminar alumnos y profesores, gestionar r
 
 El objetivo de esta API es **facilitar la administración del centro** y ofrecer un acceso rápido y estructurado a la información para aplicaciones front-end o sistemas de terceros.
 
-Tienes toda la documentacion aqui: ## 📚 Índice de Documentación del Proyecto
+---
+
+## 📚 Índice de Documentación del Proyecto
 
 | Sección del Documento | Enlace al Archivo | Archivo en Carpeta `doc/` |
 | :--- | :--- | :--- |
-| **Contexto de la Aplicación** | [Contexto del Proyecto](doc/EquiCampus%20Contexto.md) | `EquiCampus Contexto.md` |
-| **Mundo Real del Problema** | [Problema y Solución](doc/Problema%20y%20Solucion.md) | `Problema y Solucion.md` |
-| **Casos de Uso, Requisitos F y NFF** | [Caso de Uso y Requisitos](doc/Caso%20de%20uso%20y%20requisitos%20funcionales%20y%20no%20funcionales.md) | `Caso de uso y requisitos funcionales y no funcionales.md` |
-| **Diseño** | [Diseño General](doc/Diseño.md) | `Diseño.md` |
-| **Diseño de los Servicios REST** | [Diseño de Servicios REST](doc/Diseño%20Servicios%20REST.md) | `Diseño Servicios REST.md` |
-| **Base de Datos** | [Diseño de la Base de Datos](doc/Base%20de%20datos.md) | `Base de datos.md` |
-| **Plan de Pruebas** | [Plan de Pruebas](doc/plan%20de%20pruebas.md) | `plan de pruebas.md` |
-| **Implementación** | [Detalles de Implementación](doc/implementacion.md) | `implementacion.md` |
-| **Información sobre Herramientas** | [Información Herramientas y Función](doc/Informacion%20herramientas%20y%20funcion.md) | `Informacion herramientas y funcion.md` |
-| **Capturas de la Funcionalidad** | [Capturas de la Funcionalidad](doc/capturas%20de%20la%20funcionalidad.md) | `capturas de la funcionalidad.md` |
-| **Elementos Destacables** | [Elementos Destacados](doc/Elementos%20destacados.md) | `Elementos destacados.md` |
-| **Manual de Usuario** | [Manual de Usuario](doc/manual%20de%20usuario.md) | `manual de usuario.md` |
-| **Conclusiones** | [Conclusiones del Proyecto](doc/conclusiones.md) | `conclusiones.md` |
-| **Bibliografía** | [Bibliografía y Referencias](doc/bibliografia.md) | `bibliografia.md` |
+| Contexto de la Aplicación | [Contexto del Proyecto](doc/EquiCampus%20Contexto.md) | `EquiCampus Contexto.md` |
+| Mundo Real del Problema | [Problema y Solución](doc/Problema%20y%20Solucion.md) | `Problema y Solucion.md` |
+| Casos de Uso y Requisitos | [Caso de Uso y Requisitos](doc/Caso%20de%20uso%20y%20requisitos%20funcionales%20y%20no%20funcionales.md) | `Caso de uso y requisitos funcionales y no funcionales.md` |
+| Servicios REST | [Diseño de Servicios REST](doc/Diseño%20Servicios%20REST.md) | `Diseño Servicios REST.md` |
+| Base de Datos | [Diseño de la Base de Datos](doc/Base%20de%20datos.md) | `Base de datos.md` |
+| Autenticación y Seguridad | [Autenticación](doc/Autenticacion.md) | `Autenticacion.md` |
+| UI y Tecnologías Frontend | [UI y Tecnologías Frontend](doc/UI%20y%20tecnologias%20Frontedn.md) | `UI y tecnologias Frontedn.md` |
+| Plan de Pruebas | [Plan de Pruebas](doc/plan%20de%20pruebas.md) | `plan de pruebas.md` |
+| Implementación | [Implementación](doc/implementacion.md) | `implementacion.md` |
+| Herramientas | [Herramientas](doc/Informacion%20herramientas%20y%20funcion.md) | `Informacion herramientas y funcion.md` |
+| Capturas de Funcionalidad | [Capturas](doc/capturas%20de%20la%20funcionalidad.md) | `capturas de la funcionalidad.md` |
+| Elementos Destacables | [Destacados](doc/Elementos%20destacados.md) | `Elementos destacados.md` |
+| Manual de Usuario | [Manual de Usuario](doc/manual%20de%20usuario.md) | `manual de usuario.md` |
+| Conclusiones | [Conclusiones](doc/conclusiones.md) | `conclusiones.md` |
+| Bibliografía | [Bibliografía](doc/bibliografia.md) | `bibliografia.md` |
+
+---
+
+## ⚙️ Funcionalidades principales
+
+- Gestión completa de **Alumnos y Profesores**.
+- Gestión de **clases, cursos y reservas**.
+- Autenticación y control de acceso.
+- Operaciones CRUD mediante API REST (`GET`, `POST`, `PUT`, `DELETE`).
+
+---
+
+## 🧪 Plan de pruebas
+
+Se han implementado pruebas de integración utilizando:
+
+- **JUnit 5**
+- **MockMvc**
+
+Validaciones realizadas:
+
+- Creación, modificación y eliminación de registros.
+- Validación de campos obligatorios.
+- Consultas GET para verificar respuestas correctas.
+
+Más información:  
+👉 [Plan de pruebas](doc/plan%20de%20pruebas.md)
 
 ---
 
