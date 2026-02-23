@@ -14,4 +14,8 @@ public class ProfesorId extends Identificador {
      public ProfesorId(Integer value) {
         super(value);
     }
+      
+    @Override
+    public String toString() {return String.valueOf(this.value);
+    }
 }

@@ -20,5 +20,6 @@ public class CreateAlumnoCommand {
     private String nombre;
     private String apellido;
     private ProfesorId ProfesorId;
+    private String email;
 
 }

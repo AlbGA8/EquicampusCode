@@ -1,0 +1,131 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+  <head>
+    <link rel="icon" href="/imagenes/LogoEquiCampus.png" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>EquiCampus - Acceso Gestión Hípica</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+      rel="stylesheet"
+    />
+    <style>
+      
+      :root {
+        --forest-green: #2d5a3f;
+        --sand-gold: #d4b081;
+      }
+
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      }
+
+      .bg-forest {
+        background-color: var(--forest-green);
+      }
+      .text-forest {
+        color: var(--forest-green);
+      }
+      .text-sand {
+        color: var(--sand-gold);
+      }
+
+      #login-screen {
+        background:
+          linear-gradient(rgba(45, 90, 63, 0.9), rgba(45, 90, 63, 0.9)),
+          url("https://images.unsplash.com/photo-1553284965-83fd3e82fa5a?auto=format&fit=crop&w=1350&q=80");
+        background-size: cover;
+        background-position: center;
+      }
+
+      .login-card {
+        background: white;
+        border-radius: 1.5rem;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        width: 100%;
+        max-width: 400px;
+        padding: 2.5rem;
+        text-align: center;
+      }
+    </style>
+  </head>
+  <body>
+    <div
+      id="login-screen"
+      class="fixed inset-0 z-[100] flex items-center justify-center p-4"
+    >
+      <div class="login-card">
+        <div class="mb-8">
+          <img
+            th:src="@{/imagenes/LogoEquiCampus.png}"
+            alt="Logo"
+            class="mx-auto mb-4 h-16"
+            onerror="
+              this.outerHTML =
+                '<div class=\'w-16 h-16 bg-forest rounded-2xl mx-auto flex items-center justify-center mb-4\'><i class=\'fas fa-horse text-white text-3xl\'></i></div>'
+            "
+          />
+          <h2 class="text-3xl font-extrabold text-forest">
+            Equi<span class="text-sand">Campus</span>
+          </h2>
+          <p class="text-gray-500 text-sm mt-2">
+            Acceso Gestión de Centros Hípicos
+          </p>
+        </div>
+
+        <div
+          th:if="${param.error}"
+          class="mb-4 p-3 bg-red-100 text-red-700 text-xs rounded-xl font-bold"
+        >
+          <i class="fas fa-times-circle mr-2"></i> Usuario o contraseña
+          incorrectos
+        </div>
+
+        <div
+          th:if="${param.logout}"
+          class="mb-4 p-3 bg-blue-100 text-blue-700 text-xs rounded-xl font-bold"
+        >
+          <i class="fas fa-info-circle mr-2"></i> Sesión cerrada con éxito
+        </div>
+
+        <form th:action="@{/login}" method="post" class="space-y-4">
+          <div>
+            <input
+              type="text"
+              name="username"
+              placeholder="Email o Usuario"
+              required
+              class="w-full p-3 bg-gray-50 border border-gray-200 rounded-xl outline-none focus:ring-2 focus:ring-forest transition-all"
+            />
+          </div>
+
+          <div>
+            <input
+              type="password"
+              name="password"
+              placeholder="Contraseña"
+              required
+              class="w-full p-3 bg-gray-50 border border-gray-200 rounded-xl outline-none focus:ring-2 focus:ring-forest transition-all"
+            />
+          </div>
+
+          <button
+            type="submit"
+            class="w-full bg-forest text-white py-4 rounded-xl font-bold text-lg hover:shadow-lg transition-all mt-4"
+          >
+            Entrar
+          </button>
+        </form>
+
+        <div class="mt-6">
+          <a
+            href="#"
+            class="text-xs text-gray-400 hover:text-forest transition font-medium"
+            >¿Olvidaste tu contraseña?</a
+          >
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

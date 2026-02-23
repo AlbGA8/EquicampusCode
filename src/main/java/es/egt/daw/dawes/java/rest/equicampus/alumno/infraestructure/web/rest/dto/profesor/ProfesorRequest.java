@@ -17,6 +17,6 @@ public record ProfesorRequest(
 
     // Constructor desde la entidad Profesor
     public ProfesorRequest(Profesor profesor) {
-        this(profesor.getNombre(), profesor.getApellidos());
+        this(profesor.getNombre(), profesor.getApellido());
     }
 }

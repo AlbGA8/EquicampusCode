@@ -23,7 +23,9 @@ public class EditAlumnoUseCase {
         return alumnoRepository.getById(command.id())
         .map(a ->{
             a.setNombre(command.nombre());
-            a.setApellidos(command.apellido());
+            a.setApellido(command.apellido());
+            a.setProfesor(command.profesorId());
+            a.setEmail(command.email());
             return alumnoRepository.save(a);})
         .orElseThrow(()-> new AlumnoNotFoundException(command.id().getValue()));
     }

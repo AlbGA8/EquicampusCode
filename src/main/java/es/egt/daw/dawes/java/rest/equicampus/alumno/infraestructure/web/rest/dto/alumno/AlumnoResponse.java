@@ -9,6 +9,6 @@ import java.time.LocalDateTime;
  * @since 2025-12-08
  */
 
-public record AlumnoResponse(int id, String nombre, String apellido, LocalDateTime createdAt, int profesor) {
+public record AlumnoResponse(int id, String nombre, String apellido, LocalDateTime createdAt, int profesor, String email) {
 
 }

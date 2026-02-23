@@ -23,9 +23,10 @@ public class CreateAlumnoUseCase {
         Alumno alumno = Alumno.builder()
 
         .nombre(command.nombre())
-        .apellidos(command.apellido())
+        .apellido(command.apellido())
         .createdAt(LocalDateTime.now())
-        .profesor(command.ProfesorId()).build();
+        .profesor(command.ProfesorId())
+        .email(command.email()).build();
         
 
         

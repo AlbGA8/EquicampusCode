@@ -112,7 +112,7 @@ public class AlumnoControllerIT {
         assertAll(
                 () -> assertEquals(response.getStatus(), HttpStatus.CREATED.value()), // Ha ido bien
                 () -> assertEquals(res.nombre(), nuevo.getNombre()),
-                () -> assertEquals(res.apellido(), nuevo.getApellidos()),
+                () -> assertEquals(res.apellido(), nuevo.getApellido()),
                 () -> assertEquals(res.profesor(), nuevo.getProfesor().getValue()),
                 () -> assertTrue(res.id() > 0));
     }
@@ -168,7 +168,7 @@ public class AlumnoControllerIT {
         assertAll(
                 () -> assertEquals(response.getStatus(), HttpStatus.OK.value()), // Ha ido bien
                 () -> assertEquals(res.nombre(), nuevo.getNombre()),
-                () -> assertEquals(res.apellido(), nuevo.getApellidos()),
+                () -> assertEquals(res.apellido(), nuevo.getApellido()),
                 () -> assertEquals(res.profesor(), nuevo.getProfesor().getValue()),
                 () -> assertEquals(res.id(), nuevo.getAlumnoId().getValue()));
     }

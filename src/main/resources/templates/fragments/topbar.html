@@ -1,0 +1,93 @@
+<header
+  th:fragment="topbar"
+  class="bg-white border-b border-gray-200 px-4 md:px-8 py-4 flex justify-between items-center sticky top-0 z-40"
+>
+  <div class="flex items-center">
+    <button onclick="toggleSidebar()" class="lg:hidden mr-4 p-2 text-gray-600">
+      <i class="fas fa-bars"></i>
+    </button>
+    <h1
+      id="view-title"
+      class="text-xl font-bold text-gray-800"
+      th:text="#{header.title}"
+    >
+      Panel de Control
+    </h1>
+  </div>
+
+  <div class="flex items-center gap-4">
+    <!-- BANDERAS DE IDIOMA (Estilo Thymeleaf solicitado) -->
+    <div class="flex gap-2 mr-4 hidden sm:flex">
+      <a
+        th:href="@{''(lang=es)}"
+        class="hover:scale-110 transition"
+        th:title="#{lang.spanish}"
+      >
+        <img
+          src="https://flagcdn.com/w40/es.png"
+          class="h-5 w-auto rounded-sm shadow-sm"
+          alt="Español"
+        />
+      </a>
+      <a
+        th:href="@{''(lang=en)}"
+        class="hover:scale-110 transition"
+        th:title="#{lang.english}"
+      >
+        <img
+          src="https://flagcdn.com/w40/gb.png"
+          class="h-5 w-auto rounded-sm shadow-sm"
+          alt="English"
+        />
+      </a>
+      <a
+        th:href="@{''(lang=ar)}"
+        class="hover:scale-110 transition"
+        th:title="#{lang.arabic}"
+      >
+        <img
+          src="https://flagcdn.com/w40/ma.png"
+          class="h-5 w-auto rounded-sm shadow-sm"
+          alt="Arabic"
+        />
+      </a>
+      <a
+        th:href="@{''(lang=ko)}"
+        class="hover:scale-110 transition"
+        th:title="#{lang.korean}"
+      >
+        <img
+          src="https://flagcdn.com/w40/kr.png"
+          class="h-5 w-auto rounded-sm shadow-sm"
+          alt="Korean"
+        />
+      </a>
+    </div>
+
+    <!-- Perfil -->
+    <div class="relative">
+      <button
+        onclick="toggleDropdown('profile-dropdown')"
+        class="flex items-center space-x-3 focus:outline-none"
+      >
+        <div class="text-right hidden sm:block">
+          <p class="text-sm font-bold text-gray-700" th:text="#{user.admin}">
+            Admin
+          </p>
+        </div>
+        <img
+          th:src="@{https://ui-avatars.com/api/?name=Admin&background=2D5A3F&color=fff}"
+          class="w-10 h-10 rounded-full border-2 border-sand"
+        />
+      </button>
+      <div id="profile-dropdown" class="dropdown-content mt-2 shadow-xl">
+        <a
+          href="#"
+          class="block px-4 py-2 text-sm text-red-600 hover:bg-red-50"
+          th:text="#{menu.logout}"
+          >Cerrar Sesión</a
+        >
+      </div>
+    </div>
+  </div>
+</header>

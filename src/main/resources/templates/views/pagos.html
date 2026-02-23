@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+<section th:fragment="contenidoVista" id="view-pagos" class="view-section">
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+            <div class="bg-emerald-600 text-white p-6 rounded-2xl shadow-lg">
+              <p
+                class="text-xs font-bold uppercase opacity-80 mb-2"
+                th:text="#{payments.card.estimated}"
+              >
+                Ingresos Estimados Mes
+              </p>
+              <h3 class="text-3xl font-bold">14.280,00 €</h3>
+            </div>
+            <div class="bg-amber-500 text-white p-6 rounded-2xl shadow-lg">
+              <p
+                class="text-xs font-bold uppercase opacity-80 mb-2"
+                th:text="#{payments.card.pending}"
+              >
+                Pendiente de Cobro
+              </p>
+              <h3 class="text-3xl font-bold">2.150,00 €</h3>
+            </div>
+            <div class="bg-white p-6 rounded-2xl shadow border border-gray-100">
+              <p
+                class="text-xs font-bold uppercase text-gray-400 mb-2"
+                th:text="#{payments.card.expenses}"
+              >
+                Gastos Mantenimiento
+              </p>
+              <h3 class="text-3xl font-bold text-gray-800">5.400,00 €</h3>
+            </div>
+          </div>
+          <div class="custom-card overflow-hidden">
+            <div
+              class="p-6 border-b flex justify-between items-center bg-gray-50/50"
+            >
+              <h2
+                class="font-bold text-gray-800 text-lg"
+                th:text="#{payments.history.title}"
+              >
+                Historial de Facturación
+              </h2>
+              <div class="flex gap-2">
+                <input
+                  type="text"
+                  th:placeholder="#{payments.search.placeholder}"
+                  class="p-2 border rounded-lg text-sm w-48 outline-none"
+                />
+                <button
+                  class="bg-forest text-white px-4 py-2 rounded text-sm font-bold flex items-center"
+                >
+                  <i class="fas fa-file-export mr-2"></i>
+                  <span th:text="#{generic.button.export}">Exportar</span>
+                </button>
+              </div>
+            </div>
+            <div class="p-0 overflow-x-auto">
+              <table class="w-full text-left text-sm">
+                <thead
+                  class="bg-gray-50 text-gray-400 uppercase text-[10px] font-bold tracking-widest border-b"
+                >
+                  <tr>
+                    <th class="px-6 py-4">ID</th>
+                    <th class="px-6 py-4" th:text="#{payments.table.client}">
+                      Cliente
+                    </th>
+                    <th class="px-6 py-4" th:text="#{payments.table.concept}">
+                      Concepto
+                    </th>
+                    <th class="px-6 py-4" th:text="#{payments.table.date}">
+                      Fecha
+                    </th>
+                    <th class="px-6 py-4" th:text="#{payments.table.amount}">
+                      Importe
+                    </th>
+                    <th class="px-6 py-4" th:text="#{payments.table.status}">
+                      Estado
+                    </th>
+                  </tr>
+                </thead>
+                <tbody class="divide-y">
+                  <tr>
+                    <td class="px-6 py-4 text-gray-400">#FAC-102</td>
+                    <td class="px-6 py-4 font-bold">Elena Martínez</td>
+                    <td class="px-6 py-4 italic">Pupilaje Enero - Box 3</td>
+                    <td class="px-6 py-4">15/01/2024</td>
+                    <td class="px-6 py-4 font-bold">450.00 €</td>
+                    <td class="px-6 py-4">
+                      <span
+                        class="bg-emerald-100 text-emerald-700 px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-tighter"
+                        th:text="#{status.paid}"
+                        >PAGADO</span
+                      >
+                    </td>
+                  </tr>
+                  <tr>
+                    <td class="px-6 py-4 text-gray-400">#FAC-103</td>
+                    <td class="px-6 py-4 font-bold">Julián Costa</td>
+                    <td class="px-6 py-4 italic">Bono 10 Clases Salto</td>
+                    <td class="px-6 py-4">18/01/2024</td>
+                    <td class="px-6 py-4 font-bold">280.00 €</td>
+                    <td class="px-6 py-4">
+                      <span
+                        class="bg-red-100 text-red-700 px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-tighter"
+                        th:text="#{status.pending}"
+                        >PENDIENTE</span
+                      >
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+</section>
+</body>
+</html>

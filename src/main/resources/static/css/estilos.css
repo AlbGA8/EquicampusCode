@@ -1,0 +1,251 @@
+/* =========================================
+   1. VARIABLES GLOBALES
+   ========================================= */
+:root {
+  --forest-green: #2d5a3f;
+  --sand-gold: #d4b081;
+  --soft-sky: #e8f4f8;
+  --sidebar-width: 260px;
+}
+
+/* =========================================
+   2. ESTILOS BASE Y RESET
+   ========================================= */
+body {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #f8fafc; /* Slate-50 */
+  color: #334155; /* Slate-700 */
+  margin: 0;
+  overflow-x: hidden; /* Evita scroll horizontal en móvil */
+}
+
+/* =========================================
+   3. LAYOUT (SIDEBAR Y MAIN)
+   ========================================= */
+.sidebar {
+  width: var(--sidebar-width);
+  background-color: var(--forest-green);
+  height: 100vh;
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 50;
+  transition: transform 0.3s ease;
+  overflow-y: auto; /* Permite scroll si el menú es muy alto */
+}
+
+.main-content {
+  margin-left: var(--sidebar-width); /* Deja espacio al sidebar */
+  min-height: 100vh;
+  transition: margin-left 0.3s ease;
+}
+
+/* --- Menú de Navegación --- */
+.nav-item {
+  display: flex;
+  align-items: center;
+  padding: 0.85rem 1.5rem;
+  color: rgba(255, 255, 255, 0.7);
+  cursor: pointer;
+  transition: all 0.2s;
+  border-left: 4px solid transparent;
+}
+
+.nav-item:hover {
+  color: white;
+  background-color: rgba(255, 255, 255, 0.05);
+}
+
+.nav-item.active {
+  color: white;
+  background-color: rgba(255, 255, 255, 0.15);
+  border-left-color: var(--sand-gold);
+  font-weight: 600;
+}
+
+/* =========================================
+   5. COMPONENTES UI
+   ========================================= */
+
+/* Cards personalizadas */
+.custom-card {
+  background: white;
+  border-radius: 1rem;
+  box-shadow:
+    0 4px 6px -1px rgba(0, 0, 0, 0.05),
+    0 10px 15px -3px rgba(0, 0, 0, 0.1);
+  border: 1px solid #f1f5f9;
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.custom-card:hover {
+  /* Efecto hover suave opcional */
+  transform: translateY(-2px);
+  box-shadow: 0 10px 20px -3px rgba(0, 0, 0, 0.1);
+}
+
+/* Utilidades de Color */
+.bg-forest {
+  background-color: var(--forest-green) !important;
+}
+.text-forest {
+  color: var(--forest-green) !important;
+}
+
+.bg-sand {
+  background-color: var(--sand-gold) !important;
+}
+.text-sand {
+  color: var(--sand-gold) !important;
+}
+.border-sand {
+  border-color: var(--sand-gold) !important;
+}
+
+.bg-soft-sky {
+  background-color: var(--soft-sky) !important;
+}
+
+/* =========================================
+   6. MODALES Y POPUPS
+   ========================================= */
+.modal-overlay {
+  background-color: rgba(0, 0, 0, 0.6); /* Fondo oscuro semitransparente */
+  backdrop-filter: blur(4px); /* Efecto borroso elegante */
+  display: none; /* Oculto por defecto */
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 100; /* Por encima de todo */
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.modal-overlay.active {
+  display: flex; /* Centrado Flexbox */
+  opacity: 1;
+}
+
+/* Animación de entrada del contenido del modal */
+.modal-overlay.active > div {
+  animation: popIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+/* Dropdown (Perfil) */
+.dropdown-content {
+  display: none;
+  position: absolute;
+  right: 0;
+  top: 100%;
+  background: white;
+  min-width: 200px;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+  border-radius: 0.5rem;
+  z-index: 90;
+  border: 1px solid #e2e8f0;
+  margin-top: 0.5rem;
+}
+
+.dropdown-content.show {
+  display: block;
+  animation: fadeIn 0.2s ease-out;
+}
+
+/* =========================================
+   7. ANIMACIONES
+   ========================================= */
+@keyframes slideUpFade {
+  from {
+    opacity: 0;
+    transform: translateY(15px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes popIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* =========================================
+   8. RESPONSIVE (MÓVIL)
+   ========================================= */
+@media (max-width: 1024px) {
+  .sidebar {
+    transform: translateX(-100%); /* Oculto a la izquierda */
+  }
+
+  .sidebar.open {
+    transform: translateX(0); /* Visible */
+    box-shadow: 5px 0 15px rgba(0, 0, 0, 0.2);
+  }
+
+  .main-content {
+    margin-left: 0; /* Ocupa todo el ancho */
+  }
+}
+#contenedor-modales, #contenedor-modales-edicion {
+    position: relative;
+    z-index: 999;
+}
+   
+      :root {
+        --forest-green: #2d5a3f;
+        --sand-gold: #d4b081;
+      }
+
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      }
+
+      .bg-forest {
+        background-color: var(--forest-green);
+      }
+      .text-forest {
+        color: var(--forest-green);
+      }
+      .text-sand {
+        color: var(--sand-gold);
+      }
+
+      #login-screen {
+        background:
+          linear-gradient(rgba(45, 90, 63, 0.9), rgba(45, 90, 63, 0.9)),
+          url("https://images.unsplash.com/photo-1553284965-83fd3e82fa5a?auto=format&fit=crop&w=1350&q=80");
+        background-size: cover;
+        background-position: center;
+      }
+
+      .login-card {
+        background: white;
+        border-radius: 1.5rem;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        width: 100%;
+        max-width: 400px;
+        padding: 2.5rem;
+        text-align: center;
+      }

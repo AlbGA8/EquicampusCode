@@ -2,9 +2,11 @@ package es.egt.daw.dawes.java.rest.equicampus.alumno.application.usecase.alumno;
 
 
 import java.util.List;
+import java.util.Optional;
 
 import es.egt.daw.dawes.java.rest.equicampus.alumno.domain.error.AlumnoNotFoundException;
 import es.egt.daw.dawes.java.rest.equicampus.alumno.domain.model.entity.Alumno;
+import es.egt.daw.dawes.java.rest.equicampus.alumno.domain.model.identifiers.AlumnoId;
 import es.egt.daw.dawes.java.rest.equicampus.alumno.domain.repository.AlumnoRepository;
 import lombok.AllArgsConstructor;
 
@@ -31,5 +33,10 @@ public class FindAlumnoUseCase {
         return alumnos;
 
     }
+
+    public Optional<Alumno> findById(AlumnoId id) {
+        return alumnoRepository.getById(id);
+    }
+    
 
 }

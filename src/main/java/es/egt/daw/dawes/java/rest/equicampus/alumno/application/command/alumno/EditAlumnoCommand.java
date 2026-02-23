@@ -2,6 +2,7 @@ package es.egt.daw.dawes.java.rest.equicampus.alumno.application.command.alumno;
 
 
 import es.egt.daw.dawes.java.rest.equicampus.alumno.domain.model.identifiers.AlumnoId;
+import es.egt.daw.dawes.java.rest.equicampus.alumno.domain.model.identifiers.ProfesorId;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.experimental.Accessors;
@@ -9,6 +10,8 @@ import lombok.experimental.Accessors;
 @Getter
 @AllArgsConstructor
 @Accessors(fluent = true)
+
+
 /**
  * 
  * @author Alba Garcia Puerta
@@ -20,5 +23,8 @@ public class EditAlumnoCommand {
     private AlumnoId id;
     private String nombre;
     private String apellido;
+    private ProfesorId profesorId;
+    private String email;
+    
 
 }
