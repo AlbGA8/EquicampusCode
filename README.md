@@ -21,7 +21,6 @@ El objetivo de esta API es **facilitar la administración del centro** y ofrecer
 | UI y Tecnologías Frontend | [UI y Tecnologías Frontend](doc/UI-UX-IxD.md) | `UI y tecnologias Frontedn.md` |
 | Plan de Pruebas | [Plan de Pruebas](doc/plan%20de%20pruebas.md) | `plan de pruebas.md` |
 | Implementación | [Implementación](doc/implementacion.md) | `implementacion.md` |
-| Herramientas | [Herramientas](doc/Informacion%20herramientas%20y%20funcion.md) | `Informacion herramientas y funcion.md` |
 | Capturas de Funcionalidad | [Capturas](doc/capturas%20de%20la%20funcionalidad.md) | `capturas de la funcionalidad.md` |
 | Elementos Destacables | [Destacados](doc/Elementos%20destacados.md) | `Elementos destacados.md` |
 | Manual de Usuario | [Manual de Usuario](doc/manual%20de%20usuario.md) | `manual de usuario.md` |
