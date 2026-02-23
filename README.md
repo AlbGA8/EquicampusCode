@@ -18,7 +18,7 @@ El objetivo de esta API es **facilitar la administración del centro** y ofrecer
 | Servicios REST | [Diseño de Servicios REST](doc/Diseño%20Servicios%20REST.md) | `Diseño Servicios REST.md` |
 | Base de Datos | [Diseño de la Base de Datos](doc/Base%20de%20datos.md) | `Base de datos.md` |
 | Autenticación y Seguridad | [Autenticación](doc/Autenticacion.md) | `Autenticacion.md` |
-| UI y Tecnologías Frontend | [UI y Tecnologías Frontend](doc/UI%20y%20tecnologias%20Frontedn.md) | `UI y tecnologias Frontedn.md` |
+| UI y Tecnologías Frontend | [UI y Tecnologías Frontend](doc/UI-UX-IxD.md) | `UI y tecnologias Frontedn.md` |
 | Plan de Pruebas | [Plan de Pruebas](doc/plan%20de%20pruebas.md) | `plan de pruebas.md` |
 | Implementación | [Implementación](doc/implementacion.md) | `implementacion.md` |
 | Herramientas | [Herramientas](doc/Informacion%20herramientas%20y%20funcion.md) | `Informacion herramientas y funcion.md` |
