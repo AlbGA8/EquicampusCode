@@ -33,7 +33,7 @@ import lombok.Data;
 public class AlumnoEntity {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "alumno_id")
     private Integer alumnoId;
 

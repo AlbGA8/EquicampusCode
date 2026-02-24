@@ -32,7 +32,7 @@ import lombok.Data;
 public class ProfesorEntity {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "profesor_id")
     private Integer profesorId;
 

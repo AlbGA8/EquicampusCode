@@ -10,11 +10,11 @@ services:
     ports:
       - "3306:3306"
     healthcheck:
-      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
-      interval: 10s       # Revisa cada 10 segundos
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-proot"]
+      interval: 5s       # Revisa cada 10 segundos
       timeout: 5s        # Espera 5 segundos por respuesta
       retries: 10         # Inténtalo hasta 10 veces antes de rendirte
-      start_period: 60s   # <--- MUY IMPORTANTE: Ignora fallos durante el primer minuto
+      start_period: 20s   
 
   adminer:
     image: adminer
@@ -23,10 +23,16 @@ services:
       - "8090:8080"
 
   alumnos-service:
-    image: albagarcia1605/equicampus:v2
+    image: albagarcia1605/equicampus:latest
     container_name: equicampus-app
     depends_on:
       db:
         condition: service_healthy
     ports:
       - "8082:8082"
+    environment:
+      # Variable para que Spring conecte a la DB usando el nombre del servicio 'db'
+      - DB_HOST=db
+      - SPRING_DATASOURCE_URL=jdbc:mysql://db:3306/store_db
+      - SPRING_DATASOURCE_USERNAME=root
+      - SPRING_DATASOURCE_PASSWORD=root  
