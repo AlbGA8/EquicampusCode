@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>EquiCampus - Acceso Gestión Hípica</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
       rel="stylesheet"
@@ -55,7 +56,7 @@
       id="login-screen"
       class="fixed inset-0 z-[100] flex items-center justify-center p-4"
     >
-      <div class="login-card">
+      <div class="bg-white rounded-3xl shadow-lg w-full max-w-[400px] p-10 text-center">
         <div class="mb-8">
           <img
             th:src="@{/imagenes/LogoEquiCampus.png}"
@@ -76,56 +77,50 @@
 
         <div
           th:if="${param.error}"
-          class="mb-4 p-3 bg-red-100 text-red-700 text-xs rounded-xl font-bold"
-        >
-          <i class="fas fa-times-circle mr-2"></i> Usuario o contraseña
-          incorrectos
+          class="alert alert-danger d-flex align-items-center rounded-xl py-2 mb-4 text-start" role="alert">
+          <i class="fas fa-times-circle me-2"></i> 
+          <div style="font-size: 0.75rem;">Usuario o contraseña incorrectos</div>
         </div>
 
         <div
           th:if="${param.logout}"
-          class="mb-4 p-3 bg-blue-100 text-blue-700 text-xs rounded-xl font-bold"
-        >
-          <i class="fas fa-info-circle mr-2"></i> Sesión cerrada con éxito
+          class="alert alert-info d-flex align-items-center rounded-xl py-2 mb-4 text-start" role="alert">
+          <i class="fas fa-info-circle me-2"></i> 
+          <div style="font-size: 0.75rem;">Sesión cerrada con éxito</div>
         </div>
 
-        <form th:action="@{/login}" method="post" class="space-y-4">
-          <div>
-            <input
-              type="text"
-              name="username"
-              placeholder="Email o Usuario"
-              required
-              class="w-full p-3 bg-gray-50 border border-gray-200 rounded-xl outline-none focus:ring-2 focus:ring-forest transition-all"
-            />
+        <form th:action="@{/login}" method="post">
+          <div class="mb-3 text-start">
+            <label class="form-label text-forest small font-bold px-1">Usuario</label>
+            <input type="text" name="username" required
+                   class="form-control form-control-lg border-gray-200 rounded-xl focus:border-forest focus:ring-0 transition-all text-base"
+                   placeholder="Email o Usuario"/>
           </div>
 
-          <div>
-            <input
-              type="password"
-              name="password"
-              placeholder="Contraseña"
-              required
-              class="w-full p-3 bg-gray-50 border border-gray-200 rounded-xl outline-none focus:ring-2 focus:ring-forest transition-all"
-            />
+          <div class="mb-4 text-start">
+            <label class="form-label text-forest small font-bold px-1">Contraseña</label>
+            <input type="password" name="password" required
+                   class="form-control form-control-lg border-gray-200 rounded-xl focus:border-forest focus:ring-0 transition-all text-base"
+                   placeholder="••••••••"/>
           </div>
 
           <button
             type="submit"
-            class="w-full bg-forest text-white py-4 rounded-xl font-bold text-lg hover:shadow-lg transition-all mt-4"
+            class="btn btn-lg w-full bg-forest text-white rounded-xl py-3 font-bold hover:shadow-xl hover:opacity-90 transition-all transform hover:-translate-y-1"
           >
             Entrar
           </button>
         </form>
 
-        <div class="mt-6">
+        <div class="mt-4">
           <a
             href="#"
-            class="text-xs text-gray-400 hover:text-forest transition font-medium"
+            class="text-decoration-none text-muted small hover:text-forest transition font-medium"
             >¿Olvidaste tu contraseña?</a
           >
         </div>
       </div>
     </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
   </body>
 </html>

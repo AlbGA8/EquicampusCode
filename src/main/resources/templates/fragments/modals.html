@@ -1,375 +1,87 @@
 <div th:fragment="app-modals">
-  <div
-    th:fragment="modal-nuevo-alumno"
-    id="modal-nuevo-alumno"
-    class="modal-overlay active"
-  >
-    <div
-      class="bg-white rounded-3xl w-full max-w-lg p-0 shadow-2xl relative overflow-hidden transform transition-all scale-100"
-    >
-      <div class="bg-forest p-4 flex justify-between items-center">
-        <h3
-          class="text-white font-bold text-lg"
-          th:text="#{student.form.title}"
-        >
-          REGISTRAR ALUMNO
-        </h3>
-        <button
-          type="button"
-          onclick="document.getElementById('contenedor-modales').innerHTML = ''"
-          class="text-white hover:text-sand transition"
-        >
-          <i class="fas fa-times text-xl"></i>
-        </button>
+  
+  <div th:fragment="modal-nuevo-alumno" id="modal-nuevo-alumno" class="modal-overlay active">
+    <div class="bg-white rounded-3xl w-full max-w-lg shadow-2xl overflow-hidden relative transform transition-all">
+      
+      <div class="bg-forest p-4 d-flex justify-content-between align-items-center">
+        <h3 class="text-white font-bold m-0" th:text="#{student.form.title}">REGISTRAR ALUMNO</h3>
+        <button type="button" onclick="document.getElementById('contenedor-modales').innerHTML = ''" 
+                class="btn-close btn-close-white shadow-none"></button>
       </div>
 
       <div class="p-8">
-        <form
-          hx-post="/web/alumnos/nuevo"
-          hx-target="body"
-          th:object="${alumno}"
-          class="space-y-5"
-        >
-          <div>
-            <label
-              class="block text-xs font-bold text-gray-500 uppercase tracking-wider mb-2"
-              th:text="#{student.form.label.name}"
-              >Nombre</label
-            >
-            <div class="relative">
-              <span
-                class="absolute inset-y-0 left-0 flex items-center pl-3 text-gray-400"
-                ><i class="fas fa-user"></i
-              ></span>
-              <input
-                type="text"
-                th:field="*{nombre}"
-                required
-                class="w-full pl-10 pr-4 py-3 border border-gray-200 rounded-lg text-gray-700 bg-gray-50 focus:bg-white focus:outline-none focus:border-[var(--forest-green)] focus:ring-1 focus:ring-[var(--forest-green)] transition-all"
-                th:placeholder="#{student.form.placeholder.name}"
-              />
+        <form hx-post="/web/alumnos/nuevo" hx-target="body" th:object="${alumno}">
+          
+          <div class="mb-4">
+            <label class="form-label text-xs font-bold text-muted uppercase tracking-wider mb-2" th:text="#{student.form.label.name}">Nombre</label>
+            <div class="input-group shadow-sm">
+              <span class="input-group-text bg-light border-end-0 text-muted"><i class="fas fa-user"></i></span>
+              <input type="text" th:field="*{nombre}" required
+                     class="form-control border-start-0 rounded-end-lg py-2 focus:ring-0 focus:border-forest"
+                     th:placeholder="#{student.form.placeholder.name}" />
             </div>
           </div>
 
-          <div>
-            <label
-              class="block text-xs font-bold text-gray-500 uppercase tracking-wider mb-2"
-              th:text="#{student.form.label.surname}"
-              >Apellido</label
-            >
-            <div class="relative">
-              <span
-                class="absolute inset-y-0 left-0 flex items-center pl-3 text-gray-400"
-                ><i class="fas fa-signature"></i
-              ></span>
-              <input
-                type="text"
-                th:field="*{apellido}"
-                required
-                class="w-full pl-10 pr-4 py-3 border border-gray-200 rounded-lg text-gray-700 bg-gray-50 focus:bg-white focus:outline-none focus:border-[var(--forest-green)] focus:ring-1 focus:ring-[var(--forest-green)] transition-all"
-                th:placeholder="#{student.form.placeholder.surname}"
-              />
+          <div class="mb-4">
+            <label class="form-label text-xs font-bold text-muted uppercase tracking-wider mb-2" th:text="#{student.form.label.surname}">Apellido</label>
+            <div class="input-group shadow-sm">
+              <span class="input-group-text bg-light border-end-0 text-muted"><i class="fas fa-signature"></i></span>
+              <input type="text" th:field="*{apellido}" required
+                     class="form-control border-start-0 rounded-end-lg py-2 focus:ring-0 focus:border-forest"
+                     th:placeholder="#{student.form.placeholder.surname}" />
             </div>
           </div>
 
-          <div>
-            <label
-              class="block text-xs font-bold text-gray-500 uppercase tracking-wider mb-2"
-              th:text="#{student.form.label.email}"
-              >Email</label
-            >
-            <div class="relative">
-              <span
-                class="absolute inset-y-0 left-0 flex items-center pl-3 text-gray-400"
-                ><i class="fas fa-envelope"></i
-              ></span>
-              <input
-                type="email"
-                th:field="*{email}"
-                required
-                class="w-full pl-10 pr-4 py-3 border border-gray-200 rounded-lg text-gray-700 bg-gray-50 focus:bg-white focus:outline-none focus:border-[var(--forest-green)] focus:ring-1 focus:ring-[var(--forest-green)] transition-all"
-                th:placeholder="#{student.form.placeholder.email}"
-              />
+          <div class="mb-4">
+            <label class="form-label text-xs font-bold text-muted uppercase tracking-wider mb-2" th:text="#{student.form.label.email}">Email</label>
+            <div class="input-group shadow-sm">
+              <span class="input-group-text bg-light border-end-0 text-muted"><i class="fas fa-envelope"></i></span>
+              <input type="email" th:field="*{email}" required
+                     class="form-control border-start-0 rounded-end-lg py-2 focus:ring-0 focus:border-forest"
+                     th:placeholder="#{student.form.placeholder.email}" />
             </div>
           </div>
 
-          <div class="relative">
-            <span
-              class="absolute inset-y-0 left-0 flex items-center pl-3 text-gray-400 pointer-events-none"
-              ><i class="fas fa-chalkboard-user"></i
-            ></span>
-            <select
-              th:field="*{profesor}"
-              required
-              class="w-full pl-10 pr-4 py-3 border border-gray-200 rounded-lg text-gray-700 bg-gray-50 focus:bg-white focus:outline-none focus:border-[var(--forest-green)] focus:ring-1 focus:ring-[var(--forest-green)] transition-all appearance-none"
-            >
-              <option
-                value=""
-                th:text="#{student.form.placeholder.teacher}"
-              ></option>
-              <option
-                th:each="profe : ${profesores}"
-                th:value="${profe.profesorId}"
-                th:text="${profe.nombre + ' ' + profe.apellido}"
-              ></option>
-            </select>
-            <div
-              class="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none text-gray-400"
-            >
-              <i class="fas fa-chevron-down text-xs"></i>
+          <div class="mb-5">
+            <div class="input-group shadow-sm">
+              <span class="input-group-text bg-light border-end-0 text-muted"><i class="fas fa-chalkboard-user"></i></span>
+              <select th:field="*{profesor}" required class="form-select border-start-0 focus:ring-0">
+                <option value="" th:text="#{student.form.placeholder.teacher}">Asignar Profesor</option>
+                <option th:each="profe : ${profesores}" th:value="${profe.profesorId}" 
+                        th:text="${profe.nombre + ' ' + profe.apellido}"></option>
+              </select>
             </div>
           </div>
 
-          <div class="pt-4">
-            <button
-              type="submit"
-              class="w-full bg-forest text-white font-bold py-3 rounded-lg shadow-md hover:bg-opacity-90 transform hover:-translate-y-0.5 transition-all duration-200 flex justify-center items-center gap-2"
-            >
-              <i class="fas fa-save"></i>
-              <span th:text="#{generic.button.save}">Guardar Alumno</span>
-            </button>
-          </div>
-        </form>
-      </div>
-    </div>
-  </div>
-
-  <div
-    th:fragment="modal-nuevo-profesor"
-    id="modal-nuevo-profesor"
-    class="modal-overlay active"
-  >
-    <div
-      class="bg-white rounded-3xl w-full max-w-lg p-0 shadow-2xl relative overflow-hidden transform transition-all scale-100"
-    >
-      <div class="bg-forest p-4 flex justify-between items-center">
-        <h3
-          class="text-white font-bold text-lg"
-          th:text="#{teacher.form.title}"
-        >
-          REGISTRAR PROFESOR
-        </h3>
-        <button
-          type="button"
-          onclick="document.getElementById('contenedor-modales').innerHTML = ''"
-          class="text-white hover:text-sand transition"
-        >
-          <i class="fas fa-times text-xl"></i>
-        </button>
-      </div>
-
-      <div class="p-8">
-        <form
-          hx-post="/web/profesores/nuevo"
-          hx-target="body"
-          th:object="${profesor}"
-          class="space-y-5"
-        >
-          <div>
-            <label
-              class="block text-xs font-bold text-gray-500 uppercase tracking-wider mb-2"
-              th:text="#{teacher.form.label.name}"
-              >Nombre</label
-            >
-            <div class="relative">
-              <span
-                class="absolute inset-y-0 left-0 flex items-center pl-3 text-gray-400"
-                ><i class="fas fa-user"></i
-              ></span>
-              <input
-                type="text"
-                th:field="*{nombre}"
-                required
-                class="w-full pl-10 pr-4 py-3 border border-gray-200 rounded-lg text-gray-700 bg-gray-50 focus:bg-white focus:outline-none focus:border-[var(--forest-green)] focus:ring-1 focus:ring-[var(--forest-green)] transition-all"
-                th:placeholder="#{teacher.form.placeholder.name}"
-              />
-            </div>
-          </div>
-
-          <div>
-            <label
-              class="block text-xs font-bold text-gray-500 uppercase tracking-wider mb-2"
-              th:text="#{teacher.form.label.surname}"
-              >Apellido</label
-            >
-            <div class="relative">
-              <span
-                class="absolute inset-y-0 left-0 flex items-center pl-3 text-gray-400"
-                ><i class="fas fa-signature"></i
-              ></span>
-              <input
-                type="text"
-                th:field="*{apellido}"
-                required
-                class="w-full pl-10 pr-4 py-3 border border-gray-200 rounded-lg text-gray-700 bg-gray-50 focus:bg-white focus:outline-none focus:border-[var(--forest-green)] focus:ring-1 focus:ring-[var(--forest-green)] transition-all"
-                th:placeholder="#{teacher.form.placeholder.surname}"
-              />
-            </div>
-          </div>
-          <div class="pt-4">
-            <button
-              type="submit"
-              class="w-full bg-forest text-white font-bold py-3 rounded-lg shadow-md hover:bg-opacity-90 transform hover:-translate-y-0.5 transition-all duration-200 flex justify-center items-center gap-2"
-            >
-              <i class="fas fa-save"></i>
-              <span th:text="#{generic.button.save}">Guardar Profesor</span>
-            </button>
-          </div>
-        </form>
-      </div>
-    </div>
-  </div>
-
-  <div id="modal-caballo" class="modal-overlay">
-    <div class="bg-white rounded-3xl w-full max-w-lg p-8 shadow-2xl relative">
-      <button
-        onclick="closeModal('modal-caballo')"
-        class="absolute top-4 right-4 text-gray-400 hover:text-red-500"
-      >
-        <i class="fas fa-times"></i>
-      </button>
-      <h3
-        class="text-xl font-bold text-forest mb-4"
-        th:text="#{horse.form.title}"
-      >
-        Nuevo Caballo
-      </h3>
-      <form class="space-y-4">
-        <input
-          type="text"
-          th:placeholder="#{horse.form.name}"
-          class="w-full p-3 bg-gray-50 border rounded-xl"
-        />
-        <button
-          type="button"
-          onclick="closeModal('modal-caballo')"
-          class="w-full bg-forest text-white py-3 rounded-xl font-bold"
-          th:text="#{generic.button.save}"
-        >
-          Guardar
-        </button>
-      </form>
-    </div>
-  </div>
-  <!--Edicion alumno-->
-  <div th:fragment="modal-editar-alumno" class="modal-overlay active">
-    <div
-      class="bg-white rounded-3xl w-full max-w-lg shadow-2xl overflow-hidden relative"
-    >
-      <div class="bg-forest p-4 flex justify-between items-center">
-        <h3 class="text-white font-bold text-lg">EDITAR ALUMNO</h3>
-        <button
-          type="button"
-          onclick="document.getElementById('contenedor-modales').innerHTML = ''"
-          class="text-white hover:text-sand"
-        >
-          <i class="fas fa-times text-xl"></i>
-        </button>
-      </div>
-
-      <div class="p-8">
-        <form
-          th:hx-post="'/web/alumnos/editar/' + ${alumno.alumnoId.value}"
-          hx-target="body"
-          class="space-y-5"
-        >
-          <input
-            type="text"
-            name="nombre"
-            th:value="${alumno.nombre}"
-            readonly
-            class="w-full p-3 bg-gray-100 border rounded-lg cursor-not-allowed"
-          />
-
-          <input
-            type="text"
-            name="apellido"
-            th:value="${alumno.apellido}"
-            readonly
-            class="w-full p-3 bg-gray-100 border rounded-lg cursor-not-allowed"
-          />
-
-          <input
-            type="email"
-            name="email"
-            th:value="${alumno.email}"
-            required
-            class="w-full p-3 border rounded-lg bg-gray-50 focus:bg-white"
-          />
-
-          <select
-            name="profesor"
-            required
-            class="w-full p-3 border rounded-lg bg-gray-50"
-          >
-            <option value="">Asignar Profesor</option>
-            <option
-              th:each="p : ${profesores}"
-              th:value="${p.profesorId}"
-              th:text="${p.nombre + ' ' + p.apellido}"
-              th:selected="${p.profesorId.value == alumno.profesor.value}"
-            ></option>
-          </select>
-
-          <button
-            type="submit"
-            class="w-full bg-forest text-white py-3 rounded-lg font-bold hover:opacity-90"
-          >
-            Guardar Cambios
+          <button type="submit" class="btn btn-lg w-full bg-forest text-white font-bold rounded-xl py-3 shadow-md hover:opacity-90 transition-all transform hover:-translate-y-0.5 d-flex align-items-center justify-content-center gap-2">
+            <i class="fas fa-save"></i>
+            <span th:text="#{generic.button.save}">Guardar Alumno</span>
           </button>
         </form>
       </div>
     </div>
   </div>
-  <!--Eliminar-->
 
   <div th:fragment="modal-eliminar-alumno" class="modal-overlay active">
-    <div
-      class="bg-white rounded-3xl w-full max-w-md shadow-2xl overflow-hidden relative transform transition-all scale-100"
-    >
-      <div class="bg-red-600 p-4 flex justify-between items-center text-white">
-        <h3 class="font-bold text-lg flex items-center gap-2">
-          <i class="fas fa-exclamation-triangle"></i>
-          Confirmar Eliminación
+    <div class="bg-white rounded-3xl w-full max-w-md shadow-2xl overflow-hidden relative">
+      <div class="bg-danger p-4 d-flex justify-content-between align-items-center text-white">
+        <h3 class="font-bold m-0 d-flex align-items-center gap-2">
+          <i class="fas fa-exclamation-triangle"></i> Confirmar Eliminación
         </h3>
-        <button
-          type="button"
-          onclick="document.getElementById('contenedor-modales').innerHTML = ''"
-          class="hover:text-gray-200"
-        >
-          <i class="fas fa-times text-xl"></i>
-        </button>
+        <button type="button" onclick="document.getElementById('contenedor-modales').innerHTML = ''" class="btn-close btn-close-white"></button>
       </div>
 
       <div class="p-8 text-center">
-        <p class="text-gray-600 mb-6">
-          ¿Estás completamente seguro de que deseas eliminar a este alumno?
-          <span class="block font-bold text-red-600 mt-2">
-            Esta acción no se puede deshacer.
-          </span>
+        <p class="text-muted mb-4">
+          ¿Estás seguro de eliminar a este alumno?
+          <span class="d-block text-danger fw-bold mt-2">Esta acción no se puede deshacer.</span>
         </p>
 
-        <div class="flex gap-4">
-          <button
-            type="button"
-            onclick="
-              document.getElementById('contenedor-modales').innerHTML = ''
-            "
-            class="flex-1 px-4 py-3 bg-gray-100 text-gray-700 rounded-xl font-bold hover:bg-gray-200 transition"
-          >
-            Cancelar
-          </button>
-
-          <div class="flex-1">
-            <button
-              type="button"
-              th:hx-delete="'/web/alumnos/eliminar/' + ${id}"
-              hx-target="body"
-              class="w-full px-4 py-3 bg-red-600 text-white rounded-xl font-bold hover:bg-red-700 transition"
-            >
-              Sí, Eliminar
-            </button>
-          </div>
+        <div class="d-flex gap-3">
+          <button type="button" onclick="document.getElementById('contenedor-modales').innerHTML = ''" 
+                  class="btn btn-light flex-fill py-3 rounded-xl font-bold">Cancelar</button>
+          <button type="button" th:hx-delete="'/web/alumnos/eliminar/' + ${id}" hx-target="body" 
+                  class="btn btn-danger flex-fill py-3 rounded-xl font-bold">Sí, Eliminar</button>
         </div>
       </div>
     </div>

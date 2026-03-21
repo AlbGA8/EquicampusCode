@@ -1,93 +1,63 @@
-<header
-  th:fragment="topbar"
-  class="bg-white border-b border-gray-200 px-4 md:px-8 py-4 flex justify-between items-center sticky top-0 z-40"
->
-  <div class="flex items-center">
-    <button onclick="toggleSidebar()" class="lg:hidden mr-4 p-2 text-gray-600">
+<header th:fragment="topbar"
+        class="bg-white border-bottom border-gray-200 px-4 px-md-5 py-3 d-flex justify-content-between align-items-center sticky-top z-3">
+  
+  <div class="d-flex align-items-center">
+    <button onclick="toggleSidebar()" class="btn d-lg-none me-3 text-secondary shadow-none">
       <i class="fas fa-bars"></i>
     </button>
-    <h1
-      id="view-title"
-      class="text-xl font-bold text-gray-800"
-      th:text="#{header.title}"
-    >
+    <h1 id="view-title" class="h5 fw-bold text-dark m-0" th:text="#{header.title}">
       Panel de Control
     </h1>
   </div>
 
-  <div class="flex items-center gap-4">
-    <!-- BANDERAS DE IDIOMA (Estilo Thymeleaf solicitado) -->
-    <div class="flex gap-2 mr-4 hidden sm:flex">
-      <a
-        th:href="@{''(lang=es)}"
-        class="hover:scale-110 transition"
-        th:title="#{lang.spanish}"
-      >
-        <img
-          src="https://flagcdn.com/w40/es.png"
-          class="h-5 w-auto rounded-sm shadow-sm"
-          alt="Español"
-        />
+  <div class="d-flex align-items-center gap-3">
+    
+    <div class="d-none d-sm-flex align-items-center gap-2 me-3">
+      <a th:href="@{''(lang=es)}" class="hover:scale-110 transition-transform" th:title="#{lang.spanish}">
+        <img src="https://flagcdn.com/w40/es.png" class="h-4 rounded-1 shadow-sm" alt="ES" />
       </a>
-      <a
-        th:href="@{''(lang=en)}"
-        class="hover:scale-110 transition"
-        th:title="#{lang.english}"
-      >
-        <img
-          src="https://flagcdn.com/w40/gb.png"
-          class="h-5 w-auto rounded-sm shadow-sm"
-          alt="English"
-        />
+      <a th:href="@{''(lang=en)}" class="hover:scale-110 transition-transform" th:title="#{lang.english}">
+        <img src="https://flagcdn.com/w40/gb.png" class="h-4 rounded-1 shadow-sm" alt="EN" />
       </a>
-      <a
-        th:href="@{''(lang=ar)}"
-        class="hover:scale-110 transition"
-        th:title="#{lang.arabic}"
-      >
-        <img
-          src="https://flagcdn.com/w40/ma.png"
-          class="h-5 w-auto rounded-sm shadow-sm"
-          alt="Arabic"
-        />
+      <a th:href="@{''(lang=ar)}" class="hover:scale-110 transition-transform" th:title="#{lang.arabic}">
+        <img src="https://flagcdn.com/w40/ma.png" class="h-4 rounded-1 shadow-sm" alt="AR" />
       </a>
-      <a
-        th:href="@{''(lang=ko)}"
-        class="hover:scale-110 transition"
-        th:title="#{lang.korean}"
-      >
-        <img
-          src="https://flagcdn.com/w40/kr.png"
-          class="h-5 w-auto rounded-sm shadow-sm"
-          alt="Korean"
-        />
+      <a th:href="@{''(lang=ko)}" class="hover:scale-110 transition-transform" th:title="#{lang.korean}">
+        <img src="https://flagcdn.com/w40/kr.png" class="h-4 rounded-1 shadow-sm" alt="KO" />
       </a>
     </div>
 
-    <!-- Perfil -->
-    <div class="relative">
-      <button
-        onclick="toggleDropdown('profile-dropdown')"
-        class="flex items-center space-x-3 focus:outline-none"
-      >
-        <div class="text-right hidden sm:block">
-          <p class="text-sm font-bold text-gray-700" th:text="#{user.admin}">
-            Admin
-          </p>
+    <div class="dropdown">
+      <button class="btn d-flex align-items-center gap-3 border-0 dropdown-toggle shadow-none" 
+              type="button" 
+              id="userMenu" 
+              data-bs-toggle="dropdown" 
+              aria-expanded="false">
+        <div class="text-end d-none d-sm-block">
+          <p class="small fw-bold text-dark m-0" th:text="#{user.admin}">Admin</p>
         </div>
-        <img
-          th:src="@{https://ui-avatars.com/api/?name=Admin&background=2D5A3F&color=fff}"
-          class="w-10 h-10 rounded-full border-2 border-sand"
-        />
+        <img th:src="@{https://ui-avatars.com/api/?name=Admin&background=2D5A3F&color=fff}"
+             class="rounded-circle border border-2 border-sand" 
+             style="width: 38px; height: 38px;" />
       </button>
-      <div id="profile-dropdown" class="dropdown-content mt-2 shadow-xl">
-        <a
-          href="#"
-          class="block px-4 py-2 text-sm text-red-600 hover:bg-red-50"
-          th:text="#{menu.logout}"
-          >Cerrar Sesión</a
-        >
-      </div>
+      
+      <ul class="dropdown-menu dropdown-menu-end shadow-lg border-0 rounded-3 mt-2" aria-labelledby="userMenu">
+        <li>
+          <h6 class="dropdown-header text-forest fw-bold border-bottom pb-2 mb-2" th:text="#{user.admin}">Admin</h6>
+        </li>
+        <li>
+          <a class="dropdown-item d-flex align-items-center gap-2 py-2" href="#">
+            <i class="fas fa-user-cog fa-sm text-muted"></i> Mi Perfil
+          </a>
+        </li>
+        <li><hr class="dropdown-divider"></li>
+        <li>
+          <a class="dropdown-item text-danger d-flex align-items-center gap-2 py-2" th:href="@{/logout}">
+            <i class="fas fa-sign-out-alt fa-sm"></i> 
+            <span th:text="#{menu.logout}">Cerrar Sesión</span>
+          </a>
+        </li>
+      </ul>
     </div>
   </div>
 </header>

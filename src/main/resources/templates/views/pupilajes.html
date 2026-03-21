@@ -1,211 +1,120 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <body>
-<section th:fragment="contenidoVista" id="view-pupilajes" class="view-section">
-          <div
-            class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-6"
-          >
-            <h2
-              class="text-2xl font-bold text-forest"
-              th:text="#{stable.list.title}"
-            >
-              Gestión de Pupilajes
-            </h2>
-            <div class="flex gap-2 w-full sm:w-auto">
-              <input
-                type="text"
-                th:placeholder="#{stable.search.placeholder}"
-                class="flex-grow p-2 border rounded-lg text-sm focus:ring-forest outline-none"
-              />
-              <button
-                onclick="openModal('modal-caballo')"
-                class="bg-forest text-white px-4 py-2 rounded-lg text-sm font-bold"
-              >
-                <i class="fas fa-plus mr-2"></i>
-                <span th:text="#{stable.button.add}">Alta</span>
-              </button>
-            </div>
-          </div>
-          <div
-            class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6"
-          >
-            <!-- Caballo 1 -->
-            <div class="custom-card overflow-hidden group">
-              <div class="h-40 bg-gray-200 relative">
-                <img
-                  src="https://images.unsplash.com/photo-1553284965-83fd3e82fa5a?auto=format&fit=crop&w=400&q=80"
-                  class="w-full h-full object-cover"
-                />
-                <div
-                  class="absolute bottom-2 left-4 bg-white/90 px-2 py-1 rounded text-xs font-bold text-forest shadow"
-                >
-                  Box #12
+<section th:fragment="contenidoVista" id="view-pupilajes" class="container-fluid py-4">
+    
+    <div class="row align-items-center g-3 mb-5">
+        <div class="col-12 col-md-6">
+            <h2 class="h3 fw-bold text-forest m-0" th:text="#{stable.list.title}">Gestión de Pupilajes</h2>
+        </div>
+        <div class="col-12 col-md-6">
+            <div class="d-flex gap-2 justify-content-md-end">
+                <div class="input-group input-group-sm shadow-sm" style="max-width: 250px;">
+                    <span class="input-group-text bg-white border-end-0 text-muted"><i class="fas fa-search"></i></span>
+                    <input type="text" class="form-control border-start-0 ps-0" th:placeholder="#{stable.search.placeholder}">
                 </div>
-              </div>
-              <div class="p-4">
-                <h3 class="font-bold text-lg mb-1">Rayo Macqueen</h3>
-                <p class="text-xs text-gray-500 mb-4">
-                  <span th:text="#{horse.prop}">Prop</span>: Alberto Soler
-                </p>
-                <div class="space-y-1 mb-4">
-                  <div class="flex justify-between text-xs">
-                    <span class="text-gray-400" th:text="#{horse.diet}"
-                      >Dieta:</span
-                    >
-                    <span class="font-bold text-forest">Avena + Heno</span>
-                  </div>
-                  <div class="flex justify-between text-xs">
-                    <span class="text-gray-400" th:text="#{horse.health}"
-                      >Salud:</span
-                    >
-                    <span
-                      class="text-emerald-600 font-bold"
-                      th:text="#{horse.health.ok}"
-                      >Al día</span
-                    >
-                  </div>
-                </div>
-                <button
-                  class="w-full py-2 border border-forest text-forest rounded-lg text-xs font-bold hover:bg-forest hover:text-white transition"
-                  th:text="#{horse.card}"
-                >
-                  Ficha
+                <button onclick="openModal('modal-caballo')" class="btn btn-sm bg-forest text-white fw-bold px-3 rounded-lg shadow-sm">
+                    <i class="fas fa-plus me-1"></i> <span th:text="#{stable.button.add}">Alta</span>
                 </button>
-              </div>
             </div>
-            <!-- Caballo 2 -->
-            <div class="custom-card overflow-hidden group">
-              <div class="h-40 bg-gray-200 relative">
-                <img
-                  src="/imagenes/alazan.jpg"
-                  class="w-full h-full object-cover"
-                />
-                <div
-                  class="absolute bottom-2 left-4 bg-white/90 px-2 py-1 rounded text-xs font-bold text-forest shadow"
-                >
-                  Box #05
+        </div>
+    </div>
+
+    <div class="row g-4">
+        
+        <div class="col-12 col-sm-6 col-lg-4 col-xl-3">
+            <div class="card h-100 border-0 shadow-sm rounded-4 overflow-hidden transition-hover">
+                <div class="position-relative" style="height: 180px;">
+                    <img src="https://images.unsplash.com/photo-1553284965-83fd3e82fa5a?auto=format&fit=crop&w=400&q=80" 
+                         class="w-100 h-100 object-fit-cover" alt="Caballo">
+                    <div class="position-absolute bottom-0 start-0 m-3">
+                        <span class="badge bg-white text-forest shadow-sm fw-bold px-2 py-1">Box #12</span>
+                    </div>
                 </div>
-              </div>
-              <div class="p-4">
-                <h3 class="font-bold text-lg mb-1">Luna Nueva</h3>
-                <p class="text-xs text-gray-500 mb-4">
-                  <span th:text="#{horse.prop}">Prop</span>: Marta Ruiz
-                </p>
-                <div class="space-y-1 mb-4">
-                  <div class="flex justify-between text-xs">
-                    <span class="text-gray-400" th:text="#{horse.diet}"
-                      >Dieta:</span
-                    >
-                    <span class="font-bold text-forest">Forraje Mix</span>
-                  </div>
-                  <div class="flex justify-between text-xs">
-                    <span class="text-gray-400" th:text="#{horse.health}"
-                      >Salud:</span
-                    >
-                    <span
-                      class="text-amber-600 font-bold"
-                      th:text="#{horse.health.dental}"
-                      >Rev. Dental</span
-                    >
-                  </div>
+                <div class="card-body p-4">
+                    <h3 class="h5 fw-bold mb-1">Rayo Macqueen</h3>
+                    <p class="small text-muted mb-4">
+                        <i class="fas fa-user-circle me-1"></i> <span th:text="#{horse.prop}">Prop</span>: Alberto Soler
+                    </p>
+                    
+                    <div class="vstack gap-2 mb-4">
+                        <div class="d-flex justify-content-between align-items-center border-bottom border-light pb-2">
+                            <span class="small text-muted" th:text="#{horse.diet}">Dieta</span>
+                            <span class="small fw-bold text-forest">Avena + Heno</span>
+                        </div>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <span class="small text-muted" th:text="#{horse.health}">Salud</span>
+                            <span class="badge rounded-pill bg-success-subtle text-success border border-success-subtle" th:text="#{horse.health.ok}">Al día</span>
+                        </div>
+                    </div>
+
+                    <button class="btn btn-outline-forest btn-sm w-100 fw-bold rounded-pill py-2" th:text="#{horse.card}">Ficha Completa</button>
                 </div>
-                <button
-                  class="w-full py-2 border border-forest text-forest rounded-lg text-xs font-bold hover:bg-forest hover:text-white transition"
-                  th:text="#{horse.card}"
-                >
-                  Ficha
-                </button>
-              </div>
             </div>
-            <!-- Caballo 3 -->
-            <div class="custom-card overflow-hidden group">
-              <div class="h-40 bg-gray-200 relative">
-                <img
-                  src="/imagenes/spirit.jpg"
-                  class="w-full h-full object-cover"
-                />
-                <div
-                  class="absolute bottom-2 left-4 bg-white/90 px-2 py-1 rounded text-xs font-bold text-forest shadow"
-                >
-                  Box #08
+        </div>
+
+        <div class="col-12 col-sm-6 col-lg-4 col-xl-3">
+            <div class="card h-100 border-0 shadow-sm rounded-4 overflow-hidden transition-hover">
+                <div class="position-relative" style="height: 180px;">
+                    <img src="/imagenes/alazan.jpg" class="w-100 h-100 object-fit-cover" alt="Caballo"
+                         onerror="this.src='https://images.unsplash.com/photo-1598974357801-cbca100e65d3?auto=format&fit=crop&w=400&q=80'">
+                    <div class="position-absolute bottom-0 start-0 m-3">
+                        <span class="badge bg-white text-forest shadow-sm fw-bold px-2 py-1">Box #05</span>
+                    </div>
                 </div>
-              </div>
-              <div class="p-4">
-                <h3 class="font-bold text-lg mb-1">Spirit</h3>
-                <p class="text-xs text-gray-500 mb-4">
-                  <span th:text="#{horse.prop}">Prop</span>: Hípica (Escuela)
-                </p>
-                <div class="space-y-1 mb-4">
-                  <div class="flex justify-between text-xs">
-                    <span class="text-gray-400" th:text="#{horse.diet}"
-                      >Dieta:</span
-                    >
-                    <span class="font-bold text-forest">Pienso Alta E.</span>
-                  </div>
-                  <div class="flex justify-between text-xs">
-                    <span class="text-gray-400" th:text="#{horse.health}"
-                      >Salud:</span
-                    >
-                    <span
-                      class="text-red-500 font-bold"
-                      th:text="#{horse.health.vaccine}"
-                      >Vacuna Pend.</span
-                    >
-                  </div>
+                <div class="card-body p-4">
+                    <h3 class="h5 fw-bold mb-1">Luna Nueva</h3>
+                    <p class="small text-muted mb-4"><span th:text="#{horse.prop}">Prop</span>: Marta Ruiz</p>
+                    
+                    <div class="vstack gap-2 mb-4">
+                        <div class="d-flex justify-content-between align-items-center border-bottom border-light pb-2">
+                            <span class="small text-muted" th:text="#{horse.diet}">Dieta</span>
+                            <span class="small fw-bold text-forest">Forraje Mix</span>
+                        </div>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <span class="small text-muted" th:text="#{horse.health}">Salud</span>
+                            <span class="badge rounded-pill bg-warning-subtle text-warning border border-warning-subtle" th:text="#{horse.health.dental}">Rev. Dental</span>
+                        </div>
+                    </div>
+
+                    <button class="btn btn-outline-forest btn-sm w-100 fw-bold rounded-pill py-2" th:text="#{horse.card}">Ficha Completa</button>
                 </div>
-                <button
-                  class="w-full py-2 border border-forest text-forest rounded-lg text-xs font-bold hover:bg-forest hover:text-white transition"
-                  th:text="#{horse.card}"
-                >
-                  Ficha
-                </button>
-              </div>
             </div>
-            <!-- Caballo 4 -->
-            <div class="custom-card overflow-hidden group">
-              <div class="h-40 bg-gray-200 relative">
-                <img
-                  src="/imagenes/frison.jpg"
-                  class="w-full h-full object-cover"
-                />
-                <div
-                  class="absolute bottom-2 left-4 bg-white/90 px-2 py-1 rounded text-xs font-bold text-forest shadow"
-                >
-                  Box #15
+        </div>
+
+        <div class="col-12 col-sm-6 col-lg-4 col-xl-3">
+            <div class="card h-100 border-0 shadow-sm rounded-4 overflow-hidden transition-hover border-top border-4 border-danger">
+                <div class="position-relative" style="height: 180px;">
+                    <img src="/imagenes/spirit.jpg" class="w-100 h-100 object-fit-cover" alt="Caballo"
+                         onerror="this.src='https://images.unsplash.com/photo-1534445867742-43195f401b6c?auto=format&fit=crop&w=400&q=80'">
+                    <div class="position-absolute bottom-0 start-0 m-3">
+                        <span class="badge bg-white text-forest shadow-sm fw-bold px-2 py-1">Box #08</span>
+                    </div>
+                    <div class="position-absolute top-0 end-0 m-2">
+                        <i class="fas fa-exclamation-circle text-danger bg-white rounded-circle fs-4 shadow"></i>
+                    </div>
                 </div>
-              </div>
-              <div class="p-4">
-                <h3 class="font-bold text-lg mb-1">Tornado</h3>
-                <p class="text-xs text-gray-500 mb-4">
-                  <span th:text="#{horse.prop}">Prop</span>: Juan Belmonte
-                </p>
-                <div class="space-y-1 mb-4">
-                  <div class="flex justify-between text-xs">
-                    <span class="text-gray-400" th:text="#{horse.diet}"
-                      >Dieta:</span
-                    >
-                    <span class="font-bold text-forest">Heno + Ajo</span>
-                  </div>
-                  <div class="flex justify-between text-xs">
-                    <span class="text-gray-400" th:text="#{horse.health}"
-                      >Salud:</span
-                    >
-                    <span
-                      class="text-emerald-600 font-bold"
-                      th:text="#{horse.health.ok}"
-                      >Al día</span
-                    >
-                  </div>
+                <div class="card-body p-4">
+                    <h3 class="h5 fw-bold mb-1">Spirit</h3>
+                    <p class="small text-muted mb-4"><span th:text="#{horse.prop}">Prop</span>: Hípica (Escuela)</p>
+                    
+                    <div class="vstack gap-2 mb-4">
+                        <div class="d-flex justify-content-between align-items-center border-bottom border-light pb-2">
+                            <span class="small text-muted" th:text="#{horse.diet}">Dieta</span>
+                            <span class="small fw-bold text-forest">Pienso Alta E.</span>
+                        </div>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <span class="small text-muted" th:text="#{horse.health}">Salud</span>
+                            <span class="badge rounded-pill bg-danger-subtle text-danger border border-danger-subtle" th:text="#{horse.health.vaccine}">Vacuna Pend.</span>
+                        </div>
+                    </div>
+
+                    <button class="btn btn-outline-forest btn-sm w-100 fw-bold rounded-pill py-2" th:text="#{horse.card}">Ficha Completa</button>
                 </div>
-                <button
-                  class="w-full py-2 border border-forest text-forest rounded-lg text-xs font-bold hover:bg-forest hover:text-white transition"
-                  th:text="#{horse.card}"
-                >
-                  Ficha
-                </button>
-              </div>
             </div>
-          </div>
+        </div>
+
+    </div>
 </section>
 </body>
 </html>

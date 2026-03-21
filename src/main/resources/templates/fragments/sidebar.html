@@ -1,72 +1,80 @@
-<aside th:fragment="sidebar" id="sidebar" class="sidebar">
-  <div class="p-6">
-    <div class="flex items-center space-x-3 mb-10">
-      <div class="logo-container">
-        <i class="fas fa-horse-head text-3xl text-white"></i>
+fugufdghu
+
+<aside th:fragment="sidebar" id="sidebar" class="sidebar bg-forest min-vh-100 shadow">
+  <div class="p-4">
+    <div class="d-flex align-items-center space-x-3 mb-10 px-2">
+      <div class="logo-container bg-white/10 p-2 rounded-lg">
+        <i class="fas fa-horse-head text-2xl text-white"></i>
       </div>
       <span class="text-xl font-bold text-white tracking-tight">
         Equi<span class="text-sand">Campus</span>
       </span>
     </div>
 
-    <nav class="space-y-1">
-      
-      <a th:href="@{/web/dashboard}" 
-         class="nav-item block cursor-pointer"
-         th:classappend="${contenidoVista == 'views/dashboard'} ? 'active' : ''">
+    <nav class="nav flex-column space-y-1">
+
+      <a th:href="@{/web/dashboard}"
+        class="nav-link text-white rounded-lg transition-all d-flex align-items-center py-3 px-3"
+        th:classappend="${contenidoVista == 'views/dashboard'} ? 'bg-white/20 active shadow-sm' : 'hover:bg-white/10'">
         <i class="fas fa-th-large text-center w-6 mr-3"></i>
         <span th:text="#{menu.dashboard}">Dashboard</span>
       </a>
 
-      <a th:href="@{/web/pupilajes}" 
-         class="nav-item block cursor-pointer"
-         th:classappend="${contenidoVista == 'views/pupilajes'} ? 'active' : ''">
+      <a th:href="@{/web/pupilajes}"
+        class="nav-link text-white rounded-lg transition-all d-flex align-items-center py-3 px-3"
+        th:classappend="${contenidoVista == 'views/pupilajes'} ? 'bg-white/20 active shadow-sm' : 'hover:bg-white/10'">
         <i class="fas fa-horse-head text-center w-6 mr-3"></i>
         <span th:text="#{menu.stables}">Pupilajes</span>
       </a>
 
-      <a th:href="@{/web/clases}" 
-         class="nav-item block cursor-pointer"
-         th:classappend="${contenidoVista == 'views/clases'} ? 'active' : ''">
+      <a th:href="@{/web/clases}"
+        class="nav-link text-white rounded-lg transition-all d-flex align-items-center py-3 px-3"
+        th:classappend="${contenidoVista == 'views/clases'} ? 'bg-white/20 active shadow-sm' : 'hover:bg-white/10'">
         <i class="fas fa-calendar-check text-center w-6 mr-3"></i>
         <span th:text="#{menu.classes}">Clases</span>
       </a>
 
-      <a th:href="@{/web/pistas}" 
-         class="nav-item block cursor-pointer"
-         th:classappend="${contenidoVista == 'views/pistas'} ? 'active' : ''">
+      <a th:href="@{/web/pistas}"
+        class="nav-link text-white rounded-lg transition-all d-flex align-items-center py-3 px-3"
+        th:classappend="${contenidoVista == 'views/pistas'} ? 'bg-white/20 active shadow-sm' : 'hover:bg-white/10'">
         <i class="fas fa-map-marked-alt text-center w-6 mr-3"></i>
         <span th:text="#{menu.arenas}">Pistas</span>
       </a>
 
-      <a th:href="@{/web/alumnos}" 
-         class="nav-item block cursor-pointer"
-         th:classappend="${contenidoVista == 'views/alumnos'} ? 'active' : ''">
+      <a th:href="@{/web/alumnos}"
+        class="nav-link text-white rounded-lg transition-all d-flex align-items-center py-3 px-3"
+        th:classappend="${contenidoVista == 'views/alumnos'} ? 'bg-white/20 active shadow-sm' : 'hover:bg-white/10'">
         <i class="fas fa-user-graduate text-center w-6 mr-3"></i>
         <span th:text="#{menu.students}">Alumnos</span>
       </a>
 
-      <a th:href="@{/web/profesores}" 
-         class="nav-item block cursor-pointer"
-         th:classappend="${contenidoVista == 'views/profesores'} ? 'active' : ''">
+      <a th:href="@{/web/profesores}"
+        class="nav-link text-white rounded-lg transition-all d-flex align-items-center py-3 px-3"
+        th:classappend="${contenidoVista == 'views/profesores'} ? 'bg-white/20 active shadow-sm' : 'hover:bg-white/10'">
         <i class="fas fa-chalkboard-teacher text-center w-6 mr-3"></i>
         <span th:text="#{menu.teachers}">Profesorado</span>
       </a>
 
-      <a th:href="@{/web/pagos}" 
-         class="nav-item block cursor-pointer"
-         th:classappend="${contenidoVista == 'views/pagos'} ? 'active' : ''">
+     <button class="btn btn-primary shadow" style="background-color: #0d6efd !important; border-color: #0d6efd !important;">
+    TEST FORZADO
+</button>
+
+      <a th:href="@{/web/pagos}"
+        class="nav-link text-white rounded-lg transition-all d-flex align-items-center py-3 px-3"
+        th:classappend="${contenidoVista == 'views/pagos'} ? 'bg-white/20 active shadow-sm' : 'hover:bg-white/10'">
         <i class="fas fa-credit-card text-center w-6 mr-3"></i>
         <span th:text="#{menu.payments}">Pagos</span>
       </a>
 
-      <div class="pt-10 border-t border-white/10 mt-6">
-        <a href="#" class="nav-item block cursor-pointer opacity-60 hover:opacity-100">
+      <div class="pt-6 border-t border-white/10 mt-6">
+        <a href="#"
+          class="nav-link text-white/60 hover:text-white hover:bg-white/10 rounded-lg py-3 px-3 transition-all d-flex align-items-center">
           <i class="fas fa-cog text-center w-6 mr-3"></i>
           <span th:text="#{menu.settings}">Configuración</span>
         </a>
-        
-        <a th:href="@{/logout}" class="nav-item block cursor-pointer text-red-300 hover:text-red-100 hover:bg-red-900/20">
+
+        <a th:href="@{/logout}"
+          class="nav-link text-red-300 hover:text-white hover:bg-red-600/40 rounded-lg py-3 px-3 transition-all d-flex align-items-center">
           <i class="fas fa-sign-out-alt text-center w-6 mr-3"></i>
           <span th:text="#{menu.logout}">Salir</span>
         </a>

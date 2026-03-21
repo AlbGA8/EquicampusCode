@@ -1,113 +1,125 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <body>
-<section th:fragment="contenidoVista" id="view-clases" class="view-section">
- <div class="grid grid-cols-1 lg:grid-cols-4 gap-8">
-            <div class="lg:col-span-3 custom-card p-6">
-              <div class="flex justify-between items-center mb-6">
-                <h2
-                  class="text-xl font-bold text-forest"
-                  th:text="#{schedule.calendar.title}"
-                >
-                  Calendario de Reservas
-                </h2>
-                <div class="flex gap-2">
-                  <button class="p-2 border rounded hover:bg-gray-50">
-                    <i class="fas fa-chevron-left"></i>
-                  </button>
-                  <span
-                    class="px-4 py-2 font-bold text-sm"
-                    th:text="#{generic.date.jan2024}"
-                    >Enero 2024</span
-                  >
-                  <button class="p-2 border rounded hover:bg-gray-50">
-                    <i class="fas fa-chevron-right"></i>
-                  </button>
-                </div>
+<section th:fragment="contenidoVista" id="view-clases" class="container-fluid py-4">
+  <div class="row g-4">
+    
+    <div class="col-lg-9">
+      <div class="card border-0 shadow-sm rounded-3xl p-4 h-100">
+        
+        <div class="d-flex justify-content-between align-items-center mb-4">
+          <h2 class="h4 fw-bold text-forest m-0" th:text="#{schedule.calendar.title}">
+            Calendario de Reservas
+          </h2>
+          <div class="btn-group shadow-sm">
+            <button class="btn btn-outline-light text-dark border-gray-200">
+              <i class="fas fa-chevron-left"></i>
+            </button>
+            <span class="btn btn-light border-gray-200 fw-bold px-4 disabled opacity-100" th:text="#{generic.date.jan2024}">
+              Enero 2024
+            </span>
+            <button class="btn btn-outline-light text-dark border-gray-200">
+              <i class="fas fa-chevron-right"></i>
+            </button>
+          </div>
+        </div>
+
+        <div class="row g-2 text-center mb-2">
+          <div th:each="day : ${ {'mon', 'tue', 'wed', 'thu', 'fri', 'sat', 'sun'} }" 
+               class="col text-xs fw-bold text-muted tracking-widest uppercase" 
+               th:text="#{day.__${day}__}">LUN</div>
+        </div>
+
+        <div class="row g-2 overflow-auto" style="min-height: 500px;">
+          
+          <div class="col border-end border-light-subtle px-1">
+            <div class="vstack gap-2">
+              <div class="badge text-start p-2 border-start border-4 border-primary bg-primary bg-opacity-10 text-primary rounded-1">
+                <div class="fw-bold">09:00</div>
+                <div class="small">Doma - Carlos</div>
               </div>
-              <div
-                class="grid grid-cols-7 gap-2 text-center text-[10px] font-bold text-gray-400 mb-4 tracking-widest uppercase"
-              >
-                <div th:text="#{day.mon}">LUN</div>
-                <div th:text="#{day.tue}">MAR</div>
-                <div th:text="#{day.wed}">MIÉ</div>
-                <div th:text="#{day.thu}">JUE</div>
-                <div th:text="#{day.fri}">VIE</div>
-                <div th:text="#{day.sat}">SÁB</div>
-                <div th:text="#{day.sun}">DOM</div>
+              <div class="badge text-start p-2 border-start border-4 border-warning bg-warning bg-opacity-10 text-warning rounded-1">
+                <div class="fw-bold">17:00</div>
+                <div class="small">Salto - Lucía</div>
               </div>
-              <div
-                class="relative h-[500px] border rounded-lg p-2 bg-gray-50/20 divide-x flex overflow-x-auto"
-              >
-                <div class="flex-1 p-1 space-y-2">
-                  <div
-                    class="bg-blue-100 text-blue-700 p-2 rounded text-[10px] font-bold border-l-4 border-blue-500"
-                  >
-                    09:00 Doma - Carlos
-                  </div>
-                  <div
-                    class="bg-amber-100 text-amber-700 p-2 rounded text-[10px] font-bold border-l-4 border-amber-500"
-                  >
-                    17:00 Salto - Lucía
-                  </div>
-                </div>
-                <!-- ... resto de eventos (simplificado, normalmente vendrían de BBDD) ... -->
-                <div class="flex-1 p-1 space-y-2">
-                  <div
-                    class="bg-purple-100 text-purple-700 p-2 rounded text-[10px] font-bold border-l-4 border-purple-500"
-                  >
-                    10:00 Pony Club
-                  </div>
-                </div>
-                <div class="flex-1 p-1 space-y-2">
-                  <div
-                    class="bg-blue-100 text-blue-700 p-2 rounded text-[10px] font-bold border-l-4 border-blue-500"
-                  >
-                    16:00 Doma
-                  </div>
-                  <div
-                    class="bg-emerald-100 text-emerald-700 p-2 rounded text-[10px] font-bold border-l-4 border-emerald-500"
-                  >
-                    18:00 Pista Alquiler
-                  </div>
-                </div>
-                <div class="flex-1"></div>
-                <div class="flex-1"></div>
-                <div class="flex-1"></div>
-                <div class="flex-1"></div>
-              </div>
-            </div>
-            <div class="custom-card p-6">
-              <h3
-                class="font-bold mb-4 text-forest uppercase text-sm tracking-widest"
-                th:text="#{schedule.form.title}"
-              >
-                Nueva Reserva
-              </h3>
-              <form class="space-y-4">
-                <select class="w-full p-2 border rounded-lg text-sm">
-                  <option th:text="#{schedule.form.select_student}">
-                    Seleccionar Alumno
-                  </option>
-                </select>
-                <select class="w-full p-2 border rounded-lg text-sm">
-                  <option th:text="#{activity.dressage}">Doma</option>
-                  <option th:text="#{activity.jump}">Salto</option>
-                </select>
-                <input
-                  type="datetime-local"
-                  class="w-full p-2 border rounded-lg text-sm"
-                />
-                <button
-                  type="button"
-                  class="w-full bg-sand text-white py-3 rounded-xl font-bold hover:shadow-lg transition"
-                  th:text="#{schedule.button.book}"
-                >
-                  Agendar
-                </button>
-              </form>
             </div>
           </div>
+
+          <div class="col border-end border-light-subtle px-1 text-center">
+             <span class="text-muted opacity-25 mt-4 d-block small">Sin eventos</span>
+          </div>
+
+          <div class="col border-end border-light-subtle px-1">
+            <div class="badge text-start p-2 border-start border-4 border-info bg-info bg-opacity-10 text-info rounded-1">
+              <div class="fw-bold">10:00</div>
+              <div class="small">Pony Club</div>
+            </div>
+          </div>
+
+          <div class="col border-end border-light-subtle px-1">
+            <div class="vstack gap-2">
+              <div class="badge text-start p-2 border-start border-4 border-primary bg-primary bg-opacity-10 text-primary rounded-1">
+                <div class="fw-bold">16:00</div>
+                <div class="small">Doma</div>
+              </div>
+              <div class="badge text-start p-2 border-start border-4 border-success bg-success bg-opacity-10 text-success rounded-1">
+                <div class="fw-bold">18:00</div>
+                <div class="small">Alquiler Pista</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col border-end border-light-subtle px-1"></div>
+          <div class="col border-end border-light-subtle px-1"></div>
+          <div class="col px-1"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-lg-3">
+      <div class="card border-0 shadow-sm rounded-3xl p-4 bg-light bg-opacity-50">
+        <h3 class="h6 fw-bold mb-4 text-forest uppercase tracking-wider" th:text="#{schedule.form.title}">
+          Nueva Reserva
+        </h3>
+        
+        <form class="vstack gap-3">
+          <div class="form-group">
+            <label class="form-label small fw-bold text-muted">Alumno</label>
+            <select class="form-select border-0 shadow-sm py-2">
+              <option th:text="#{schedule.form.select_student}">Seleccionar Alumno</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label small fw-bold text-muted">Actividad</label>
+            <select class="form-select border-0 shadow-sm py-2">
+              <option th:text="#{activity.dressage}">Doma</option>
+              <option th:text="#{activity.jump}">Salto</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label small fw-bold text-muted">Fecha y Hora</label>
+            <input type="datetime-local" class="form-control border-0 shadow-sm py-2" />
+          </div>
+
+          <button type="button" 
+                  class="btn btn-warning w-100 py-3 rounded-xl fw-bold text-white shadow-sm hover:shadow-lg transition-all"
+                  th:text="#{schedule.button.book}">
+            Agendar
+          </button>
+        </form>
+      </div>
+      
+      <div class="card border-0 bg-forest text-white mt-4 p-4 rounded-3xl shadow-sm">
+        <p class="small m-0 opacity-75">Ocupación hoy</p>
+        <h4 class="fw-bold">85%</h4>
+        <div class="progress h-1 bg-white bg-opacity-20 mt-2">
+          <div class="progress-bar bg-sand" style="width: 85%"></div>
+        </div>
+      </div>
+    </div>
+  </div>
 </section>
 </body>
 </html>

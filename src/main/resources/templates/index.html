@@ -8,8 +8,12 @@
     <main class="main-content">
       <header th:replace="~{fragments/topbar :: topbar}"></header>
 
-      <div id="views-container" class="p-4 md:p-8">
-        <div th:replace="${contenidoVista} :: contenidoVista"></div>
+      <div id="views-container" class="container-fluid p-4 md:p-5">
+        <div class="row">
+          <div class="clo-12">
+            <div th:replace="${contenidoVista} :: contenidoVista"></div>
+          </div>
+        </div>
       </div>
       <div
         id="modal-exito"
@@ -18,7 +22,7 @@
         style="display: flex !important; opacity: 1 !important; z-index: 9999"
       >
         <div
-          class="bg-white rounded-3xl w-full max-w-sm p-8 text-center shadow-2xl"
+          class="bg-white rounded-3xl w-full max-w-sm p-8 text-center shadow"
         >
           <div
             class="mx-auto flex items-center justify-center h-20 w-20 rounded-full bg-green-100 mb-6 shadow-sm"
@@ -36,7 +40,7 @@
           </p>
           <button
             onclick="this.closest('.modal-overlay').remove()"
-            class="w-full bg-forest text-white font-bold py-3 rounded-lg hover:bg-opacity-90 transition"
+            class="btn btn-success w-full py-3 rounded-lg font-bold shadow-md hover:scale-105 transition-transform"
           >
             Entendido
           </button>

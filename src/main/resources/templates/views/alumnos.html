@@ -2,142 +2,91 @@
 <html xmlns:th="http://www.thymeleaf.org">
   <body>
     <section th:fragment="contenidoVista" id="view-alumnos">
-      <div class="flex justify-between items-center mb-6">
-        <h2
-          class="text-3xl font-bold text-forest"
-          th:text="#{student.list.title}"
-        >
+      
+      <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2 class="h3 fw-bold text-forest m-0" th:text="#{student.list.title}">
           Directorio de Alumnos
         </h2>
-        <div class="flex gap-3">
-          <a
-            th:href="@{/web/alumnos/pdf}"
-            class="border border-red-200 bg-red-50 text-red-700 px-4 py-2.5 rounded-lg hover:bg-red-100 transition duration-200 flex items-center gap-2 shadow-sm"
-            th:title="#{generic.button.export_pdf}"
-          >
-            <i class="fa-solid fa-file-pdf text-xl"></i>
-            <span
-              class="hidden md:inline font-medium"
-              th:text="#{generic.button.pdf}"
-              >PDF</span
-            >
+        <div class="d-flex gap-2">
+          <a th:href="@{/web/alumnos/pdf}" 
+             class="btn btn-outline-danger d-flex align-items-center gap-2 rounded-lg px-3 py-2 shadow-sm"
+             th:title="#{generic.button.export_pdf}">
+            <i class="fa-solid fa-file-pdf"></i>
+            <span class="d-none d-md-inline fw-medium" th:text="#{generic.button.pdf}">PDF</span>
           </a>
-          <button
-            hx-get="/web/alumnos/modal-nuevo"
-            hx-target="#contenedor-modales"
-            hx-swap="innerHTML"
-            class="bg-forest text-white px-4 py-2 rounded-lg text-sm font-bold"
-          >
-            + Nuevo Alumno
+          
+          <button hx-get="/web/alumnos/modal-nuevo" 
+                  hx-target="#contenedor-modales" 
+                  hx-swap="innerHTML"
+                  class="btn bg-forest text-white fw-bold px-4 py-2 rounded-lg shadow-sm hover:opacity-90 transition-all">
+            <i class="fas fa-plus me-1"></i> <span th:text="#{generic.button.new_student}">+ Nuevo Alumno</span>
           </button>
         </div>
       </div>
-      <div class="custom-card overflow-hidden">
-        <div class="overflow-x-auto overflow-y-auto max-h-[55vh] relative">
-          <table class="w-full text-left border-collapse">
-            <thead class="bg-forest text-white sticky top-0 z-10">
+
+      <div class="card border-0 shadow-sm rounded-3xl overflow-hidden">
+        <div class="table-responsive" style="max-height: 60vh;">
+          <table class="table table-hover align-middle mb-0">
+            <thead class="bg-forest text-white sticky-top z-2">
               <tr>
-                <th
-                  class="p-4 font-semibold text-sm"
-                  th:text="#{student.table.name}"
-                >
-                  Alumno
-                </th>
-                <th
-                  class="p-4 font-semibold text-sm"
-                  th:text="#{student.table.level}"
-                >
-                  Nivel
-                </th>
-                <th
-                  class="p-4 font-semibold text-sm"
-                  th:text="#{student.table.horse}"
-                >
-                  Caballo
-                </th>
-                <th
-                  class="p-4 font-semibold text-sm"
-                  th:text="#{student.table.balance}"
-                >
-                  Saldo
-                </th>
-                <th
-                  class="p-4 font-semibold text-center text-sm"
-                  th:text="#{generic.actions}"
-                >
-                  Acciones
-                </th>
+                <th class="ps-4 py-3 fw-semibold border-0" th:text="#{student.table.name}">Alumno</th>
+                <th class="py-3 fw-semibold border-0 text-center" th:text="#{student.table.level}">Nivel</th>
+                <th class="py-3 fw-semibold border-0" th:text="#{student.table.horse}">Caballo</th>
+                <th class="py-3 fw-semibold border-0" th:text="#{student.table.balance}">Saldo</th>
+                <th class="pe-4 py-3 fw-semibold border-0 text-end" th:text="#{generic.actions}">Acciones</th>
               </tr>
             </thead>
-            <tbody class="divide-y divide-gray-100">
-              <tr
-                th:id="'alumno-fila-' + ${alumno.alumnoId.value}"
-                th:each="alumno : ${alumnos}"
-                class="hover:bg-soft-sky transition duration-150"
-              >
-                <td class="px-6 py-4 flex items-center gap-3">
-                  <img
-                    th:src="'https://ui-avatars.com/api/?name=' + ${alumno.nombre} + '&background=D4B081&color=fff'"
-                    class="w-8 h-8 rounded-full"
-                  />
-                  <div>
-                    <p
-                      class="font-bold"
-                      th:text="${alumno.nombre} + ' ' + ${alumno.apellido}"
-                    >
-                      Nombre
-                    </p>
-                    <p
-                      class="text-[10px] text-gray-400"
-                      th:text="${alumno.email}"
-                    >
-                      email
-                    </p>
+            
+            <tbody class="border-top-0">
+              <tr th:id="'alumno-fila-' + ${alumno.alumnoId.value}" th:each="alumno : ${alumnos}" class="transition-all">
+                
+                <td class="ps-4 py-3">
+                  <div class="d-flex align-items-center gap-3">
+                    <img th:src="'https://ui-avatars.com/api/?name=' + ${alumno.nombre} + '&background=D4B081&color=fff'"
+                         class="rounded-circle shadow-sm" style="width: 35px; height: 35px;" />
+                    <div>
+                      <div class="fw-bold text-dark" th:text="${alumno.nombre} + ' ' + ${alumno.apellido}">Nombre</div>
+                      <div class="text-muted small" style="font-size: 11px;" th:text="${alumno.email}">email</div>
+                    </div>
                   </div>
                 </td>
-                <td class="px-6 py-4">
-                  <span
-                    class="bg-blue-100 text-blue-700 px-2 py-1 rounded text-[10px] font-bold"
-                    th:text="#{student.level.label}"
-                    >NIVEL</span
-                  >
+
+                <td class="text-center">
+                  <span class="badge rounded-pill bg-info bg-opacity-10 text-info px-3 py-2 fw-bold" 
+                        style="font-size: 10px;" th:text="#{student.level.label}">NIVEL</span>
                 </td>
-                <td class="px-6 py-4 text-gray-600" th:text="#{horse.school}">
-                  Escuela
-                </td>
-                <td class="px-6 py-4 text-emerald-600 font-bold">0.00 €</td>
-                <td class="px-6 py-4 text-right">
-                  <button
-                    th:hx-get="@{/web/alumnos/modal-edicion/{id}(id=${alumno.alumnoId.value})}"
-                    hx-target="#contenedor-modales"
-                    hx-swap="innerHTML"
-                    class="text-sand hover:text-orange-600 p-1"
-                  >
-                    <i class="fa-solid fa-pen-to-square text-lg"></i>
-                  </button>
-                  <button
-                    th:hx-get="'/web/alumnos/confirmar-eliminacion/' + ${alumno.alumnoId.value}"
-                    hx-target="#contenedor-modales"
-                    hx-swap="innerHTML"
-                    class="text-red-500 hover:text-red-700 p-1"
-                  >
-                    <i class="fa-solid fa-trash text-lg"></i>
-                  </button>
+
+                <td class="text-secondary" th:text="#{horse.school}">Escuela</td>
+                
+                <td class="fw-bold text-success">0.00 €</td>
+
+                <td class="pe-4 text-end">
+                  <div class="d-flex justify-content-end gap-1">
+                    <button th:hx-get="@{/web/alumnos/modal-edicion/{id}(id=${alumno.alumnoId.value})}"
+                            hx-target="#contenedor-modales" hx-swap="innerHTML"
+                            class="btn btn-link text-sand p-2 hover:bg-light rounded-circle transition-colors">
+                      <i class="fa-solid fa-pen-to-square"></i>
+                    </button>
+                    <button th:hx-get="'/web/alumnos/confirmar-eliminacion/' + ${alumno.alumnoId.value}"
+                            hx-target="#contenedor-modales" hx-swap="innerHTML"
+                            class="btn btn-link text-danger p-2 hover:bg-danger-subtle rounded-circle transition-colors">
+                      <i class="fa-solid fa-trash"></i>
+                    </button>
+                  </div>
                 </td>
               </tr>
+
               <tr th:if="${#lists.isEmpty(alumnos)}">
-                <td
-                  colspan="5"
-                  class="p-8 text-center text-gray-400 italic"
-                  th:text="#{student.list.empty}"
-                >
-                  No hay alumnos registrados.
+                <td colspan="5" class="p-5 text-center text-muted fst-italic">
+                  <i class="fas fa-users-slash d-block mb-2 fs-3 opacity-25"></i>
+                  <span th:text="#{student.list.empty}">No hay alumnos registrados.</span>
                 </td>
               </tr>
             </tbody>
           </table>
         </div>
       </div>
+      
     </section>
   </body>
 </html>

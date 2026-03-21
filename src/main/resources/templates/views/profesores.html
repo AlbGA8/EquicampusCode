@@ -1,59 +1,73 @@
 <!doctype html>
 <html xmlns:th="http://www.thymeleaf.org">
   <body>
-    <section th:fragment="contenidoVista" id="view-profesores">
-      <div class="flex justify-between items-center mb-6">
-        <h2
-          class="text-2xl font-bold text-forest"
-          th:text="#{teacher.list.title}"
-        >
+    <section th:fragment="contenidoVista" id="view-profesores" class="container-fluid py-4">
+      
+      <div class="d-flex justify-content-between align-items-center mb-5">
+        <h2 class="h3 fw-bold text-forest m-0" th:text="#{teacher.list.title}">
           Gestión de Profesorado
         </h2>
 
-        <button
-            hx-get="/web/profesores/modal-nuevo"
-            hx-target="#contenedor-modales"
-            hx-swap="innerHTML"
-            class="bg-forest text-white px-4 py-2 rounded-lg text-sm font-bold"
-          >
-            Añadir Profesor
-          </button>       
+        <button hx-get="/web/profesores/modal-nuevo"
+                hx-target="#contenedor-modales"
+                hx-swap="innerHTML"
+                class="btn bg-forest text-white px-4 py-2 rounded-lg fw-bold shadow-sm hover:opacity-90 transition-all">
+          <i class="fas fa-plus-circle me-2"></i> <span th:text="#{teacher.button.add}">Añadir Profesor</span>
+        </button>       
       </div>
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-        <div
-          th:each="profe : ${profesores}"
-          class="custom-card p-6 flex flex-col items-center text-center"
-        >
-          <img
-            th:src="'https://ui-avatars.com/api/?name=' + ${profe.nombre} + '&background=2D5A3F&color=fff&size=128'"
-            class="w-20 h-20 rounded-full mb-4 border-4 border-sand"
-          />
-          <h3
-            class="text-lg font-bold"
-            th:text="${profe.nombre} + ' ' + ${profe.apellido}"
-          >
-            Nombre
-          </h3>
-          <p
-            class="text-xs text-sand font-bold uppercase tracking-wider mb-4"
-            th:text="#{teacher.role.instructor}"
-          >
-            Instructor
-          </p>
-          <button
-            class="w-full py-2 bg-gray-50 text-forest rounded font-bold text-xs hover:bg-forest hover:text-white transition"
-            th:text="#{teacher.button.schedule}"
-          >
-            Ver Horario
-          </button>
+
+      <div class="row g-4">
+        
+        <div th:each="profe : ${profesores}" class="col-12 col-sm-6 col-lg-4 col-xl-3">
+          <div class="card h-100 border-0 shadow-sm rounded-4 p-4 text-center transition-hover border-bottom border-4 border-sand">
+            
+            <div class="position-relative d-inline-block mx-auto mb-4">
+              <img th:src="'https://ui-avatars.com/api/?name=' + ${profe.nombre} + '&background=2D5A3F&color=fff&size=128'"
+                   class="rounded-circle border border-4 border-white shadow-sm"
+                   style="width: 100px; height: 100px; object-fit: cover;" />
+              <span class="position-absolute bottom-0 end-0 bg-success border border-2 border-white rounded-circle p-2" title="Disponible"></span>
+            </div>
+
+            <h3 class="h5 fw-bold text-dark mb-1" th:text="${profe.nombre} + ' ' + ${profe.apellido}">
+              Nombre del Profesor
+            </h3>
+            
+            <p class="text-xs text-sand fw-bold text-uppercase tracking-wider mb-4" th:text="#{teacher.role.instructor}">
+              Instructor Principal
+            </p>
+
+            <div class="d-flex justify-content-center gap-3 mb-4 small text-muted">
+              <div class="text-center">
+                <div class="fw-bold text-dark">12</div>
+                <div style="font-size: 10px;">Clases/Sem</div>
+              </div>
+              <div class="vr"></div>
+              <div class="text-center">
+                <div class="fw-bold text-dark">4.9</div>
+                <div style="font-size: 10px;">Rating</div>
+              </div>
+            </div>
+
+            <div class="vstack gap-2 mt-auto">
+              <button class="btn btn-light text-forest fw-bold py-2 rounded-3 btn-sm hover:bg-forest hover:text-white transition-all shadow-none">
+                <i class="far fa-calendar-alt me-2"></i> <span th:text="#{teacher.button.schedule}">Ver Horario</span>
+              </button>
+              
+              <button hx-get="'/web/profesores/editar/' + ${profe.profesorId.value}"
+                      class="btn btn-link text-muted text-decoration-none py-1 small">
+                <i class="fas fa-cog me-1"></i> <span th:text="#{generic.edit}">Editar Perfil</span>
+              </button>
+            </div>
+          </div>
         </div>
-        <div
-          th:if="${#lists.isEmpty(profesores)}"
-          class="col-span-full text-center text-gray-400 p-8 border-2 border-dashed rounded-xl"
-          th:text="#{teacher.list.empty}"
-        >
-          No hay profesores registrados.
+
+        <div th:if="${#lists.isEmpty(profesores)}" class="col-12">
+          <div class="text-center py-5 border-2 border-dashed border-light-subtle rounded-4 bg-light bg-opacity-25">
+            <i class="fas fa-chalkboard-teacher fs-1 text-muted opacity-25 mb-3"></i>
+            <p class="text-muted fst-italic" th:text="#{teacher.list.empty}">No hay profesores registrados.</p>
+          </div>
         </div>
+
       </div>
     </section>
   </body>
